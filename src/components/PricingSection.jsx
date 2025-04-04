@@ -41,8 +41,8 @@ export default function PricingSection() {
     <section id='pricingSection' className="py-20 px-4 md:py-32 md:px-8 bg-black relative overflow-hidden">
       <div className="container mx-auto max-w-6xl relative z-10">
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-black">Nuestros Planes</h2>
-          <p className="text-black opacity-80 max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Nuestros Planes</h2>
+          <p className="text-white opacity-80 max-w-2xl mx-auto">
             Elige el plan que mejor se adapte a las necesidades de tu negocio y lleva tu presencia en línea al siguiente nivel.
           </p>
         </div>
