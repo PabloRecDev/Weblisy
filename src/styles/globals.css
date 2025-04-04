@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply bg-primary text-text-primary min-h-screen;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        @apply text-secondary font-bold;
+    }
+    
+    p {
+        @apply text-text-primary;
+    }
+    
+    a {
+        @apply text-secondary hover:text-secondary-light transition-colors duration-300;
+    }
+}
+
+@layer components {
+    /* Botones */
+    .btn-primary {
+        @apply bg-secondary text-primary px-5 py-2 rounded-md transition-colors duration-300 hover:bg-secondary-dark;
+    }
+    
+    .btn-secondary {
+        @apply bg-primary-20 text-text-primary px-5 py-2 rounded-md transition-colors duration-300 hover:bg-primary-40;
+    }
+    
+    /* Contenedores */
+    .container-custom {
+        @apply bg-primary-20 p-5 rounded-lg;
+    }
+    
+    .card {
+        @apply bg-primary-20 p-6 rounded-lg shadow-lg;
+    }
+    
+    /* Formularios */
+    .input-custom {
+        @apply bg-primary-20 text-text-primary border border-primary-40 rounded-md p-2 w-full focus:border-secondary focus:outline-none;
+    }
+    
+    .label-custom {
+        @apply text-text-secondary mb-2 block;
+    }
+    
+    /* Navegación */
+    .nav-link {
+        @apply text-text-primary hover:text-secondary transition-colors duration-300;
+    }
+    
+    /* Tablas */
+    .table-custom {
+        @apply w-full border-collapse;
+    }
+    
+    .table-custom th {
+        @apply bg-primary-40 text-text-primary p-3 text-left;
+    }
+    
+    .table-custom td {
+        @apply border border-primary-40 p-3 text-text-primary;
+    }
+    
+    /* Badges */
+    .badge {
+        @apply px-2 py-1 rounded-full text-sm;
+    }
+    
+    .badge-primary {
+        @apply bg-secondary text-primary;
+    }
+    
+    .badge-secondary {
+        @apply bg-primary-40 text-text-primary;
+    }
+    
+    /* Alertas */
+    .alert {
+        @apply p-4 rounded-md mb-4;
+    }
+    
+    .alert-success {
+        @apply bg-secondary text-primary;
+    }
+    
+    .alert-error {
+        @apply bg-secondary-dark text-white;
+    }
+    
+    /* Modales */
+    .modal-overlay {
+        @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center;
+    }
+    
+    .modal-content {
+        @apply bg-primary-20 p-6 rounded-lg max-w-md w-full mx-4;
+    }
+} 
