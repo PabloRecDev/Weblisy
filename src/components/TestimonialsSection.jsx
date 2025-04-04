@@ -24,11 +24,11 @@ export default function TestimonialsSection() {
 
   return (
     <section className="py-20 px-4 md:py-32 md:px-8 bg-gray-100 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1552566626-52f371b0f9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-20"></div>
+      <div className="absolute inset-0 h-full w-full bg-[#000000]"></div>
       <div className="container mx-auto max-w-6xl relative z-10">
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-black">Lo que dicen nuestros clientes</h2>
-          <p className="text-black opacity-80 max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Lo que dicen nuestros clientes</h2>
+          <p className="text-white opacity-80 max-w-2xl mx-auto">
             Descubre cómo nuestras soluciones de desarrollo web han impactado positivamente a nuestros clientes.
           </p>
         </div>
