@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from "./ui/button";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default function HeroSection() {
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
   return (
-    <section className="min-h-screen py-20 px-4 md:py-32 md:px-8 bg-black relative overflow-hidden">
-      <div className="absolute inset-0 h-full w-full bg-black"><div className="absolute inset-0 bg-[linear-gradient(#00ffff15_1px,transparent_1px),linear-gradient(90deg,#00ffff15_1px,transparent_1px)] bg-[size:40px_40px]"></div><div className="absolute inset-0 bg-[radial-gradient(circle_400px_at_50%_300px,#0000ff15,transparent)]"></div><div className="absolute bottom-0 h-1/2 w-full bg-gradient-to-t from-[#ff00ff10] to-transparent"></div></div>
-      <div className="container mx-auto max-w-6xl relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+    <section id="hero" className="min-h-screen flex items-center justify-center py-0 px-4 md:py-32 md:px-8 bg-gradient-to-b from-black/30 to-black/5 relative overflow-hidden mt-0">
+      <div className="absolute -z-10 inset-0 h-full w-full bg-[#0a0a0a]"><div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.20)_1px,transparent_1px)] bg-[size:16px_16px]"></div></div>
+      <div className="container mx-auto max-w-6xl relative z-10 flex flex-col items-center justify-center text-center">
+        <div className="grid grid-cols-1 gap-12 items-center justify-items-center" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200">
           <div className="animate-fade-in">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
               Impulsa tu Negocio con Nuestras Aplicaciones Web
@@ -15,13 +21,17 @@ export default function HeroSection() {
             <p className="text-lg text-white opacity-80 mb-8">
               Descubre cómo nuestras soluciones de desarrollo web pueden transformar tu negocio y llevarlo al siguiente nivel.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button className="bg-white text-black hover:bg-white/90 transition-all duration-300 transform hover:scale-105">
-                Explorar Soluciones
-              </Button>
-              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-105">
-                Contáctanos
-              </Button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <a href="#pricingSection" className="flex">
+                <Button className=" border bg-white text-black hover:text-white hover:bg-black/90 transition-all duration-300 transform hover:scale-105">
+                  Explorar Soluciones
+                </Button>
+              </a>
+              <a href="#contacto" className="flex">
+                <Button variant="outline" className=" border text-white hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-105">
+                  Contáctanos
+                </Button>
+              </a>
             </div>
           </div>
           <div className="relative animate-float">
