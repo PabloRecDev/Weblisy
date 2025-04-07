@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <img src="/src/assets/weblisy-logo.png" alt="Logo" className="h-20 md:h-32 mb-0" />
+            <img src="/assets/weblisy-logo.png" alt="Logo" className="h-20 md:h-32 mb-0" />
             <p className="text-gray-400">Una solución innovadora para todas tus necesidades.</p>
           </div>
           <div>
