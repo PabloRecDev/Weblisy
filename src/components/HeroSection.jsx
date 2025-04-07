@@ -21,18 +21,23 @@ export default function HeroSection() {
             <p className="text-lg text-white opacity-80 mb-8">
               Descubre cómo nuestras soluciones de desarrollo web pueden transformar tu negocio y llevarlo al siguiente nivel.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <a href="#pricingSection" className="flex">
-                <Button className=" border bg-white text-black hover:text-white hover:bg-black/90 transition-all duration-300 transform hover:scale-105">
-                  Explorar Soluciones
-                </Button>
-              </a>
-              <a href="#contacto" className="flex">
-                <Button variant="outline" className=" border text-white hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-105">
-                  Contáctanos
-                </Button>
-              </a>
-            </div>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full">
+  <a href="#pricingSection" className="w-full sm:w-auto flex">
+    <Button className="w-full md:w-auto border bg-white text-black hover:text-white hover:bg-transparent transition-all ease-in-out duration-300 transform hover:scale-[1.03] hover:shadow-md py-1 md:py-3 text-xs md:text-sm h-auto">
+      Explorar Soluciones
+    </Button>
+  </a>
+  <a href="#contacto" className="w-full sm:w-auto flex">
+    <Button
+      variant="outline"
+      className="w-full md:w-auto border text-white hover:bg-white hover:text-black transition-all ease-in-out duration-300 transform hover:scale-[1.03] hover:shadow-md py-1 md:py-3 text-xs md:text-sm h-auto"
+    >
+      Contáctanos
+    </Button>
+  </a>
+</div>
+
+
           </div>
           <div className="relative animate-float">
          

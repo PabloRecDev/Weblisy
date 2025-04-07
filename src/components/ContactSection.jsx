@@ -37,7 +37,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contacto" className="py-20 px-4 md:py-32 md:px-8 bg-gradient-to-b from-black/95 to-black relative overflow-hidden">
+    <section id="contacto" className="py-20 px-4 md:py-32 md:px-8  bg-gradient-to-b from-black/95 to-black relative overflow-hidden">
       <div className="container mx-auto max-w-3xl relative z-10">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Contáctanos</h2>

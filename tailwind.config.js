@@ -23,7 +23,8 @@ module.exports = {
         text: {
           primary: '#FFFFFF',
           secondary: '#CCCCCC',
-        }
+        },
+        customOrange: '#db4a2b',
       },
       borderColor: {
         DEFAULT: '#666666',

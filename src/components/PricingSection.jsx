@@ -15,7 +15,7 @@ export default function PricingSection() {
   };
 
   return (
-    <section id='pricingSection' className="py-20 px-4 md:py-32 md:px-8 bg-gradient-to-b from-black/95 to-black relative overflow-hidden">
+    <section id='pricingSection' className="py-20 px-4 md:py-32 md:px-8   bg-black/90  relative overflow-hidden">
       <div className="container mx-auto max-w-4xl relative z-10">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Un solo plan. Todo lo que necesitas.</h2>
@@ -26,7 +26,7 @@ export default function PricingSection() {
 
         <div className="max-w-xl mx-auto">
           <div 
-            className="p-8 rounded-lg bg-black border border-white/20 hover:border-white/40 transition-all duration-300 transform hover:scale-105 animate-fade-in-up"
+            className="p-8 rounded-lg bg-white/10 border border-opacity-10 hover:border-white/40 transition-all duration-300 transform hover:scale-105 animate-fade-in-up"
             style={{ animationDelay: `100ms` }}
           >
             <h3 className="text-2xl font-bold text-white mb-2 text-center">{plan.name}</h3>
@@ -40,7 +40,7 @@ export default function PricingSection() {
                 </li>
               ))}
             </ul>
-            <a href="#contacto"><button className="w-full py-3 px-6 bg-white text-black rounded-lg hover:bg-black hover:text-white border border-white transition-colors duration-300">
+            <a href="#contacto"><button className="w-full py-3 px-6 bg-white text-black rounded-lg hover:bg-transparent hover:text-white border border-white transition-colors duration-300">
               Reservar Ahora
             </button></a>
           </div>
