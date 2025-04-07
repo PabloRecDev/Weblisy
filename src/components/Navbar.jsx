@@ -30,7 +30,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16 md:h-16">
           <div className="text-white font-bold text-xl md:text-2xl">
             <a href="#">
-              <img src="/src/assets/weblisy-logo.png" alt="Logo" className="h-20 md:h-32" />
+              <img src="/assets/weblisy-logo.png" alt="Logo" className="h-20 md:h-32" />
             </a>
           </div>
           <div className="md:hidden">

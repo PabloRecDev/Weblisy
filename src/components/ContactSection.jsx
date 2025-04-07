@@ -81,7 +81,7 @@ export default function ContactSection() {
             />
           </div>
 
-          <Button type="submit" className="w-full bg-white text-black hover:bg-black hover:text-white border border-white transition-colors duration-300">
+          <Button type="submit" className="w-full bg-white text-black hover:bg-transparent hover:text-white border border-white transition-colors duration-300">
             {status === "loading" ? "Enviando..." : "Enviar Mensaje"}
           </Button>
 
