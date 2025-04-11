@@ -3,4 +3,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.weblisy.es/sitemap.xml
+Sitemap: https://www.weblisy.es /sitemap.xml
