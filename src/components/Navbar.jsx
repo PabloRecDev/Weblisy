@@ -28,7 +28,7 @@ export default function Navbar() {
     <nav className={` border-b-2 border-white/10 fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isBlurred ? 'bg-customBlack backdrop-blur-md border-white/10' : 'bg-customBlack'}`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-16">
-          <div className="text-white font-bold text-xl md:text-2xl ml-20">
+          <div className="text-white font-bold text-xl md:text-2xl ml-0 md:ml-20">
             <a href="#">
               <img src="/assets/weblisy-logo.png" alt="Logo" className="h-20 md:h-32" />
             </a>
