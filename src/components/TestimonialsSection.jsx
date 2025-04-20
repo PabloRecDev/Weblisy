@@ -19,7 +19,7 @@ export default function TestimonialsSection() {
   ];
 
   return (
-    <section id='testimonios' className="py-20 px-4 md:py-32 md:px-8 bg-gradient-to-b from-black/95 to-black relative overflow-hidden">
+    <section id='testimonios' className="py-20 px-4 md:py-32 md:px-8 bg-customBlack relative overflow-hidden">
       <div className="container mx-auto max-w-6xl relative z-10">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Lo que dicen nuestros clientes</h2>
@@ -32,7 +32,7 @@ export default function TestimonialsSection() {
           {testimonials.map((testimonial, index) => (
             <div 
               key={index} 
-              className="p-6 rounded-lg bg-white/10 border border-opacity-10 border-white hover:border-white/40 transition-all duration-300 transform hover:scale-105 animate-fade-in-up flex flex-col justify-between"
+              className="p-6 rounded-lgp-6 rounded-lg bg-transparent border border-opacity-10 border-white  hover:border-opacity-40  transition-all duration-400 transform hover:scale-105 animate-fade-in-up flex flex-col justify-between"
               style={{ animationDelay: `${index * 100}ms` }}
               data-aos={index % 2 === 0 ? 'fade-right' : 'fade-left'}
               data-aos-duration="1000"

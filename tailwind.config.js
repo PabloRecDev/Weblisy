@@ -25,6 +25,7 @@ module.exports = {
           secondary: '#CCCCCC',
         },
         customOrange: '#db4a2b',
+        customBlack: '#09090b',
       },
       borderColor: {
         DEFAULT: '#666666',
