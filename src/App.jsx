@@ -20,6 +20,7 @@ import BlogArticlePage from './pages/BlogArticle';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
+import { HelmetProvider } from 'react-helmet-async';
 
 function ScrollToHash() {
   const location = useLocation();
@@ -37,11 +38,12 @@ function ScrollToHash() {
 
 function App() {
   return (
-    <Router>
-      <AuthProvider>
-        <ScrollToHash />
-        <ScrollToTop />
-        <Routes>
+    <HelmetProvider>
+      <Router>
+        <AuthProvider>
+          <ScrollToHash />
+          <ScrollToTop />
+          <Routes>
           {/* Rutas públicas */}
           <Route path="/" element={
             <div className="min-h-screen absolute -z-10 inset-0 h-full w-full absolute bottom-0 h-1/2 w-full bg-gradient-to-t from-[#ffffff] to-[#000000]" >
@@ -73,6 +75,7 @@ function App() {
         </Routes>
       </AuthProvider>
     </Router>
+    </HelmetProvider>
   )
 }
 

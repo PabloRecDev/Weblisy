@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { getArticle } from "../components/BlogArticles";
+import { Helmet } from 'react-helmet-async';
 
 export default function BlogArticlePage() {
   const { slug } = useParams();
@@ -11,6 +12,10 @@ export default function BlogArticlePage() {
   if (!article) {
     return (
       <div className="min-h-screen bg-customBlack text-white flex flex-col">
+        <Helmet>
+          <title>Artículo no encontrado | Blog Weblisy</title>
+          <meta name="description" content="El artículo que buscas no existe o ha sido eliminado." />
+        </Helmet>
         <Navbar />
         <main className="flex-1 pt-24 pb-12 px-4 md:px-0 flex flex-col items-center justify-center">
           <div className="text-center">
@@ -25,6 +30,10 @@ export default function BlogArticlePage() {
 
   return (
     <div className="min-h-screen bg-customBlack text-white flex flex-col">
+      <Helmet>
+        <title>{article.title} | Blog Weblisy</title>
+        <meta name="description" content={article.summary || "Lee este artículo de Weblisy sobre desarrollo web, SEO y tendencias digitales."} />
+      </Helmet>
       <Navbar />
       <main className="flex-1 pt-24 pb-12 px-4 md:px-0">
         <div className="max-w-2xl mx-auto">
