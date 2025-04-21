@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from "./ui/button";
 
 export default function Navbar() {
@@ -29,9 +30,9 @@ export default function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-16">
           <div className="text-white font-bold text-xl md:text-2xl ml-0 md:ml-20">
-            <a href="#">
+            <Link to="/" onClick={() => setIsOpen(false)}>
               <img src="/assets/weblisy-logo.png" alt="Logo" className="h-20 md:h-32" />
-            </a>
+            </Link>
           </div>
           <div className="md:hidden">
             <button onClick={toggleMenu} className="text-white focus:outline-none">
@@ -62,14 +63,15 @@ export default function Navbar() {
 >
 
 
-            <a href="#hero" className="text-white hover:text-white/80 transition-colors py-4 md:py-2" onClick={() => setIsOpen(false)}>Inicio</a>
-            <a href="#proceso" className="text-white hover:text-white/80 transition-colors py-4 md:py-2" onClick={() => setIsOpen(false)}>Cómo Trabajamos</a>
-            <a href="#testimonios" className="text-white hover:text-white/80 transition-colors py-4 md:py-2" onClick={() => setIsOpen(false)}>Testimonios</a>
-            <a href="#pricingSection" className="text-white hover:text-white/80 transition-colors py-4 md:py-2" onClick={() => setIsOpen(false)}>Planes</a>
-            <a href="#contacto" onClick={() => setIsOpen(false)}><Button className="bg-white text-black border-white border-opacity-10 hover:bg-transparent hover:text-white border border-white transition-all duration-300 mt-0 md:mt-0 py-1 md:py-2 text-xs md:text-sm transform  flex items-center justify-center w-full md:w-auto h-auto rounded-md">
+            <Link to="/#hero" className="text-white hover:text-white/80 transition-colors py-4 md:py-2" onClick={() => setIsOpen(false)}>Inicio</Link>
+            <Link to="/#proceso" className="text-white hover:text-white/80 transition-colors py-4 md:py-2" onClick={() => setIsOpen(false)}>Cómo Trabajamos</Link>
+            <Link to="/#testimonios" className="text-white hover:text-white/80 transition-colors py-4 md:py-2" onClick={() => setIsOpen(false)}>Testimonios</Link>
+            <Link to="/#pricingSection" className="text-white hover:text-white/80 transition-colors py-4 md:py-2" onClick={() => setIsOpen(false)}>Planes</Link>
+            <Link to="/blog" className="text-white hover:text-green-400 transition-colors py-4 md:py-2" onClick={() => setIsOpen(false)}>Blog</Link>
+            <Link to="/#contacto" onClick={() => setIsOpen(false)}><Button className="bg-white text-black border-white border-opacity-10 hover:bg-transparent hover:text-white border border-white transition-all duration-300 mt-0 md:mt-0 py-1 md:py-2 text-xs md:text-sm transform  flex items-center justify-center w-full md:w-auto h-auto rounded-md">
   Contáctanos
 </Button>
-</a>
+</Link>
           </div>
         </div>
       </div>

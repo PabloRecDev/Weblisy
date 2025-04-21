@@ -13,11 +13,34 @@ import Dashboard from './pages/admin/Dashboard'
 import { AuthProvider } from './components/AuthContext'
 import ProtectedRoute from './components/ProtectedRoute'
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import PresupuestoPage from './pages/Presupuesto';
+import BlogPage from './pages/Blog';
+import BlogArticlePage from './pages/BlogArticle';
+
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import ScrollToTop from './components/ScrollToTop';
+
+function ScrollToHash() {
+  const location = useLocation();
+  useEffect(() => {
+    if (location.pathname === '/' && location.hash) {
+      const id = location.hash.replace('#', '');
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [location]);
+  return null;
+}
 
 function App() {
   return (
     <Router>
       <AuthProvider>
+        <ScrollToHash />
+        <ScrollToTop />
         <Routes>
           {/* Rutas públicas */}
           <Route path="/" element={
@@ -33,6 +56,9 @@ function App() {
               <Footer/>
             </div>
           } />
+          <Route path="/presupuesto" element={<PresupuestoPage />} />
+          <Route path="/blog" element={<BlogPage />} />
+<Route path="/blog/:slug" element={<BlogArticlePage />} />
           <Route path="/privacidad" element={<PrivacyPolicy />} />
 
           {/* Rutas de administración */}

@@ -13,11 +13,13 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-bold mb-4">Enlaces</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-400 hover:text-white">Inicio</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white">Servicios</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white">Sobre Nosotros</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white">Contáctanos</a></li>
-<li><Link to="/privacidad" className="text-gray-400 hover:text-white">Política de Privacidad</Link></li>
+              <li><Link to="/#hero" className="text-gray-400 hover:text-white">Inicio</Link></li>
+              <li><Link to="/#proceso" className="text-gray-400 hover:text-white">Cómo Trabajamos</Link></li>
+              <li><Link to="/#testimonios" className="text-gray-400 hover:text-white">Testimonios</Link></li>
+              <li><Link to="/#pricingSection" className="text-gray-400 hover:text-white">Planes</Link></li>
+              <li><Link to="/blog" className="text-gray-400 hover:text-white">Blog</Link></li>
+              <li><Link to="/#contacto" className="text-gray-400 hover:text-white">Contáctanos</Link></li>
+              <li><Link to="/privacidad" className="text-gray-400 hover:text-white">Política de Privacidad</Link></li>
             </ul>
           </div>
           <div>

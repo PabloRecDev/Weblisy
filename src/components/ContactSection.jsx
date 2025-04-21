@@ -37,16 +37,23 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contacto" className="py-20 px-4 md:py-32 md:px-8  bg-gradient-to-b from-customBlack to-black relative overflow-hidden">
-      <div className="container mx-auto max-w-3xl relative z-10">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Contáctanos</h2>
-          <p className="text-white opacity-80 max-w-xl mx-auto">
-            ¿Tienes un proyecto en mente? Completa el formulario y me pondré en contacto contigo lo antes posible.
+    <section id="contacto" className="py-20 px-4 md:py-32 md:px-8 bg-gradient-to-br from-customBlack via-black to-black relative overflow-hidden">
+      <div className="container mx-auto max-w-xl relative z-10">
+        <div className="text-center mb-8 animate-fade-in-up">
+          <div className="flex justify-center mb-2">
+            <span className="text-green-400 text-4xl md:text-5xl">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-12 h-12">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </span>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-extrabold mb-2 text-white">¡Contáctanos!</h2>
+          <p className="text-white/80 max-w-md mx-auto text-lg">
+            ¿Tienes una duda rápida o quieres saludar? Completa el formulario y te responderemos pronto.
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6 bg-white/5 backdrop-blur p-8 rounded-xl border border-white/10 shadow-lg">
+        <form onSubmit={handleSubmit} className="space-y-5 bg-black/70 p-6 rounded-xl border border-white/10 shadow-lg animate-fade-in">
           <div className="space-y-2">
             <Label htmlFor="name" className="text-white">Nombre</Label>
             <Input
@@ -54,7 +61,7 @@ export default function ContactSection() {
               name="name"
               placeholder="Tu nombre"
               required
-              className="bg-black/40 border-white/10 text-white placeholder-white/60"
+              className="bg-black/70 border-white/10 text-white placeholder-white/50"
             />
           </div>
 
@@ -66,7 +73,7 @@ export default function ContactSection() {
               type="email"
               placeholder="tunombre@email.com"
               required
-              className="bg-black/40 border-white/10 text-white placeholder-white/60"
+              className="bg-black/70 border-white/10 text-white placeholder-white/50"
             />
           </div>
 
@@ -75,14 +82,14 @@ export default function ContactSection() {
             <Textarea
               id="message"
               name="message"
-              placeholder="Contame sobre tu proyecto..."
+              placeholder="¿En qué podemos ayudarte?"
               required
-              className="bg-black/40 border-white/10 text-white placeholder-white/60 min-h-[150px]"
+              className="bg-black/70 border-white/10 text-white placeholder-white/50 min-h-[100px]"
             />
           </div>
 
-          <Button type="submit" className="w-full bg-white text-black hover:bg-transparent hover:text-white border border-white transition-colors duration-300">
-            {status === "loading" ? "Enviando..." : "Enviar Mensaje"}
+          <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-md transition-all duration-300 shadow-md">
+            {status === "loading" ? "Enviando..." : "Enviar mensaje"}
           </Button>
 
           {/* Mensaje de éxito */}
