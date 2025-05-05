@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default function PricingSection() {
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
   const plan = {
     name: "Sitio web profesional",
     originalPrice: "€500",
@@ -31,7 +37,10 @@ export default function PricingSection() {
 
 
   return (
-    <section id='pricingSection' className="py-20 px-4 md:py-32 md:px-8 bg-black/90 relative overflow-hidden">
+    <section
+      id='pricingSection'
+      className="py-20 px-4 md:py-32 md:px-8 bg-black/90 relative overflow-hidden"
+    >
       <div className="container mx-auto max-w-4xl relative z-10">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
@@ -45,8 +54,9 @@ export default function PricingSection() {
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Tarjeta Sitio web profesional DESTACADA */}
           <div 
-            className="p-8 rounded-xl bg-gradient-to-br from-white to-gray-100 border border-gray-200 hover:border-black/20 transition-all duration-300 transform animate-fade-in-up shadow-2xl"
-            style={{ animationDelay: `100ms` }}
+            className="p-8 rounded-xl bg-gradient-to-br from-white to-gray-100 border border-gray-200 hover:border-black/20 transition-all duration-300 transform shadow-2xl"
+            data-aos="fade-right"
+            data-aos-delay="100"
           >
             <div className="mb-2">
               <span className="inline-block px-3 py-1 bg-black text-white text-xs font-bold rounded-full mb-2">¡Más elegido!</span>
@@ -76,8 +86,9 @@ export default function PricingSection() {
 
           {/* Tarjeta Aplicación web a medida */}
           <div 
-            className="p-8 rounded-xl bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-300 transform animate-fade-in-up shadow-2xl"
-            style={{ animationDelay: `200ms` }}
+            className="p-8 rounded-xl bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-300 transform shadow-2xl"
+            data-aos="fade-left"
+            data-aos-delay="200"
           >
             <div className="mb-2">
               <span className="inline-block px-3 py-1 bg-green-600 text-white text-xs font-bold rounded-full mb-2">Para empresas</span>
