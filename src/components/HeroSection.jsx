@@ -10,7 +10,7 @@ export default function HeroSection() {
 
   return (
     <section id="hero" className="min-h-screen flex tems-center justify-center py-0 px-4 md:py-32 md:px-8 bg-gradient-to-b from-black/30 to-black/5 relative overflow-hidden mt-0">
-      <div className="absolute -z-10 inset-0 h-full w-full bg-[#0a0a0a]"><div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.20)_1px,transparent_1px)] bg-[size:16px_16px]"></div></div>
+    <div class="absolute -z-10 inset-0  h-full w-full bg-gradient-to-br from-black to-slate-900"><div class="absolute inset-0 bg-[conic-gradient(from_180deg_at_50%_50%,#3b82f680_0deg,#10b98180_72deg,#6366f180_144deg,#8b5cf680_216deg,#ec489980_288deg,#3b82f680_360deg)] animate-[spin_10s_linear_infinite] blur-[75px]"></div><div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.07)_2px,transparent_2px),linear-gradient(90deg,rgba(255,255,255,0.07)_2px,transparent_2px)] bg-[size:40px_40px]"></div></div>
       <div className="container mx-auto max-w-6xl relative z-10 flex flex-col items-center justify-center text-center">
         <div className="grid grid-cols-1 gap-12 items-center justify-items-center" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200">
           <div className="animate-fade-in">
