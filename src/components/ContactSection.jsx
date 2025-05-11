@@ -53,7 +53,7 @@ export default function ContactSection() {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-5 bg-black/70 p-6 rounded-xl  shadow-lg animate-fade-in">
+        <form onSubmit={handleSubmit} className="space-y-5 bg-transparent p-6 rounded-xl  shadow-lg animate-fade-in">
           <div className="space-y-2">
             <Label htmlFor="name" className="text-white">Nombre</Label>
             <Input
