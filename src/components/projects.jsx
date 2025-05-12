@@ -11,7 +11,7 @@ const projects = [
     tech: ['React', 'Tailwind', 'Vite', 'SEO Básico'],
     objective: 'Transmitir confianza y profesionalismo con un diseño limpio y responsivo.',
     icon: <Briefcase className="w-5 h-5 inline mr-2 text-green-400" />,
-    link: 'bokettorestaurante.com',
+    link: 'https://bokettorestaurante.com',
   },
   {
     title: 'Sistema de Reservas Online',
