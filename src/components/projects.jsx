@@ -17,7 +17,7 @@ const projects = [
     title: 'Sistema de Reservas Online',
     description: 'Plataforma web personalizada para gestionar reservas y clientes.',
     image: '/assets/BokettoAdmin.png',
-    tech: ['React', 'Node.js', 'MongoDB', 'Stripe'],
+    tech: ['React', 'Node.js', 'MongoDB'],
     objective: 'Automatizar el flujo de reservas y facilitar la gestión de citas y pagos.',
     result: 'Reducción del 80% en tareas manuales de atención y mejora en la experiencia del cliente.',
     icon: <CalendarClock className="w-5 h-5 inline mr-2 text-green-400" />,
