@@ -16,7 +16,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import PresupuestoPage from './pages/Presupuesto';
 import BlogPage from './pages/Blog';
 import BlogArticlePage from './pages/BlogArticle';
-
+import ProjectsPage from './components/projects'; // tu componente de proyectos
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
@@ -51,6 +51,7 @@ function App() {
               <main className="pt-16">
                 <HeroSection title="Impulsa tu Negocio con Nuestras Aplicaciones Web" subtitle="Soluciones minimalistas y efectivas" cta="Explora Ahora" />
                 <FeaturesSection title="Funcionalidades Clave" description="Descubre cómo nuestras aplicaciones pueden transformar tu negocio." />
+                <ProjectsPage /> 
                 <TestimonialsSection title="Opiniones de Nuestros Clientes" />
                 <PricingSection title="Opciones de Precios" description="Encuentra el plan perfecto para ti." />
                 <ContactSection/>
@@ -60,6 +61,7 @@ function App() {
           } />
           <Route path="/presupuesto" element={<PresupuestoPage />} />
           <Route path="/blog" element={<BlogPage />} />
+          <Route path="/proyectos" element={<ProjectsPage />} />
 <Route path="/blog/:slug" element={<BlogArticlePage />} />
           <Route path="/privacidad" element={<PrivacyPolicy />} />
 

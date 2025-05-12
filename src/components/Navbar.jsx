@@ -60,6 +60,7 @@ export default function Navbar() {
             <Link to="/#proceso" className="text-white hover:text-white/80 transition-colors py-4 md:py-2" onClick={() => setIsOpen(false)}>Cómo Trabajamos</Link>
             <Link to="/#testimonios" className="text-white hover:text-white/80 transition-colors py-4 md:py-2" onClick={() => setIsOpen(false)}>Testimonios</Link>
             <Link to="/#pricingSection" className="text-white hover:text-white/80 transition-colors py-4 md:py-2" onClick={() => setIsOpen(false)}>Planes</Link>
+            <Link to="/proyectos" className="text-white hover:text-white/80 transition-colors py-4 md:py-2" onClick={() => setIsOpen(false)}>Proyectos</Link>
             <Link to="/blog" className="text-white hover:text-green-400 transition-colors py-4 md:py-2" onClick={() => setIsOpen(false)}>Blog</Link>
             <Link to="/#contacto" onClick={() => setIsOpen(false)}>
               <Button className="bg-white text-black border-white border-opacity-10 hover:bg-transparent hover:text-white border border-white transition-all duration-300 mt-0 md:mt-0 py-1 md:py-2 text-xs md:text-sm transform flex items-center justify-center w-full md:w-auto h-auto rounded-md">
