@@ -40,7 +40,7 @@ const Login = () => {
             <div className="flex flex-col sm:flex-row h-screen">
                 {/* Columna izquierda con fondo */}
                 <div className="hidden sm:block w-full sm:w-1/2 relative h-full overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-700 opacity-90"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-black to-black opacity-90"></div>
                     <div className="absolute inset-0 bg-black/30"></div>
                     <div className="absolute inset-0 flex items-center justify-center h-full w-full">
                         <div className="text-white text-center">

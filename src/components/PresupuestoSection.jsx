@@ -38,8 +38,8 @@ export default function PresupuestoSection() {
     <section id="presupuesto" className="py-20 px-4 md:py-32 md:px-8 bg-customBlack relative overflow-hidden">
       {/* Fondo decorativo con gradientes y blur */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute -top-32 -left-32 w-96 h-96 bg-gradient-to-br from-green-500/10 via-purple-500/10 to-transparent rounded-full blur-3xl animate-float-slow"></div>
-        <div className="absolute bottom-0 right-0 w-80 h-80 bg-gradient-to-tr from-purple-500/10 via-green-500/10 to-transparent rounded-full blur-2xl animate-float-slower"></div>
+        <div className="absolute -top-32 -left-32 w-96 h-96 bg-gradient-to-br from-black/10 via-black/10 to-transparent rounded-full blur-3xl animate-float-slow"></div>
+        <div className="absolute bottom-0 right-0 w-80 h-80 bg-gradient-to-tr from-black/10 via-black/10 to-transparent rounded-full blur-2xl animate-float-slower"></div>
       </div>
 
       <div className="container mx-auto max-w-3xl relative z-10">
@@ -52,7 +52,7 @@ export default function PresupuestoSection() {
             <span className="text-white font-semibold">Propuesta en 24h</span>
           </div>
           <div className="flex flex-col items-center">
-            <span className="text-purple-400 text-3xl mb-2">
+            <span className="text-[#038e42] text-3xl mb-2">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-10 h-10"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 1.343-3 3 0 1.657 1.343 3 3 3s3-1.343 3-3c0-1.657-1.343-3-3-3zm0 10c-4.418 0-8-1.79-8-4V7a2 2 0 012-2h12a2 2 0 012 2v7c0 2.21-3.582 4-8 4z" /></svg>
             </span>
             <span className="text-white font-semibold">Trato confidencial</span>

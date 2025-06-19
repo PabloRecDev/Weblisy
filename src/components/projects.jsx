@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { Briefcase, CalendarClock, ExternalLink } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const projects = [
   {
@@ -12,6 +13,7 @@ const projects = [
     objective: 'Transmitir confianza y profesionalismo con un diseño limpio y responsivo.',
     icon: <Briefcase className="w-5 h-5 inline mr-2 text-green-400" />,
     link: 'https://bokettorestaurante.com',
+    status: 'Completado',
   },
   {
     title: 'Sistema de Reservas Online',
@@ -21,8 +23,14 @@ const projects = [
     objective: 'Automatizar el flujo de reservas y facilitar la gestión de citas y pagos.',
     result: 'Reducción del 80% en tareas manuales de atención y mejora en la experiencia del cliente.',
     icon: <CalendarClock className="w-5 h-5 inline mr-2 text-green-400" />,
+    status: 'Completado',
   },
 ];
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 40, scale: 0.95 },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.7, ease: 'easeOut' } },
+};
 
 export default function ProjectsPage() {
   return (
@@ -30,59 +38,67 @@ export default function ProjectsPage() {
       <Navbar />
 
       <div className="pt-32 px-4 md:px-8 max-w-6xl mx-auto text-center">
-        <h1 className="text-4xl md:text-5xl font-bold mb-6">Proyectos</h1>
+        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">Proyectos</h1>
         <p className="text-white/70 text-lg mb-16">
           Casos reales de soluciones digitales desarrolladas a medida. Cada proyecto nace de una necesidad concreta y se ejecuta con precisión.
         </p>
 
-        <div className="grid md:grid-cols-2 gap-10">
-          {projects.map((project, index) => (
-            <div
-              key={index}
-              className="bg-zinc-900/60 border border-white/10 rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:border-white/20 transition duration-300 text-left"
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projects.map((project, idx) => (
+            <motion.div
+              key={project.title}
+              className="relative rounded-2xl overflow-hidden shadow-xl bg-white/5 backdrop-blur-md border border-white/10 group transition-all duration-300 hover:scale-[1.025] hover:shadow-2xl"
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
             >
-              <img
-                src={project.image}
-                alt={project.title}
-                className="w-full h-56 object-top"
-              />
-              <div className="p-6">
-                <h3 className="text-2xl font-semibold mb-2 flex items-center">
-                  {project.icon}
-                  {project.title}
-                </h3>
-                <p className="text-white/80 text-sm mb-4">{project.description}</p>
-
-                <div className="mb-3">
-                  <p className="text-xs font-semibold uppercase text-white/50">Objetivo</p>
-                  <p className="text-white/70 text-sm">{project.objective}</p>
-                </div>
-
-                <div className="mb-4">
-                  <p className="text-xs font-semibold uppercase text-white/50">Resultado</p>
-                  <p className="text-white/70 text-sm">{project.result}</p>
-                </div>
-
-                <div className="flex flex-wrap items-center gap-2 text-xs text-white/60 mb-5">
-                  {project.tech.map((tech, i) => (
-                    <span key={i} className="bg-white/10 px-2 py-1 rounded-full">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                {project.link && (
-  <a
-    href={project.link}
-    className="inline-flex items-center text-green-400 hover:text-green-300 text-sm font-medium transition"
-  >
-    Ver proyecto
-    <ExternalLink className="w-4 h-4 ml-1" />
-  </a>
-)}
-
+              {/* Imagen */}
+              <div className="relative h-48 overflow-hidden">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <span className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-semibold tracking-wide ${project.status === 'Completado' ? 'bg-green-500/20 text-green-400 border border-green-500/30' : 'bg-gray-500/20 text-gray-400 border border-gray-500/30'}`}>
+                  {project.status}
+                </span>
               </div>
-            </div>
+
+              {/* Contenido */}
+              <div className="p-6 flex flex-col h-full justify-between">
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    {project.icon}
+                    <h2 className="text-xl font-bold text-white group-hover:text-green-400 transition-colors duration-300">
+                      {project.title}
+                    </h2>
+                  </div>
+                  <p className="text-white/80 text-sm mb-3 min-h-[48px]">{project.description}</p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.tech.map((tech) => (
+                      <span key={tech} className="px-3 py-1 bg-black/40 text-white/80 text-xs rounded-full border border-white/10">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex gap-2 mt-4">
+                  {project.link && (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 py-2 rounded-lg bg-green-600/90 hover:bg-green-500 text-white font-semibold flex items-center justify-center gap-2 transition-colors duration-300 shadow-md"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      Ver Demo
+                    </a>
+                  )}
+                </div>
+              </div>
+            </motion.div>
           ))}
         </div>
 

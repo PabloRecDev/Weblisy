@@ -6,55 +6,59 @@ export default function LoadingScreen() {
     <motion.div
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-[#0a0a0a] via-[#111111] to-[#038e42]"
     >
       <div className="relative flex flex-col items-center justify-center">
         {/* Logo animado */}
         <motion.div
-          initial={{ scale: 0.5, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
+          initial={{ scale: 0.7, opacity: 0, rotate: 0 }}
+          animate={{ scale: [1, 1.08, 1], opacity: 1, rotate: [0, 8, -8, 0] }}
           transition={{
-            duration: 0.5,
-            ease: "easeOut"
+            duration: 1.5,
+            repeat: Infinity,
+            repeatType: 'loop',
+            ease: 'easeInOut'
           }}
           className="mb-8 flex items-center justify-center"
         >
           <img 
             src="/assets/weblisy-logo.png" 
             alt="WebLisy Logo" 
-            className="w-32 h-32 md:w-48 md:h-48 object-contain"
+            className="w-36 h-36 md:w-56 md:h-56 object-contain drop-shadow-lg"
           />
         </motion.div>
 
-        {/* Barra de progreso */}
-        <div className="w-48 md:w-64 h-1 bg-white/20 rounded-full overflow-hidden">
-          <motion.div
-            initial={{ width: "0%" }}
-            animate={{ width: "100%" }}
-            transition={{
-              duration: 2,
-              ease: "easeInOut"
-            }}
-            className="h-full bg-gradient-to-r from-blue-500 to-purple-600"
+        {/* Spinner circular animado */}
+        <motion.div
+          className="relative flex items-center justify-center mb-2"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+        >
+          <motion.span
+            className="block w-12 h-12 border-4 border-[#038e42]/30 border-t-[#038e42] rounded-full animate-spin"
+            style={{ borderTopColor: '#038e42' }}
+            animate={{ rotate: 360 }}
+            transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}
           />
-        </div>
+        </motion.div>
 
         {/* Texto de carga */}
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="text-white/80 text-center mt-4 text-sm md:text-base"
+          className="text-white/90 text-center mt-2 text-base md:text-lg tracking-wide font-medium"
         >
           Cargando tu experiencia...
         </motion.p>
 
-        {/* Efecto de partículas */}
-        <div className="absolute inset-0 -z-10">
-          {[...Array(20)].map((_, i) => (
+        {/* Efecto de partículas sutiles */}
+        <div className="absolute inset-0 -z-10 pointer-events-none">
+          {[...Array(16)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-1 h-1 bg-white rounded-full"
+              className="absolute w-1.5 h-1.5 bg-[#038e42]/30 rounded-full blur-sm"
               initial={{
                 x: Math.random() * 400 - 200,
                 y: Math.random() * 400 - 200,
@@ -64,12 +68,12 @@ export default function LoadingScreen() {
                 x: Math.random() * 400 - 200,
                 y: Math.random() * 400 - 200,
                 scale: [0, 1, 0],
-                opacity: [0, 0.5, 0]
+                opacity: [0, 0.3, 0]
               }}
               transition={{
-                duration: 2,
+                duration: 2.5,
                 repeat: Infinity,
-                delay: i * 0.1
+                delay: i * 0.13
               }}
             />
           ))}

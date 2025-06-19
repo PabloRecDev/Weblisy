@@ -100,4 +100,89 @@
     .modal-content {
         @apply bg-primary-20 p-6 rounded-lg max-w-md w-full mx-4;
     }
+    
+    /* Estilos para el calendario react-day-picker */
+    .rdp {
+        @apply bg-transparent;
+    }
+    
+    .rdp-months {
+        @apply flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0;
+    }
+    
+    .rdp-month {
+        @apply space-y-4;
+    }
+    
+    .rdp-caption {
+        @apply flex justify-center pt-1 relative items-center;
+    }
+    
+    .rdp-caption_label {
+        @apply text-sm font-medium text-white;
+    }
+    
+    .rdp-nav {
+        @apply space-x-1 flex items-center;
+    }
+    
+    .rdp-nav_button {
+        @apply h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 text-white border border-white/10 hover:bg-white/10 rounded transition-all duration-200;
+    }
+    
+    .rdp-nav_button_previous {
+        @apply absolute left-1;
+    }
+    
+    .rdp-nav_button_next {
+        @apply absolute right-1;
+    }
+    
+    .rdp-table {
+        @apply w-full border-collapse space-y-1;
+    }
+    
+    .rdp-head_row {
+        @apply flex;
+    }
+    
+    .rdp-head_cell {
+        @apply text-white/70 rounded-md w-9 font-normal text-[0.8rem];
+    }
+    
+    .rdp-row {
+        @apply flex w-full mt-2;
+    }
+    
+    .rdp-cell {
+        @apply h-9 w-9 text-center text-sm p-0 relative focus-within:relative focus-within:z-20;
+    }
+    
+    .rdp-day {
+        @apply h-9 w-9 p-0 font-normal aria-selected:opacity-100 text-white hover:bg-white/10 rounded transition-all duration-200;
+    }
+    
+    .rdp-day_selected {
+        @apply bg-white/20 text-white hover:bg-white/30 focus:bg-white/30;
+    }
+    
+    .rdp-day_today {
+        @apply bg-white/10 text-white;
+    }
+    
+    .rdp-day_outside {
+        @apply text-white/30 opacity-50;
+    }
+    
+    .rdp-day_disabled {
+        @apply text-white/30 opacity-50 cursor-not-allowed;
+    }
+    
+    .rdp-day_range_middle {
+        @apply aria-selected:bg-white/10 aria-selected:text-white;
+    }
+    
+    .rdp-day_hidden {
+        @apply invisible;
+    }
 } 
