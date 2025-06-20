@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS meetings (
     company VARCHAR(255),
     message TEXT,
     meeting_date DATE NOT NULL,
-    meeting_time VARCHAR(10) NOT NULL,
+    meeting_time TIME NOT NULL,
     meeting_type VARCHAR(50) NOT NULL,
     meeting_type_name VARCHAR(100) NOT NULL,
     status VARCHAR(20) DEFAULT 'pending' CHECK (status IN ('pending', 'confirmed', 'completed', 'cancelled')),
@@ -38,21 +38,21 @@ CREATE TRIGGER update_meetings_updated_at
 -- Configurar RLS (Row Level Security) - opcional para seguridad adicional
 ALTER TABLE meetings ENABLE ROW LEVEL SECURITY;
 
--- Política para permitir inserción desde la aplicación
-CREATE POLICY "Allow insert from app" ON meetings
+-- Política para permitir inserción desde el formulario público
+CREATE POLICY "Permitir inserción de reuniones públicas" ON meetings
     FOR INSERT WITH CHECK (true);
 
--- Política para permitir lectura desde el panel de administración
-CREATE POLICY "Allow read from admin" ON meetings
-    FOR SELECT USING (true);
+-- Política para permitir lectura a usuarios autenticados (para el admin)
+CREATE POLICY "Permitir lectura de reuniones a usuarios autenticados" ON meetings
+    FOR SELECT USING (auth.role() = 'authenticated');
 
--- Política para permitir actualización desde el panel de administración
-CREATE POLICY "Allow update from admin" ON meetings
-    FOR UPDATE USING (true);
+-- Política para permitir actualización a usuarios autenticados
+CREATE POLICY "Permitir actualización de reuniones a usuarios autenticados" ON meetings
+    FOR UPDATE USING (auth.role() = 'authenticated');
 
--- Política para permitir eliminación desde el panel de administración
-CREATE POLICY "Allow delete from admin" ON meetings
-    FOR DELETE USING (true);
+-- Política para permitir eliminación a usuarios autenticados
+CREATE POLICY "Permitir eliminación de reuniones a usuarios autenticados" ON meetings
+    FOR DELETE USING (auth.role() = 'authenticated');
 
 -- Comentarios para documentar la tabla
 COMMENT ON TABLE meetings IS 'Tabla para almacenar las reuniones agendadas desde el formulario de contacto';

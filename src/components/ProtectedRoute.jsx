@@ -7,37 +7,16 @@ const ProtectedRoute = ({ children }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // TEMPORAL: Permitir acceso sin autenticación para pruebas
-        // Comentar las siguientes líneas cuando quieras activar la autenticación
-        
-        // Verificar si hay un usuario en localStorage
-        const storedUser = localStorage.getItem('user');
-        const storedSession = localStorage.getItem('session');
-
-        if (storedUser && storedSession) {
-            try {
-                const userData = JSON.parse(storedUser);
-                const sessionData = JSON.parse(storedSession);
-                
-                // Verificar si la sesión no ha expirado
-                if (sessionData.expires_at && new Date(sessionData.expires_at * 1000) > new Date()) {
-                    setUser(userData);
-                } else {
-                    // Sesión expirada, limpiar localStorage
-                    localStorage.removeItem('user');
-                    localStorage.removeItem('session');
-                }
-            } catch (error) {
-                console.error('Error parsing user data:', error);
-                localStorage.removeItem('user');
-                localStorage.removeItem('session');
+        const checkSession = async () => {
+            const { data } = await supabase.auth.getSession();
+            if (data.session && data.session.user) {
+                setUser(data.session.user);
+            } else {
+                setUser(null);
             }
-        }
-        
-        // TEMPORAL: Simular usuario autenticado para pruebas
-        setUser({ id: 'demo', email: 'demo@weblisy.com' });
-        
-        setLoading(false);
+            setLoading(false);
+        };
+        checkSession();
     }, []);
 
     if (loading) {
@@ -51,10 +30,9 @@ const ProtectedRoute = ({ children }) => {
         );
     }
 
-    // TEMPORAL: Comentar esta línea para permitir acceso sin autenticación
-    // if (!user) {
-    //     return <Navigate to="/login" replace />;
-    // }
+    if (!user) {
+        return <Navigate to="/login" replace />;
+    }
 
     return children;
 };

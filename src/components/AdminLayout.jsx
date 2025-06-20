@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+
+import { useNavigate, useLocation, Outlet } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { 
   CalendarIcon, 
@@ -11,7 +12,8 @@ import {
   CheckIcon,
   ExitIcon,
   BellIcon,
-  HamburgerMenuIcon
+  HamburgerMenuIcon,
+  EnvelopeClosedIcon
 } from '@radix-ui/react-icons';
 
 export default function AdminLayout({ children }) {
@@ -48,6 +50,7 @@ export default function AdminLayout({ children }) {
   const menuItems = [
     { path: '/admin/dashboard', icon: DashboardIcon, label: 'Dashboard' },
     { path: '/admin/reuniones', icon: CalendarIcon, label: 'Reuniones' },
+    { path: '/admin/leads', icon: EnvelopeClosedIcon, label: 'Leads/Mensajes' },
     { path: '/admin/clientes', icon: PersonIcon, label: 'Clientes' },
     { path: '/admin/facturas', icon: StarIcon, label: 'Facturas' },
     { path: '/admin/presupuestos', icon: GearIcon, label: 'Presupuestos' },
@@ -92,12 +95,12 @@ export default function AdminLayout({ children }) {
 
       {/* Sidebar */}
       <div className={`
-        ${isMobile ? 'fixed z-50' : 'sticky top-0'}
+        ${isMobile ? 'fixed z-50 h-full' : 'sticky top-0 h-screen'}
         ${sidebarOpen ? 'translate-x-0' : isMobile ? '-translate-x-full' : 'w-20'}
         ${isMobile ? 'w-80' : sidebarOpen ? 'w-64' : 'w-20'} 
         bg-[#0d0d0d] border-r border-white/10 
         transition-all duration-300 ease-in-out
-        flex flex-col h-screen
+        flex flex-col
       `}>
         {/* Logo */}
         <div className="p-4 lg:p-6 border-b border-white/10 flex items-center justify-between">
@@ -266,7 +269,7 @@ export default function AdminLayout({ children }) {
         {/* Content */}
         <main className="flex-1 overflow-y-auto">
           <div className="p-4 lg:p-6">
-            {children}
+            <Outlet />
           </div>
         </main>
       </div>

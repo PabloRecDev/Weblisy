@@ -14,6 +14,7 @@ import {
   RocketIcon,
   StarIcon
 } from '@radix-ui/react-icons';
+import { supabase } from '../lib/supabase';
 
 export default function Contact() {
   const [status, setStatus] = useState("idle");
@@ -34,20 +35,45 @@ export default function Contact() {
     e.preventDefault();
     setStatus("loading");
 
-    const form = e.target;
-    const data = new FormData(form);
+    try {
+      const { data, error } = await supabase
+        .from('leads')
+        .insert([
+          { 
+            name: formData.name, 
+            email: formData.email, 
+            phone: formData.phone,
+            company: formData.company,
+            message: formData.message,
+            source: 'contact_formal'
+          }
+        ]);
 
-    const response = await fetch("https://formspree.io/f/xkgjpokg", {
-      method: "POST",
-      body: data,
-      headers: {
-        Accept: "application/json",
-      },
-    });
+      if (error) {
+        throw error;
+      }
 
-    if (response.ok) {
+      // Una vez que el lead se ha guardado, creamos o actualizamos el cliente
+      const { error: clientError } = await supabase
+        .from('clients')
+        .upsert({ 
+          email: formData.email, 
+          name: formData.name, 
+          phone: formData.phone,
+          company: formData.company
+        }, {
+          onConflict: 'email',
+          ignoreDuplicates: false
+        });
+
+      if (clientError) {
+        // Si hay un error aquí, no lo mostramos al usuario final,
+        // pero sí lo registramos en la consola para depuración.
+        // Lo principal (recibir el lead) ya funcionó.
+        console.error('Error al guardar/actualizar el cliente:', clientError);
+      }
+
       setStatus("success");
-      form.reset();
       setFormData({
         name: '',
         email: '',
@@ -62,7 +88,9 @@ export default function Contact() {
       setTimeout(() => {
         setStatus("idle");
       }, 4000);
-    } else {
+
+    } catch (error) {
+      console.error('Error al enviar a Supabase:', error);
       setStatus("error");
     }
   };

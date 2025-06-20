@@ -39,6 +39,8 @@ import AdminFacturasPage from './pages/admin/Facturas';
 import AdminPresupuestosPage from './pages/admin/Presupuestos';
 import AdminProyectosPage from './pages/admin/Proyectos';
 import AdminTareasPage from './pages/admin/Tareas';
+import AdminLeadsPage from './pages/admin/Leads';
+import AdminLayout from './components/AdminLayout';
 
 function ScrollToHash() {
   const location = useLocation();
@@ -161,7 +163,6 @@ function App() {
                       <main className="pt-16">
                         <HeroSection />
                         <FeaturesSection />
-                        <ProjectsPage /> 
                         <TestimonialsSection />
                         <PricingSection />
                         <ContactSection/>
@@ -293,7 +294,7 @@ function App() {
                   </motion.div>
                 } />
                 
-                <Route path="/admin/dashboard" element={
+                <Route path="/admin" element={
                   <ProtectedRoute>
                     <motion.div
                       variants={pageVariants}
@@ -301,82 +302,20 @@ function App() {
                       animate="in"
                       exit="out"
                     >
-                      <AdminDashboardPage />
+                      <AdminLayout />
                     </motion.div>
                   </ProtectedRoute>
-                } />
-                <Route path="/admin/reuniones" element={
-                  <ProtectedRoute>
-                    <motion.div
-                      variants={pageVariants}
-                      initial="initial"
-                      animate="in"
-                      exit="out"
-                    >
-                      <AdminMeetingsPage />
-                    </motion.div>
-                  </ProtectedRoute>
-                } />
-                <Route path="/admin/clientes" element={
-                  <ProtectedRoute>
-                    <motion.div
-                      variants={pageVariants}
-                      initial="initial"
-                      animate="in"
-                      exit="out"
-                    >
-                      <AdminClientesPage />
-                    </motion.div>
-                  </ProtectedRoute>
-                } />
-                <Route path="/admin/facturas" element={
-                  <ProtectedRoute>
-                    <motion.div
-                      variants={pageVariants}
-                      initial="initial"
-                      animate="in"
-                      exit="out"
-                    >
-                      <AdminFacturasPage />
-                    </motion.div>
-                  </ProtectedRoute>
-                } />
-                <Route path="/admin/presupuestos" element={
-                  <ProtectedRoute>
-                    <motion.div
-                      variants={pageVariants}
-                      initial="initial"
-                      animate="in"
-                      exit="out"
-                    >
-                      <AdminPresupuestosPage />
-                    </motion.div>
-                  </ProtectedRoute>
-                } />
-                <Route path="/admin/proyectos" element={
-                  <ProtectedRoute>
-                    <motion.div
-                      variants={pageVariants}
-                      initial="initial"
-                      animate="in"
-                      exit="out"
-                    >
-                      <AdminProyectosPage />
-                    </motion.div>
-                  </ProtectedRoute>
-                } />
-                <Route path="/admin/tareas" element={
-                  <ProtectedRoute>
-                    <motion.div
-                      variants={pageVariants}
-                      initial="initial"
-                      animate="in"
-                      exit="out"
-                    >
-                      <AdminTareasPage />
-                    </motion.div>
-                  </ProtectedRoute>
-                } />
+                }>
+                  <Route index element={<AdminDashboardPage />} />
+                  <Route path="dashboard" element={<AdminDashboardPage />} />
+                  <Route path="reuniones" element={<AdminMeetingsPage />} />
+                  <Route path="leads" element={<AdminLeadsPage />} />
+                  <Route path="clientes" element={<AdminClientesPage />} />
+                  <Route path="facturas" element={<AdminFacturasPage />} />
+                  <Route path="presupuestos" element={<AdminPresupuestosPage />} />
+                  <Route path="proyectos" element={<AdminProyectosPage />} />
+                  <Route path="tareas" element={<AdminTareasPage />} />
+                </Route>
                 
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>

@@ -55,10 +55,11 @@ export default function MeetingScheduler() {
         meeting_time: time,
         meeting_type: meetingType,
         meeting_type_name: meetingTypes.find(t => t.id === meetingType)?.name,
-        status: 'pending', // pending, confirmed, completed, cancelled
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString()
+        status: 'pending' // pending, confirmed, completed, cancelled
+        // Removemos created_at y updated_at para que Supabase los maneje automáticamente
       };
+
+      console.log('Intentando insertar datos:', meetingData);
 
       // Insertar en Supabase
       const { data, error } = await supabase
@@ -67,9 +68,14 @@ export default function MeetingScheduler() {
         .select();
 
       if (error) {
-        console.error('Error al guardar la reunión:', error);
-        throw new Error('Error al guardar la reunión. Por favor, intenta de nuevo.');
+        console.error('Error detallado de Supabase:', error);
+        console.error('Código de error:', error.code);
+        console.error('Mensaje de error:', error.message);
+        console.error('Detalles:', error.details);
+        throw new Error(`Error al guardar la reunión: ${error.message}`);
       }
+
+      console.log('Datos insertados correctamente:', data);
 
       // Éxito
       setStatus("success");
@@ -91,7 +97,7 @@ export default function MeetingScheduler() {
       }, 4000);
 
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error completo:', error);
       setStatus("error");
       
       // Resetear estado de error después de 4 segundos

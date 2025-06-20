@@ -19,7 +19,6 @@ import {
   PersonIcon,
   GearIcon
 } from '@radix-ui/react-icons';
-import AdminLayout from '../../components/AdminLayout';
 import ClientsSection from '../../components/ClientsSection';
 
 export default function AdminDashboardPage() {
@@ -258,14 +257,12 @@ export default function AdminDashboardPage() {
 
   if (loading && activeTab === 'meetings') {
     return (
-      <AdminLayout>
-        <div className="flex items-center justify-center h-full">
-          <div className="text-white text-center">
-            <div className="w-8 h-8 border-2 border-white/20 border-t-white/60 rounded-full animate-spin mx-auto mb-4"></div>
-            <p className="text-white/60">Cargando reuniones...</p>
-          </div>
+      <div className="flex items-center justify-center h-full">
+        <div className="text-white text-center">
+          <div className="w-8 h-8 border-2 border-white/20 border-t-white/60 rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-white/60">Cargando reuniones...</p>
         </div>
-      </AdminLayout>
+      </div>
     );
   }
 
@@ -277,96 +274,94 @@ export default function AdminDashboardPage() {
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
 
-      <AdminLayout>
-        <div className="p-6">
-          {/* Tarjetas de estadísticas generales (clientes y reuniones) */}
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
-            <div className="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/8 transition-colors">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-white/60 text-sm">Total</p>
-                  <p className="text-2xl font-semibold">{stats.total}</p>
-                </div>
-                <CalendarIcon className="w-6 h-6 text-white/30" />
+      <div className="p-6">
+        {/* Tarjetas de estadísticas generales (clientes y reuniones) */}
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
+          <div className="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/8 transition-colors">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-white/60 text-sm">Total</p>
+                <p className="text-2xl font-semibold">{stats.total}</p>
               </div>
-            </div>
-
-            <div className="bg-yellow-500/5 border border-yellow-500/10 rounded-lg p-4 hover:bg-yellow-500/8 transition-colors">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-yellow-400 text-sm">Pendientes</p>
-                  <p className="text-2xl font-semibold text-yellow-400">{stats.pending}</p>
-                </div>
-                <ClockIcon className="w-6 h-6 text-yellow-400/30" />
-              </div>
-            </div>
-
-            <div className="bg-blue-500/5 border border-blue-500/10 rounded-lg p-4 hover:bg-blue-500/8 transition-colors">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-blue-400 text-sm">Confirmadas</p>
-                  <p className="text-2xl font-semibold text-blue-400">{stats.confirmed}</p>
-                </div>
-                <CheckIcon className="w-6 h-6 text-blue-400/30" />
-              </div>
-            </div>
-
-            <div className="bg-green-500/5 border border-green-500/10 rounded-lg p-4 hover:bg-green-500/8 transition-colors">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-green-400 text-sm">Completadas</p>
-                  <p className="text-2xl font-semibold text-green-400">{stats.completed}</p>
-                </div>
-                <StarIcon className="w-6 h-6 text-green-400/30" />
-              </div>
-            </div>
-
-            <div className="bg-red-500/5 border border-red-500/10 rounded-lg p-4 hover:bg-red-500/8 transition-colors">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-red-400 text-sm">Canceladas</p>
-                  <p className="text-2xl font-semibold text-red-400">{stats.cancelled}</p>
-                </div>
-                <Cross2Icon className="w-6 h-6 text-red-400/30" />
-              </div>
+              <CalendarIcon className="w-6 h-6 text-white/30" />
             </div>
           </div>
 
-          {/* Tabla de clientes */}
-          <ClientsSection />
+          <div className="bg-yellow-500/5 border border-yellow-500/10 rounded-lg p-4 hover:bg-yellow-500/8 transition-colors">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-yellow-400 text-sm">Pendientes</p>
+                <p className="text-2xl font-semibold text-yellow-400">{stats.pending}</p>
+              </div>
+              <ClockIcon className="w-6 h-6 text-yellow-400/30" />
+            </div>
+          </div>
 
-          {/* Resumen de próximas reuniones */}
-          <div className="mt-8">
-            <h2 className="text-lg font-semibold mb-2">Próximas reuniones</h2>
-            <div className="bg-white/5 border border-white/10 rounded-lg overflow-hidden">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="text-white/40 border-b border-white/10">
-                    <th className="py-2 px-2 font-medium text-left">Cliente</th>
-                    <th className="py-2 px-2 font-medium text-left">Empresa</th>
-                    <th className="py-2 px-2 font-medium text-left">Fecha</th>
-                    <th className="py-2 px-2 font-medium text-left">Hora</th>
-                    <th className="py-2 px-2 font-medium text-left">Tipo</th>
-                    <th className="py-2 px-2 font-medium text-left">Estado</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {upcomingMeetings.map((meeting) => (
-                    <tr key={meeting.id} className="border-b border-white/5 last:border-0 hover:bg-white/5 transition-colors group">
-                      <td className="py-2 px-2">{meeting.name}</td>
-                      <td className="py-2 px-2">{meeting.company}</td>
-                      <td className="py-2 px-2">{meeting.meeting_date}</td>
-                      <td className="py-2 px-2">{meeting.meeting_time}</td>
-                      <td className="py-2 px-2">{meeting.meeting_type_name}</td>
-                      <td className="py-2 px-2">{meeting.status === 'pending' ? 'Pendiente' : meeting.status === 'confirmed' ? 'Confirmada' : 'Otra'}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+          <div className="bg-blue-500/5 border border-blue-500/10 rounded-lg p-4 hover:bg-blue-500/8 transition-colors">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-blue-400 text-sm">Confirmadas</p>
+                <p className="text-2xl font-semibold text-blue-400">{stats.confirmed}</p>
+              </div>
+              <CheckIcon className="w-6 h-6 text-blue-400/30" />
+            </div>
+          </div>
+
+          <div className="bg-green-500/5 border border-green-500/10 rounded-lg p-4 hover:bg-green-500/8 transition-colors">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-green-400 text-sm">Completadas</p>
+                <p className="text-2xl font-semibold text-green-400">{stats.completed}</p>
+              </div>
+              <StarIcon className="w-6 h-6 text-green-400/30" />
+            </div>
+          </div>
+
+          <div className="bg-red-500/5 border border-red-500/10 rounded-lg p-4 hover:bg-red-500/8 transition-colors">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-red-400 text-sm">Canceladas</p>
+                <p className="text-2xl font-semibold text-red-400">{stats.cancelled}</p>
+              </div>
+              <Cross2Icon className="w-6 h-6 text-red-400/30" />
             </div>
           </div>
         </div>
-      </AdminLayout>
+
+        {/* Tabla de clientes */}
+        <ClientsSection />
+
+        {/* Resumen de próximas reuniones */}
+        <div className="mt-8">
+          <h2 className="text-lg font-semibold mb-2">Próximas reuniones</h2>
+          <div className="bg-white/5 border border-white/10 rounded-lg overflow-hidden">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="text-white/40 border-b border-white/10">
+                  <th className="py-2 px-2 font-medium text-left">Cliente</th>
+                  <th className="py-2 px-2 font-medium text-left">Empresa</th>
+                  <th className="py-2 px-2 font-medium text-left">Fecha</th>
+                  <th className="py-2 px-2 font-medium text-left">Hora</th>
+                  <th className="py-2 px-2 font-medium text-left">Tipo</th>
+                  <th className="py-2 px-2 font-medium text-left">Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                {upcomingMeetings.map((meeting) => (
+                  <tr key={meeting.id} className="border-b border-white/5 last:border-0 hover:bg-white/5 transition-colors group">
+                    <td className="py-2 px-2">{meeting.name}</td>
+                    <td className="py-2 px-2">{meeting.company}</td>
+                    <td className="py-2 px-2">{meeting.meeting_date}</td>
+                    <td className="py-2 px-2">{meeting.meeting_time}</td>
+                    <td className="py-2 px-2">{meeting.meeting_type_name}</td>
+                    <td className="py-2 px-2">{meeting.status === 'pending' ? 'Pendiente' : meeting.status === 'confirmed' ? 'Confirmada' : 'Otra'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

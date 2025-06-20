@@ -3,33 +3,61 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { supabase } from '../lib/supabase';
 
 export default function PresupuestoSection() {
   const [status, setStatus] = useState("idle");
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    project_type: '',
+    message: ''
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("loading");
 
-    const form = e.target;
-    const data = new FormData(form);
+    try {
+      // Preparar los datos para Supabase
+      const leadData = {
+        name: formData.name,
+        email: formData.email,
+        project_type: formData.project_type,
+        message: formData.message,
+        source: 'budget',
+        status: 'new'
+      };
 
-    const response = await fetch("https://formspree.io/f/xkgjpokg", {
-      method: "POST",
-      body: data,
-      headers: {
-        Accept: "application/json",
-      },
-    });
+      // Insertar en Supabase
+      const { error } = await supabase
+        .from('leads')
+        .insert([leadData]);
 
-    if (response.ok) {
+      if (error) throw error;
+
+      // Éxito
       setStatus("success");
-      form.reset();
+      setFormData({
+        name: '',
+        email: '',
+        project_type: '',
+        message: ''
+      });
 
       setTimeout(() => {
         setStatus("idle");
       }, 4000);
-    } else {
+    } catch (error) {
+      console.error('Error al enviar el formulario:', error);
       setStatus("error");
     }
   };
@@ -83,6 +111,8 @@ export default function PresupuestoSection() {
             <Input
               id="name"
               name="name"
+              value={formData.name}
+              onChange={handleInputChange}
               placeholder="Tu nombre"
               required
               className="bg-customBlack border-white border-opacity-5 text-white placeholder-gray-400"
@@ -95,6 +125,8 @@ export default function PresupuestoSection() {
               id="email"
               name="email"
               type="email"
+              value={formData.email}
+              onChange={handleInputChange}
               placeholder="tunombre@email.com"
               required
               className="bg-customBlack border-white border-opacity-5 text-white placeholder-gray-400"
@@ -107,8 +139,10 @@ export default function PresupuestoSection() {
               <label className="flex items-center gap-2">
                 <input
                   type="radio"
-                  name="proyecto"
+                  name="project_type"
                   value="Sitio web profesional"
+                  checked={formData.project_type === "Sitio web profesional"}
+                  onChange={handleInputChange}
                   required
                   className="accent-black"
                 />
@@ -117,8 +151,10 @@ export default function PresupuestoSection() {
               <label className="flex items-center gap-2">
                 <input
                   type="radio"
-                  name="proyecto"
+                  name="project_type"
                   value="Aplicación web a medida"
+                  checked={formData.project_type === "Aplicación web a medida"}
+                  onChange={handleInputChange}
                   required
                   className="accent-black"
                 />
@@ -132,14 +168,27 @@ export default function PresupuestoSection() {
             <Textarea
               id="message"
               name="message"
+              value={formData.message}
+              onChange={handleInputChange}
               placeholder="Cuéntanos sobre tu proyecto, funcionalidades, plazos, etc."
               required
               className="bg-customBlack border-white border-opacity-5 text-white placeholder-gray-400 min-h-[150px]"
             />
           </div>
 
-          <Button type="submit" className="w-full bg-white text-black border border-white/10 transition-colors duration-300">
-            {status === "loading" ? "Enviando..." : "Solicitar presupuesto"}
+          <Button 
+            type="submit" 
+            disabled={status === "loading"}
+            className="w-full bg-white text-black border border-white/10 transition-colors duration-300 disabled:opacity-50"
+          >
+            {status === "loading" ? (
+              <div className="flex items-center justify-center">
+                <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin mr-2"></div>
+                Enviando...
+              </div>
+            ) : (
+              "Solicitar presupuesto"
+            )}
           </Button>
 
           {/* Mensaje de éxito */}

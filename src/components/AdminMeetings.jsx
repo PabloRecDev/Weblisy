@@ -16,6 +16,7 @@ import {
   StarIcon,
   PersonIcon
 } from '@radix-ui/react-icons';
+import { supabase } from '../lib/supabase';
 
 export default function AdminMeetings() {
   const [meetings, setMeetings] = useState([]);
@@ -40,86 +41,18 @@ export default function AdminMeetings() {
   const fetchMeetings = async () => {
     try {
       setLoading(true);
-      // Datos de ejemplo
-      const mockMeetings = [
-        {
-          id: '1',
-          name: 'Juan Pérez',
-          email: 'juan.perez@empresa.com',
-          company: 'TechCorp',
-          message: 'Necesito una aplicación web para gestionar inventarios',
-          meeting_date: '2024-01-15',
-          meeting_time: '10:00',
-          meeting_type: 'video',
-          meeting_type_name: 'Videollamada',
-          status: 'pending',
-          created_at: '2024-01-10T09:30:00Z',
-          updated_at: '2024-01-10T09:30:00Z'
-        },
-        {
-          id: '2',
-          name: 'María García',
-          email: 'maria.garcia@startup.com',
-          company: 'StartupXYZ',
-          message: 'Quiero desarrollar una plataforma de e-commerce',
-          meeting_date: '2024-01-16',
-          meeting_time: '14:30',
-          meeting_type: 'phone',
-          meeting_type_name: 'Llamada telefónica',
-          status: 'confirmed',
-          created_at: '2024-01-09T15:20:00Z',
-          updated_at: '2024-01-11T10:15:00Z'
-        },
-        {
-          id: '3',
-          name: 'Carlos Rodríguez',
-          email: 'carlos.rodriguez@consulting.com',
-          company: 'ConsultingPro',
-          message: 'Busco una solución para automatizar procesos internos',
-          meeting_date: '2024-01-14',
-          meeting_time: '11:00',
-          meeting_type: 'chat',
-          meeting_type_name: 'Chat en vivo',
-          status: 'completed',
-          created_at: '2024-01-08T12:45:00Z',
-          updated_at: '2024-01-14T11:30:00Z'
-        },
-        {
-          id: '4',
-          name: 'Ana López',
-          email: 'ana.lopez@digital.com',
-          company: 'DigitalAgency',
-          message: 'Necesito un sitio web corporativo moderno',
-          meeting_date: '2024-01-17',
-          meeting_time: '16:00',
-          meeting_type: 'video',
-          meeting_type_name: 'Videollamada',
-          status: 'pending',
-          created_at: '2024-01-12T08:15:00Z',
-          updated_at: '2024-01-12T08:15:00Z'
-        },
-        {
-          id: '5',
-          name: 'Roberto Silva',
-          email: 'roberto.silva@restaurant.com',
-          company: 'RestaurantElite',
-          message: 'Quiero una aplicación para gestionar reservas',
-          meeting_date: '2024-01-13',
-          meeting_time: '13:00',
-          meeting_type: 'phone',
-          meeting_type_name: 'Llamada telefónica',
-          status: 'cancelled',
-          created_at: '2024-01-07T16:30:00Z',
-          updated_at: '2024-01-12T14:20:00Z'
-        }
-      ];
-      setTimeout(() => {
-        setMeetings(mockMeetings);
-        calculateStats(mockMeetings);
-        setLoading(false);
-      }, 800);
+      // Consulta real a Supabase
+      const { data, error } = await supabase
+        .from('meetings')
+        .select('*')
+        .order('meeting_date', { ascending: false })
+        .order('meeting_time', { ascending: false });
+      if (error) throw error;
+      setMeetings(data || []);
+      calculateStats(data || []);
+      setLoading(false);
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error al obtener reuniones:', error);
       setLoading(false);
     }
   };
@@ -138,18 +71,16 @@ export default function AdminMeetings() {
   const updateMeetingStatus = async (meetingId, newStatus) => {
     try {
       setUpdating(true);
-      const updatedMeetings = meetings.map(meeting => 
-        meeting.id === meetingId 
-          ? { ...meeting, status: newStatus, updated_at: new Date().toISOString() }
-          : meeting
-      );
-      setMeetings(updatedMeetings);
-      calculateStats(updatedMeetings);
-      setTimeout(() => {
-        setUpdating(false);
-      }, 300);
+      // Actualizar en Supabase
+      const { error } = await supabase
+        .from('meetings')
+        .update({ status: newStatus, updated_at: new Date().toISOString() })
+        .eq('id', meetingId);
+      if (error) throw error;
+      await fetchMeetings(); // Refrescar lista
+      setUpdating(false);
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error al actualizar estado:', error);
       setUpdating(false);
     }
   };
@@ -159,11 +90,15 @@ export default function AdminMeetings() {
       return;
     }
     try {
-      const updatedMeetings = meetings.filter(m => m.id !== meetingId);
-      setMeetings(updatedMeetings);
-      calculateStats(updatedMeetings);
+      // Eliminar en Supabase
+      const { error } = await supabase
+        .from('meetings')
+        .delete()
+        .eq('id', meetingId);
+      if (error) throw error;
+      await fetchMeetings(); // Refrescar lista
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error al eliminar reunión:', error);
     }
   };
 
