@@ -158,13 +158,13 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.8 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full px-4 sm:px-0"
             >
               <motion.button
                 whileTap={{ scale: 0.95 }}
-                className="group relative px-8 py-4 bg-[#038e42] text-white font-semibold rounded-lg overflow-hidden transition-all duration-300 hover:bg-[#038e42]/80"
+                className="group relative w-full sm:w-auto px-8 py-4 bg-[#038e42] text-white font-semibold rounded-lg overflow-hidden transition-all duration-300 hover:bg-[#038e42]/80"
               >
-                <span className="relative z-10 flex items-center">
+                <span className="relative z-10 flex items-center justify-center">
                   Comenzar Proyecto
                   <ArrowRightIcon className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </span>
@@ -172,7 +172,7 @@ export default function HeroSection() {
 
               <motion.button
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 border-2 border-[#038e42] text-[#038e42] font-semibold rounded-lg hover:bg-[#038e42] hover:text-white transition-all duration-300 transform"
+                className="w-full sm:w-auto px-8 py-4 border-2 border-[#038e42] text-[#038e42] font-semibold rounded-lg hover:bg-[#038e42] hover:text-white transition-all duration-300 transform"
               >
                 Ver Portafolio
               </motion.button>
