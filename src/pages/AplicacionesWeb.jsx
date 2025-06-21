@@ -31,7 +31,7 @@ export default function AplicacionesWeb() {
         "Reportes automáticos",
         "Integración con pasarelas de pago"
       ],
-      image: "../../public/assets/Sistema-Inventario1.png",
+      image: "/assets/Sistema-Inventario1.png",
       demo: "#",
       github: "#",
       status: "Completado"
@@ -49,7 +49,7 @@ export default function AplicacionesWeb() {
         "Panel de administración",
         "App móvil responsive"
       ],
-      image: "../../public/assets/Sistema-Reservas.png",
+      image: "/assets/Sistema-Reservas.png",
       demo: "#",
       github: "#",
       status: "En desarrollo"
@@ -67,7 +67,7 @@ export default function AplicacionesWeb() {
         "Analytics avanzados",
         "Integración con herramientas externas"
       ],
-      image: "../../public/assets/app-crm.png",
+      image: "/assets/app-crm.png",
       demo: "#",
       github: "#",
       status: "Completado"
@@ -85,7 +85,7 @@ export default function AplicacionesWeb() {
         "Notificaciones push",
         "API REST completa"
       ],
-      image: "../../public/assets/Sistema-GestiónIncidencias.png",
+      image: "/assets/Sistema-GestiónIncidencias.png",
       demo: "#",
       github: "#",
       status: "Completado"
@@ -103,7 +103,7 @@ export default function AplicacionesWeb() {
         "Notificaciones push",
         "Analytics de rutas"
       ],
-      image: "../../public/assets/Sistema-Skyvibes.png",
+      image: "/assets/Sistema-Skyvibes.png",
       demo: "#",
       github: "#",
       status: "En desarrollo"
@@ -121,7 +121,7 @@ export default function AplicacionesWeb() {
         "Certificados automáticos",
         "Sistema de reviews"
       ],
-      image: "../../public/assets/Boketto.png",
+      image: "/assets/Boketto.png",
       demo: "#",
       github: "#",
       status: "Completado"
