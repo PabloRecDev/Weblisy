@@ -1,39 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset 
-  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
->
-  <url>
-    <loc>https://www.weblisy.es/</loc>
-    <lastmod>2025-04-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://www.weblisy.es/#proceso</loc>
-    <lastmod>2025-04-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://weblisy.com/</loc>
+    <lastmod>2025-06-22</lastmod>
+    <priority>1.00</priority>
+    <changefreq>daily</changefreq>
   </url>
-
   <url>
-    <loc>https://www.weblisy.es/#pricingSection</loc>
-    <lastmod>2025-04-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://weblisy.com/aplicaciones-web</loc>
+    <lastmod>2025-06-22</lastmod>
+    <priority>0.90</priority>
+    <changefreq>weekly</changefreq>
   </url>
-
   <url>
-    <loc>https://www.weblisy.es/#contacto</loc>
-    <lastmod>2025-04-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://weblisy.com/proyectos</loc>
+    <lastmod>2025-06-22</lastmod>
+    <priority>0.80</priority>
+    <changefreq>weekly</changefreq>
   </url>
-
   <url>
-    <loc>https://www.weblisy.es/#testimonios</loc>
-    <lastmod>2025-04-08</lastmod>
+    <loc>https://weblisy.com/presupuesto</loc>
+    <lastmod>2025-06-22</lastmod>
+    <priority>0.80</priority>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://weblisy.com/agendar</loc>
+    <lastmod>2025-06-22</lastmod>
+    <priority>0.80</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://weblisy.com/nosotros</loc>
+    <lastmod>2025-06-22</lastmod>
+    <priority>0.70</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://weblisy.com/blog</loc>
+    <lastmod>2025-06-22</lastmod>
+    <priority>0.70</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://weblisy.com/contacto</loc>
+    <lastmod>2025-06-22</lastmod>
+    <priority>0.60</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://weblisy.com/privacidad</loc>
+    <lastmod>2025-06-22</lastmod>
+    <priority>0.50</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://weblisy.com/proyecto/1</loc>
+    <lastmod>2025-06-22</lastmod>
+    <priority>0.75</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://weblisy.com/proyecto/2</loc>
+    <lastmod>2025-06-22</lastmod>
+    <priority>0.75</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://weblisy.com/proyecto/3</loc>
+    <lastmod>2025-06-22</lastmod>
+    <priority>0.75</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://weblisy.com/proyecto/4</loc>
+    <lastmod>2025-06-22</lastmod>
+    <priority>0.75</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://weblisy.com/proyecto/5</loc>
+    <lastmod>2025-06-22</lastmod>
+    <priority>0.75</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://weblisy.com/proyecto/6</loc>
+    <lastmod>2025-06-22</lastmod>
+    <priority>0.75</priority>
+    <changefreq>weekly</changefreq>
   </url>
 </urlset>

@@ -7,6 +7,7 @@ import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Textarea } from './ui/textarea';
 import { supabase } from '../lib/supabase';
+import { createClient } from '@supabase/supabase-js';
 import { 
   CalendarIcon, 
   ClockIcon, 

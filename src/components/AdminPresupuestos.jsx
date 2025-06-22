@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 import { 
   PlusIcon,
   MagnifyingGlassIcon,
@@ -11,7 +13,9 @@ import {
   HomeIcon,
   CalendarIcon,
   TrashIcon,
-  CheckIcon
+  CheckIcon,
+  ClockIcon,
+  DownloadIcon
 } from '@radix-ui/react-icons';
 
 const mockPresupuestos = [
@@ -25,7 +29,12 @@ const mockPresupuestos = [
     estado: 'pendiente',
     prioridad: 'alta',
     total: 11979,
-    items: 4,
+    items: [
+        { descripcion: "Diseño UI/UX", cantidad: 1, precio_unitario: 1500, total: 1500 },
+        { descripcion: "Desarrollo Frontend", cantidad: 1, precio_unitario: 3000, total: 3000 },
+        { descripcion: "Desarrollo Backend", cantidad: 1, precio_unitario: 3500, total: 3500 },
+        { descripcion: "Despliegue y QA", cantidad: 1, precio_unitario: 1000, total: 1000 }
+    ],
     created_at: '2024-01-15T10:30:00Z'
   },
   {
@@ -38,7 +47,11 @@ const mockPresupuestos = [
     estado: 'aprobado',
     prioridad: 'media',
     total: 8470,
-    items: 3,
+    items: [
+        { descripcion: "Análisis de requerimientos", cantidad: 1, precio_unitario: 1000, total: 1000 },
+        { descripcion: "Desarrollo de API", cantidad: 1, precio_unitario: 4000, total: 4000 },
+        { descripcion: "Integración con lectores de códigos", cantidad: 1, precio_unitario: 2000, total: 2000 }
+    ],
     created_at: '2024-01-10T14:20:00Z'
   },
   {
@@ -51,7 +64,11 @@ const mockPresupuestos = [
     estado: 'rechazado',
     prioridad: 'baja',
     total: 4235,
-    items: 3,
+    items: [
+        { descripcion: "Workshop de diseño", cantidad: 1, precio_unitario: 800, total: 800 },
+        { descripcion: "Maquetación HTML/CSS", cantidad: 1, precio_unitario: 2500, total: 2500 },
+        { descripcion: "Optimización SEO", cantidad: 1, precio_unitario: 500, total: 500 }
+    ],
     created_at: '2024-01-08T09:15:00Z'
   }
 ];
@@ -71,6 +88,19 @@ export default function AdminPresupuestos() {
     rechazados: 0,
     valorTotal: 0
   });
+
+  const [newPresupuesto, setNewPresupuesto] = useState({
+    cliente_id: '',
+    titulo: '',
+    fecha_creacion: new Date().toISOString().split('T')[0],
+    fecha_vencimiento: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    total: 0,
+    estado: 'pendiente'
+  });
+
+  const [presupuestoItems, setPresupuestoItems] = useState([
+    { descripcion: '', cantidad: 1, precio_unitario: 0, total: 0 }
+  ]);
 
   useEffect(() => {
     fetchPresupuestos();
@@ -129,6 +159,106 @@ export default function AdminPresupuestos() {
     
     return matchesSearch && matchesEstado;
   });
+
+  const handleOpenModal = () => {
+    // Lógica para abrir el modal de creación
+    setShowModal(true);
+  };
+
+  const handleNewPresupuestoChange = (e) => {
+    const { name, value } = e.target;
+    setNewPresupuesto(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleItemChange = (index, field, value) => {
+    const updatedItems = [...presupuestoItems];
+    const item = { ...updatedItems[index], [field]: value };
+    
+    const cantidad = parseFloat(item.cantidad) || 0;
+    const precioUnitario = parseFloat(item.precio_unitario) || 0;
+    item.total = cantidad * precioUnitario;
+    
+    updatedItems[index] = item;
+    setPresupuestoItems(updatedItems);
+  };
+
+  const addItem = () => {
+    setPresupuestoItems([...presupuestoItems, { descripcion: '', cantidad: 1, precio_unitario: 0, total: 0 }]);
+  };
+
+  const removeItem = (index) => {
+    if (presupuestoItems.length > 1) {
+      setPresupuestoItems(presupuestoItems.filter((_, i) => i !== index));
+    }
+  };
+
+  const resetForm = () => {
+    setNewPresupuesto({
+      cliente_id: '',
+      titulo: '',
+      fecha_creacion: new Date().toISOString().split('T')[0],
+      fecha_vencimiento: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+      total: 0,
+      estado: 'pendiente'
+    });
+    setPresupuestoItems([{ descripcion: '', cantidad: 1, precio_unitario: 0, total: 0 }]);
+  };
+
+  const handleCreatePresupuesto = async (e) => {
+    e.preventDefault();
+    // Lógica para guardar el presupuesto (próximamente)
+    console.log("Creando presupuesto:", newPresupuesto, presupuestoItems);
+    setShowModal(false);
+    resetForm();
+  };
+
+  const generatePDF = (presupuesto) => {
+    const doc = new jsPDF();
+
+    // Encabezado
+    doc.setFontSize(20);
+    doc.text("Presupuesto", 14, 22);
+    doc.setFontSize(12);
+    doc.text(`ID: ${presupuesto.id}`, 14, 30);
+
+    // Información del cliente
+    doc.setFontSize(10);
+    doc.text(`Cliente: ${presupuesto.cliente.nombre}`, 14, 40);
+    doc.text(`Empresa: ${presupuesto.cliente.empresa}`, 14, 45);
+    doc.text(`Fecha: ${format(new Date(presupuesto.fechaCreacion), 'dd/MM/yyyy', { locale: es })}`, 150, 40);
+    doc.text(`Vencimiento: ${format(new Date(presupuesto.fechaVencimiento), 'dd/MM/yyyy', { locale: es })}`, 150, 45);
+
+    // Tabla de conceptos
+    const tableColumn = ["Descripción", "Cantidad", "Precio Unitario", "Total"];
+    const tableRows = [];
+
+    presupuesto.items.forEach(item => {
+      const itemData = [
+        item.descripcion,
+        item.cantidad,
+        `€${item.precio_unitario.toFixed(2)}`,
+        `€${item.total.toFixed(2)}`
+      ];
+      tableRows.push(itemData);
+    });
+
+    doc.autoTable({
+      head: [tableColumn],
+      body: tableRows,
+      startY: 55,
+    });
+
+    // Total
+    const finalY = doc.autoTable.previous.finalY;
+    doc.setFontSize(12);
+    doc.text(`Total: €${presupuesto.total.toLocaleString()}`, 150, finalY + 10);
+
+    // Pie de página
+    doc.setFontSize(8);
+    doc.text("Gracias por su confianza.", 14, doc.internal.pageSize.height - 10);
+
+    doc.save(`Presupuesto-${presupuesto.id}.pdf`);
+  };
 
   if (loading) {
     return (
@@ -204,6 +334,13 @@ export default function AdminPresupuestos() {
           <option value="aprobado">Aprobados</option>
           <option value="rechazado">Rechazados</option>
         </select>
+        <button
+          onClick={handleOpenModal}
+          className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-[#038e42] text-sm text-white font-medium hover:bg-[#038e42]/80 transition-colors"
+        >
+          <PlusIcon className="w-4 h-4" />
+          Crear Presupuesto
+        </button>
       </div>
 
       {/* Tabla */}
@@ -250,22 +387,12 @@ export default function AdminPresupuestos() {
                     </div>
                   </td>
                   <td className="py-2 px-2">
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={() => {
-                          setSelectedPresupuesto(presupuesto);
-                          setShowModal(true);
-                        }}
-                        className="p-1 text-white/40 hover:text-white hover:bg-white/10 rounded transition-colors"
-                        title="Ver detalles"
-                      >
-                        <PersonIcon className="w-4 h-4" />
+                    <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                       <button onClick={() => generatePDF(presupuesto)} className="p-1 hover:bg-white/10 rounded">
+                        <DownloadIcon className="w-4 h-4" />
                       </button>
-                      <button
-                        className="p-1 text-white/40 hover:text-white hover:bg-white/10 rounded transition-colors"
-                        title="Descargar PDF"
-                      >
-                        <StarIcon className="w-4 h-4" />
+                      <button className="p-1 hover:bg-white/10 rounded">
+                        <TrashIcon className="w-4 h-4 text-red-500/80" />
                       </button>
                     </div>
                   </td>
@@ -280,6 +407,72 @@ export default function AdminPresupuestos() {
           </table>
         </div>
       </div>
+
+      {/* Modal para crear presupuesto */}
+      <AnimatePresence>
+        {showModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+            onClick={() => setShowModal(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              className="bg-[#1c1c1c] rounded-lg w-full max-w-2xl p-6 border border-white/10"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h2 className="text-xl font-bold mb-4">Crear Nuevo Presupuesto</h2>
+              <form onSubmit={handleCreatePresupuesto}>
+                {/* Aquí irían los campos del formulario */}
+                <div className="space-y-4">
+                  <div>
+                    <label className="text-sm text-white/70">Título</label>
+                    <input name="titulo" value={newPresupuesto.titulo} onChange={handleNewPresupuestoChange} type="text" className="w-full mt-1 p-2 rounded bg-white/5 border border-white/10" />
+                  </div>
+                  <div>
+                    <label className="text-sm text-white/70">Cliente</label>
+                    <select name="cliente_id" value={newPresupuesto.cliente_id} onChange={handleNewPresupuestoChange} className="w-full mt-1 p-2 rounded bg-white/5 border border-white/10">
+                      <option value="">Seleccionar cliente</option>
+                      {/* Aquí se mapearían los clientes */}
+                    </select>
+                  </div>
+                  
+                  {/* Items del presupuesto */}
+                  <h3 className="font-semibold pt-4">Conceptos</h3>
+                  {presupuestoItems.map((item, index) => (
+                    <div key={index} className="flex gap-2 items-center">
+                      <input value={item.descripcion} onChange={(e) => handleItemChange(index, 'descripcion', e.target.value)} type="text" placeholder="Descripción" className="w-full p-2 rounded bg-white/5 border border-white/10" />
+                      <input value={item.cantidad} onChange={(e) => handleItemChange(index, 'cantidad', e.target.value)} type="number" placeholder="Cant." className="w-20 p-2 rounded bg-white/5 border border-white/10" />
+                      <input value={item.precio_unitario} onChange={(e) => handleItemChange(index, 'precio_unitario', e.target.value)} type="number" placeholder="Precio" className="w-24 p-2 rounded bg-white/5 border border-white/10" />
+                      <button type="button" onClick={() => removeItem(index)} className="text-red-500">
+                        <TrashIcon />
+                      </button>
+                    </div>
+                  ))}
+                   <button type="button" onClick={addItem} className="text-sm text-[#038e42]">
+                    + Añadir concepto
+                  </button>
+
+                </div>
+
+                <div className="flex justify-end gap-4 mt-6">
+                  <button type="button" onClick={() => setShowModal(false)} className="px-4 py-2 rounded bg-white/10 text-white">
+                    Cancelar
+                  </button>
+                  <button type="submit" className="px-4 py-2 rounded bg-[#038e42] text-white">
+                    Guardar Presupuesto
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
     </div>
   );
 } 
