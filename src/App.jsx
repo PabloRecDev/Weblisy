@@ -134,7 +134,7 @@ function App() {
                 <link rel="icon" href="/favicon.ico" />
                 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-                <title>WebLisy - Desarrollo Web Profesional</title>
+                <title>Weblisy | Desarrollo de Páginas Web Profesionales</title>
               </Helmet>
               
               <Routes>
