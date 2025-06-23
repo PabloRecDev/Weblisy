@@ -16,10 +16,13 @@ export default function AgendarPage() {
         <meta property="og:description" content="Agenda una reunión gratuita con nuestros expertos en desarrollo web. Consultoría sin compromiso." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://weblisy.com/agendar" />
+        <meta property="og:image" content="https://weblisy.com/assets/weblisy-logo.png" />
         
         {/* Twitter */}
-        <meta property="twitter:title" content="Agendar Reunión - WebLisy" />
-        <meta property="twitter:description" content="Agenda una reunión gratuita con nuestros expertos en desarrollo web." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Agendar Reunión - WebLisy" />
+        <meta name="twitter:description" content="Agenda una reunión gratuita con nuestros expertos en desarrollo web." />
+        <meta name="twitter:image" content="https://weblisy.com/assets/weblisy-logo.png" />
         
         {/* Canonical */}
         <link rel="canonical" href="https://weblisy.com/agendar" />

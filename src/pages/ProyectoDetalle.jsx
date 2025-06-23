@@ -311,10 +311,24 @@ export default function ProyectoDetalle() {
       <Helmet>
         <title>{project.title} | Weblisy - Desarrollo de Software</title>
         <meta name="description" content={project.description} />
+        <meta name="keywords" content={`${project.title}, ${project.category}, desarrollo web, aplicaciones web, ${project.technologies.join(', ')}`} />
+        <meta name="robots" content="index, follow" />
+        
+        {/* Open Graph */}
         <meta property="og:title" content={`${project.title} | Weblisy`} />
         <meta property="og:description" content={project.description} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={`https://weblisy.com/proyecto/${project.id}`} />
+        <meta property="og:image" content={project.images[0] || "https://weblisy.com/assets/weblisy-logo.png"} />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${project.title} | Weblisy`} />
+        <meta name="twitter:description" content={project.description} />
+        <meta name="twitter:image" content={project.images[0] || "https://weblisy.com/assets/weblisy-logo.png"} />
+        
+        {/* Canonical */}
+        <link rel="canonical" href={`https://weblisy.com/proyecto/${project.id}`} />
       </Helmet>
 
       {/* Hero Section */}
@@ -327,13 +341,16 @@ export default function ProyectoDetalle() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <Link 
-              to="/aplicaciones-web"
-              className="inline-flex items-center gap-2 text-gray-400 hover:text-[#038e42] transition-colors"
-            >
-              <ArrowLeftIcon className="w-4 h-4" />
-              Volver a Aplicaciones Web
-            </Link>
+            <nav aria-label="Breadcrumb">
+              <Link 
+                to="/aplicaciones-web"
+                className="inline-flex items-center gap-2 text-gray-400 hover:text-[#038e42] transition-colors"
+                aria-label="Volver a la página de aplicaciones web"
+              >
+                <ArrowLeftIcon className="w-4 h-4" aria-hidden="true" />
+                Volver a Aplicaciones Web
+              </Link>
+            </nav>
           </motion.div>
 
           <motion.div 
@@ -400,7 +417,7 @@ export default function ProyectoDetalle() {
               <div className="relative h-96 rounded-xl overflow-hidden">
                 <img 
                   src={project.images[activeImage]} 
-                  alt={project.title}
+                  alt={`${project.title} - Vista ${activeImage + 1} de ${project.images.length}`}
                   className="w-full h-full object-contain"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
@@ -417,10 +434,12 @@ export default function ProyectoDetalle() {
                         ? 'border-[#038e42]' 
                         : 'border-white/20 hover:border-white/40'
                     }`}
+                    aria-label={`Ver imagen ${index + 1} de ${project.title}`}
+                    aria-pressed={activeImage === index}
                   >
                     <img 
                       src={image} 
-                      alt={`${project.title} ${index + 1}`}
+                      alt={`${project.title} - Miniatura ${index + 1}`}
                       className="w-full h-full object-contain"
                     />
                   </button>

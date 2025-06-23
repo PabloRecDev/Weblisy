@@ -185,4 +185,25 @@
     .rdp-day_hidden {
         @apply invisible;
     }
+}
+
+/* Scrollbar oscuro solo para el sidebar */
+.bg-\[\#0d0d0d\]::-webkit-scrollbar {
+  width: 8px;
+}
+.bg-\[\#0d0d0d\]::-webkit-scrollbar-thumb {
+  background: #222;
+  border-radius: 6px;
+}
+.bg-\[\#0d0d0d\]::-webkit-scrollbar-thumb:hover {
+  background: #333;
+}
+.bg-\[\#0d0d0d\]::-webkit-scrollbar-track {
+  background: #111;
+}
+
+/* Firefox */
+.bg-\[\#0d0d0d\] {
+  scrollbar-color: #222 #111;
+  scrollbar-width: thin;
 } 

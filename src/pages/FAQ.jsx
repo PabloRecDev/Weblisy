@@ -42,17 +42,23 @@ const FAQItem = ({ question, answer }) => {
             <motion.button
                 className="flex justify-between items-center w-full py-6 text-left"
                 onClick={() => setIsOpen(!isOpen)}
+                aria-expanded={isOpen}
+                aria-controls={`faq-answer-${question.replace(/\s+/g, '-').toLowerCase()}`}
+                aria-label={`${isOpen ? 'Ocultar' : 'Mostrar'} respuesta a: ${question}`}
             >
                 <h3 className="text-lg md:text-xl font-medium text-white">{question}</h3>
-                <div className="text-[#038e42]">
+                <div className="text-[#038e42]" aria-hidden="true">
                     {isOpen ? <MinusIcon className="w-6 h-6" /> : <PlusIcon className="w-6 h-6" />}
                 </div>
             </motion.button>
             <motion.div
+                id={`faq-answer-${question.replace(/\s+/g, '-').toLowerCase()}`}
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
                 className="overflow-hidden"
+                role="region"
+                aria-labelledby={`faq-question-${question.replace(/\s+/g, '-').toLowerCase()}`}
             >
                 <p className="pb-6 text-gray-300 leading-relaxed">{answer}</p>
             </motion.div>
@@ -62,10 +68,27 @@ const FAQItem = ({ question, answer }) => {
 
 const FAQPage = () => {
   return (
-    <>
+    <div className="min-h-screen bg-black">
       <Helmet>
         <title>Preguntas Frecuentes (FAQ) | Weblisy</title>
         <meta name="description" content="Encuentra respuestas a las preguntas más comunes sobre nuestros servicios de diseño web, precios, plazos y soporte. Resolvemos todas tus dudas." />
+        <meta name="keywords" content="preguntas frecuentes, FAQ, desarrollo web, precios web, plazos desarrollo, soporte técnico, consultoría web" />
+        <meta name="robots" content="index, follow" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Preguntas Frecuentes (FAQ) | Weblisy" />
+        <meta property="og:description" content="Encuentra respuestas a las preguntas más comunes sobre nuestros servicios de diseño web, precios y plazos." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://weblisy.com/faq" />
+        <meta property="og:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Preguntas Frecuentes | Weblisy" />
+        <meta name="twitter:description" content="Resuelve tus dudas sobre desarrollo web, precios y plazos." />
+        <meta name="twitter:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        
+        {/* Canonical */}
         <link rel="canonical" href="https://weblisy.com/faq" />
       </Helmet>
 
@@ -123,7 +146,7 @@ const FAQPage = () => {
           </motion.div>
         </div>
       </section>
-    </>
+    </div>
   );
 };
 

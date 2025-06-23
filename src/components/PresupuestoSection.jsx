@@ -199,32 +199,28 @@ export default function PresupuestoSection() {
     }
     setStatus("loading");
     
-    // Unir los detalles en un solo mensaje para la base de datos
-    const message = `
-      Tipo de Proyecto: ${formData.project_type}
-      Funcionalidades: ${formData.features}
-      Inspiración: ${formData.inspiration || 'No especificada'}
-      Presupuesto: ${formData.budget}
-      Plazo: ${formData.timeline}
-    `;
-
     try {
-      const leadData = {
+      const requestData = {
         name: formData.name,
         email: formData.email,
         company: formData.company,
-        message: message,
-        source: 'Presupuesto Multi-paso',
-        status: 'new'
+        project_type: formData.project_type,
+        features: formData.features,
+        inspiration: formData.inspiration || null,
+        budget: formData.budget,
+        timeline: formData.timeline,
+        status: 'new',
+        priority: 'medium',
+        source: 'web'
       };
 
-      const { error } = await supabase.from('leads').insert([leadData]);
+      const { error } = await supabase.from('presupuesto_requests').insert([requestData]);
 
       if (error) throw error;
 
       setStatus("success");
     } catch (error) {
-      console.error('Error al enviar el formulario:', error);
+      console.error('Error al enviar la solicitud de presupuesto:', error);
       setStatus("error");
     }
   };

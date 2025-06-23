@@ -55,6 +55,23 @@ const MantenimientoPage = () => {
       <Helmet>
         <title>Mantenimiento Web y Soporte Técnico | Weblisy</title>
         <meta name="description" content="Ofrecemos planes de mantenimiento web para mantener tu sitio seguro, rápido y actualizado. Nos encargamos de la tecnología para que tú te centres en tu negocio." />
+        <meta name="keywords" content="mantenimiento web, soporte técnico, actualizaciones web, seguridad web, hosting, backup, monitorización, WPO, optimización web" />
+        <meta name="robots" content="index, follow" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Mantenimiento Web y Soporte Técnico | Weblisy" />
+        <meta property="og:description" content="Planes de mantenimiento web para mantener tu sitio seguro, rápido y actualizado." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://weblisy.com/servicios/mantenimiento" />
+        <meta property="og:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Mantenimiento Web | Weblisy" />
+        <meta name="twitter:description" content="Planes de mantenimiento web para mantener tu sitio seguro y actualizado." />
+        <meta name="twitter:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        
+        {/* Canonical */}
         <link rel="canonical" href="https://weblisy.com/servicios/mantenimiento" />
       </Helmet>
 

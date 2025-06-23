@@ -177,11 +177,23 @@ export default function AplicacionesWeb() {
       <Helmet>
         <title>Aplicaciones Web a Medida | Weblisy - Desarrollo de Software</title>
         <meta name="description" content="Descubre nuestras aplicaciones web a medida. Desarrollamos soluciones personalizadas para e-commerce, CRM, sistemas de gestión y más. Tecnologías modernas y escalables." />
-        <meta name="keywords" content="aplicaciones web, desarrollo a medida, software empresarial, CRM, e-commerce, sistemas de gestión, desarrollo web" />
+        <meta name="keywords" content="aplicaciones web, desarrollo a medida, software empresarial, CRM, e-commerce, sistemas de gestión, desarrollo web, React, Node.js, MongoDB" />
+        <meta name="robots" content="index, follow" />
+        
+        {/* Open Graph */}
         <meta property="og:title" content="Aplicaciones Web a Medida | Weblisy" />
         <meta property="og:description" content="Desarrollamos aplicaciones web personalizadas para tu negocio. Soluciones escalables y modernas." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://weblisy.com/aplicaciones-web" />
+        <meta property="og:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Aplicaciones Web a Medida | Weblisy" />
+        <meta name="twitter:description" content="Desarrollamos aplicaciones web personalizadas para tu negocio." />
+        <meta name="twitter:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        
+        {/* Canonical */}
         <link rel="canonical" href="https://weblisy.com/aplicaciones-web" />
       </Helmet>
 
@@ -287,7 +299,7 @@ export default function AplicacionesWeb() {
                 <div className="relative h-48 overflow-hidden">
                   <img 
                     src={project.image} 
-                    alt={project.title}
+                    alt={`Captura de pantalla de ${project.title}`}
                     className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
                   />
                   <div className="absolute top-4 right-4">

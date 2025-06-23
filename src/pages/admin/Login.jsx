@@ -53,7 +53,7 @@ const Login = () => {
                 {/* Columna derecha con el formulario */}
                 <div className="w-full sm:w-1/2 h-full bg-black p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col items-center justify-center gap-3 sm:gap-4 md:gap-6 lg:gap-8">
                     <div className="text-center">
-                        <img src="/assets/weblisy-logo.png" alt="Logo Weblisy" className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 mx-auto" />
+                        <img src="/assets/weblisy-logo.png" alt="Logo de Weblisy - Agencia de Desarrollo Web" className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 mx-auto" />
                         <h1 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white mt-[-40px]">Bienvenido de vuelta</h1>
                         <h3 className="text-xs sm:text-sm md:text-base lg:text-lg text-gray-300">Inicia sesión para continuar con tu gestión</h3>
                     </div>

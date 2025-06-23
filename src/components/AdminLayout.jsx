@@ -13,7 +13,8 @@ import {
   ExitIcon,
   BellIcon,
   HamburgerMenuIcon,
-  EnvelopeClosedIcon
+  EnvelopeClosedIcon,
+  PinRightIcon
 } from '@radix-ui/react-icons';
 
 export default function AdminLayout() {
@@ -51,6 +52,8 @@ export default function AdminLayout() {
     { path: '/admin/dashboard', icon: DashboardIcon, label: 'Dashboard' },
     { path: '/admin/reuniones', icon: CalendarIcon, label: 'Reuniones' },
     { path: '/admin/leads', icon: EnvelopeClosedIcon, label: 'Leads/Mensajes' },
+    { path: '/admin/solicitudes-presupuesto', icon: EnvelopeClosedIcon, label: 'Solic. Presupuesto' },
+    { path: '/admin/promociones', icon: PinRightIcon, label: 'Promociones' },
     { path: '/admin/clientes', icon: PersonIcon, label: 'Clientes' },
     { path: '/admin/facturas', icon: StarIcon, label: 'Facturas' },
     { path: '/admin/presupuestos', icon: GearIcon, label: 'Presupuestos' },
@@ -146,9 +149,9 @@ export default function AdminLayout() {
         {/* Bottom Actions */}
         <div className="p-4 border-t border-white/10 space-y-2">
           {/* Notificaciones */}
-          <div className="relative">
+          <div className="relative group" onMouseEnter={() => setShowNotifications(true)} onMouseLeave={() => setShowNotifications(false)}>
             <button
-              onClick={() => setShowNotifications(!showNotifications)}
+              onClick={() => navigate('/admin/notificaciones')}
               className={`w-full flex items-center ${sidebarOpen ? 'gap-3 justify-start px-3 py-2' : 'justify-center py-3'} rounded-lg text-white/60 hover:bg-white/5 hover:text-white transition-colors relative`}
             >
               <BellIcon className={`${sidebarOpen ? 'w-5 h-5' : 'w-6 h-6'} transition-all duration-300`} />
@@ -158,7 +161,6 @@ export default function AdminLayout() {
                 <span className="text-xs text-white font-bold">{notifications.length}</span>
               </div>
             </button>
-            
             {/* Dropdown de notificaciones */}
             {showNotifications && sidebarOpen && (
               <div className="absolute bottom-full left-0 right-0 mb-2 bg-black/90 backdrop-blur-sm border border-white/20 rounded-lg p-2 max-h-64 overflow-y-auto z-50 shadow-xl">
@@ -185,14 +187,6 @@ export default function AdminLayout() {
           >
             <GearIcon className={`${sidebarOpen ? 'w-5 h-5' : 'w-6 h-6'} transition-all duration-300`} />
             {sidebarOpen && <span className="text-sm lg:text-base">Configuración</span>}
-          </button>
-
-          {/* Ayuda */}
-          <button
-            className={`w-full flex items-center ${sidebarOpen ? 'gap-3 justify-start px-3 py-2' : 'justify-center py-3'} rounded-lg text-white/60 hover:bg-white/5 hover:text-white transition-colors`}
-          >
-            <StarIcon className={`${sidebarOpen ? 'w-5 h-5' : 'w-6 h-6'} transition-all duration-300`} />
-            {sidebarOpen && <span className="text-sm lg:text-base">Ayuda</span>}
           </button>
 
           {/* Separador */}

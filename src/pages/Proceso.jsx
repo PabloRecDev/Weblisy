@@ -56,6 +56,23 @@ const ProcesoPage = () => {
       <Helmet>
         <title>Nuestro Proceso de Desarrollo | Weblisy</title>
         <meta name="description" content="Descubre nuestro proceso de trabajo transparente y colaborativo, desde la estrategia inicial hasta el lanzamiento y soporte. Así construimos soluciones web exitosas." />
+        <meta name="keywords" content="proceso desarrollo web, metodología desarrollo, estrategia digital, diseño UX, programación web, lanzamiento web, soporte técnico" />
+        <meta name="robots" content="index, follow" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Nuestro Proceso de Desarrollo | Weblisy" />
+        <meta property="og:description" content="Descubre nuestro proceso de trabajo transparente y colaborativo para crear soluciones web exitosas." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://weblisy.com/proceso" />
+        <meta property="og:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Proceso de Desarrollo | Weblisy" />
+        <meta name="twitter:description" content="Proceso transparente y colaborativo para crear soluciones web exitosas." />
+        <meta name="twitter:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        
+        {/* Canonical */}
         <link rel="canonical" href="https://weblisy.com/proceso" />
       </Helmet>
 
@@ -83,35 +100,37 @@ const ProcesoPage = () => {
       {/* Timeline Section */}
       <section className="py-20 px-4 md:px-8">
         <div className="container mx-auto max-w-4xl">
+          <h2 className="sr-only">Pasos del proceso de desarrollo</h2>
           <div className="relative">
             {/* Vertical line */}
             <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-white/10" aria-hidden="true"></div>
-
-            <div className="space-y-16">
-              {processSteps.map((step, index) => (
-                <motion.div
-                  key={step.id}
-                  className="relative flex items-center"
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                  viewport={{ once: true }}
-                >
-                  {/* Icon */}
-                  <div className={`absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-[#038e42] rounded-full flex items-center justify-center border-4 border-black`}>
-                    <step.icon className="w-6 h-6 text-white" />
-                  </div>
-
-                  {/* Content */}
-                  <div className={`w-full flex ${index % 2 === 0 ? 'justify-start' : 'justify-end'}`}>
-                    <div className="w-full md:w-5/12 p-6 bg-white/5 border border-white/10 rounded-xl backdrop-blur-sm">
-                      <h3 className="text-2xl font-bold text-white mb-3">{step.title}</h3>
-                      <p className="text-gray-300 leading-relaxed">{step.description}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+            
+            {processSteps.map((step, index) => (
+              <motion.div
+                key={step.id}
+                className={`flex items-center mb-16 ${
+                  index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
+                }`}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.2 }}
+                viewport={{ once: true }}
+              >
+                {/* Content */}
+                <div className={`w-1/2 ${index % 2 === 0 ? 'pr-8' : 'pl-8'}`}>
+                  <h3 className="text-2xl font-bold text-white mb-4">{step.title}</h3>
+                  <p className="text-gray-300 leading-relaxed">{step.description}</p>
+                </div>
+                
+                {/* Icon */}
+                <div className="relative z-10 w-16 h-16 bg-[#038e42] rounded-full flex items-center justify-center border-4 border-black">
+                  <step.icon className="w-8 h-8 text-white" />
+                </div>
+                
+                {/* Spacer */}
+                <div className="w-1/2"></div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

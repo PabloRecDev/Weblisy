@@ -87,7 +87,7 @@ export default function PricingSection() {
   const plans = [
     {
       name: "Sitio Web Esencial",
-      price: "499€",
+      price: "299€",
       period: "pago único",
       description: "La presencia online profesional que tu negocio necesita para empezar a destacar.",
       features: [
@@ -101,7 +101,9 @@ export default function PricingSection() {
       ],
       popular: false,
       buttonText: "Empezar Proyecto",
-      isQuote: false
+      isQuote: false,
+      oldPrice: "599€",
+      offerBadge: true
     },
     {
       name: "Aplicación a Medida",
@@ -259,7 +261,10 @@ export default function PricingSection() {
                   className="text-center mb-6"
                   variants={priceVariants}
                 >
-                  <span className="text-4xl font-bold text-white">
+                  {plan.oldPrice && (
+                    <div className="text-sm text-white/50 mb-1">Antes <span className="line-through">{plan.oldPrice}</span></div>
+                  )}
+                  <span className="text-4xl font-bold text-[#038e42]">
                     {plan.price}
                   </span>
                   <p className="text-gray-400 text-sm mt-1">

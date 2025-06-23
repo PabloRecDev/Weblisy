@@ -95,7 +95,7 @@ const SubNavbar = ({ setIsVisible }) => {
 
             {/* Botón CTA */}
             <Link
-              to="/presupuesto"
+              to="/plan-sitio-web"
               className="bg-white text-[#038e42] px-4 py-1.5 rounded-md font-semibold text-xs sm:text-sm hover:bg-yellow-300 hover:text-black transition-all duration-200 flex items-center gap-1.5 hover:scale-105 whitespace-nowrap"
             >
               ¡Aprovechar!

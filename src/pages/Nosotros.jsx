@@ -94,15 +94,28 @@ export default function Nosotros() {
   ];
 
   return (
-    <>
+    <div className="min-h-screen bg-black">
       <Helmet>
         <title>Sobre Nosotros - Weblisy | Desarrollo Web Profesional</title>
         <meta name="description" content="Conoce nuestro equipo, valores y misión. Somos especialistas en desarrollo web y transformación digital con años de experiencia." />
         <meta name="keywords" content="sobre nosotros, equipo weblisy, desarrollo web, transformación digital" />
+        <meta name="robots" content="index, follow" />
+        
+        {/* Open Graph */}
         <meta property="og:title" content="Sobre Nosotros - Weblisy" />
         <meta property="og:description" content="Conoce nuestro equipo y nuestra pasión por el desarrollo web" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://weblisy.com/nosotros" />
+        <meta property="og:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Sobre Nosotros - Weblisy" />
+        <meta name="twitter:description" content="Conoce nuestro equipo y nuestra pasión por el desarrollo web" />
+        <meta name="twitter:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        
+        {/* Canonical */}
+        <link rel="canonical" href="https://weblisy.com/nosotros" />
       </Helmet>
 
       {/* Hero Section */}
@@ -199,13 +212,13 @@ export default function Nosotros() {
               className="relative"
             >
               <div className="w-full h-80 bg-gradient-to-br from-[#038e42]/20 to-[#038e42]/5 rounded-2xl border border-[#038e42]/20 flex items-center justify-center">
-                <RocketIcon className="w-24 h-24 text-[#038e42]" />
+                <RocketIcon className="w-24 h-24 text-[#038e42]" aria-hidden="true" />
               </div>
               <div className="absolute -top-4 -right-4 w-20 h-20 bg-white/10 rounded-full border border-white/20 flex items-center justify-center">
-                <StarIcon className="w-8 h-8 text-white" />
+                <StarIcon className="w-8 h-8 text-white" aria-hidden="true" />
               </div>
               <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-[#038e42]/20 rounded-full border border-[#038e42]/30 flex items-center justify-center">
-                <HeartIcon className="w-6 h-6 text-[#038e42]" />
+                <HeartIcon className="w-6 h-6 text-[#038e42]" aria-hidden="true" />
               </div>
             </motion.div>
           </div>
@@ -246,7 +259,7 @@ export default function Nosotros() {
               >
                 <div className="w-16 h-16 bg-[#038e42]/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-[#038e42]/30 transition-colors duration-300">
                   <div className="text-[#038e42]">
-                    {value.icon}
+                    {React.cloneElement(value.icon, { 'aria-hidden': true })}
                   </div>
                 </div>
                 <h3 className="text-xl font-semibold text-white mb-3">{value.title}</h3>
@@ -291,7 +304,7 @@ export default function Nosotros() {
               >
                 <div className="w-14 h-14 bg-[#038e42]/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#038e42]/30 transition-colors duration-300">
                   <div className="text-[#038e42]">
-                    {service.icon}
+                    {React.cloneElement(service.icon, { 'aria-hidden': true })}
                   </div>
                 </div>
                 <h3 className="text-xl font-semibold text-white mb-4">{service.title}</h3>
@@ -337,6 +350,6 @@ export default function Nosotros() {
           </motion.div>
         </div>
       </section>
-    </>
+    </div>
   );
 } 

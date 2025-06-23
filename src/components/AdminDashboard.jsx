@@ -283,252 +283,89 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white flex">
-      {/* Sidebar */}
-      <div className={`${sidebarOpen ? 'w-64' : 'w-20'} bg-white/5 border-r border-white/10 transition-all duration-300 flex flex-col`}>
-        {/* Logo */}
-        <div className="p-6 border-b border-white/10 flex items-center justify-center">
-          <img src="/assets/weblisy-logo.png" alt="WebLisy" className={`${sidebarOpen ? 'h-8' : 'h-10'} transition-all duration-300`} />
-          {sidebarOpen && <span className="text-lg font-semibold ml-3">CRM</span>}
+    <div className="space-y-8">
+      {/* Tarjetas de estadísticas generales (clientes y reuniones) */}
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
+        <div className="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/8 transition-colors">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-white/60 text-sm">Total</p>
+              <p className="text-2xl font-semibold">{stats.total}</p>
+            </div>
+            <CalendarIcon className="w-6 h-6 text-white/30" />
+          </div>
         </div>
-        {/* Navigation */}
-        <nav className="flex-1 p-4 flex flex-col gap-2">
-          <button 
-            onClick={() => navigate('/admin/dashboard')}
-            className={`w-full flex items-center ${sidebarOpen ? 'gap-3 justify-start px-3 py-2' : 'justify-center py-3'} rounded-lg transition-colors ${window.location.pathname === '/admin/dashboard' ? 'bg-white/10 text-white' : 'text-white/60 hover:bg-white/5 hover:text-white'}`}
-          >
-            <DashboardIcon className={`${sidebarOpen ? 'w-5 h-5' : 'w-7 h-7'} transition-all duration-300`} />
-            {sidebarOpen && <span>Dashboard</span>}
-          </button>
-          <button 
-            onClick={() => navigate('/admin/reuniones')}
-            className={`w-full flex items-center ${sidebarOpen ? 'gap-3 justify-start px-3 py-2' : 'justify-center py-3'} rounded-lg transition-colors ${window.location.pathname === '/admin/reuniones' ? 'bg-white/10 text-white' : 'text-white/60 hover:bg-white/5 hover:text-white'}`}
-          >
-            <CalendarIcon className={`${sidebarOpen ? 'w-5 h-5' : 'w-7 h-7'} transition-all duration-300`} />
-            {sidebarOpen && <span>Reuniones</span>}
-          </button>
-          <button 
-            onClick={() => navigate('/admin/clientes')}
-            className={`w-full flex items-center ${sidebarOpen ? 'gap-3 justify-start px-3 py-2' : 'justify-center py-3'} rounded-lg transition-colors ${window.location.pathname === '/admin/clientes' ? 'bg-white/10 text-white' : 'text-white/60 hover:bg-white/5 hover:text-white'}`}
-          >
-            <PersonIcon className={`${sidebarOpen ? 'w-5 h-5' : 'w-7 h-7'} transition-all duration-300`} />
-            {sidebarOpen && <span>Clientes</span>}
-          </button>
-          <button 
-            onClick={() => navigate('/admin/facturas')}
-            className={`w-full flex items-center ${sidebarOpen ? 'gap-3 justify-start px-3 py-2' : 'justify-center py-3'} rounded-lg transition-colors ${window.location.pathname === '/admin/facturas' ? 'bg-white/10 text-white' : 'text-white/60 hover:bg-white/5 hover:text-white'}`}
-          >
-            <StarIcon className={`${sidebarOpen ? 'w-5 h-5' : 'w-7 h-7'} transition-all duration-300`} />
-            {sidebarOpen && <span>Facturas</span>}
-          </button>
-          <button 
-            onClick={() => navigate('/admin/presupuestos')}
-            className={`w-full flex items-center ${sidebarOpen ? 'gap-3 justify-start px-3 py-2' : 'justify-center py-3'} rounded-lg transition-colors ${window.location.pathname === '/admin/presupuestos' ? 'bg-white/10 text-white' : 'text-white/60 hover:bg-white/5 hover:text-white'}`}
-          >
-            <GearIcon className={`${sidebarOpen ? 'w-5 h-5' : 'w-7 h-7'} transition-all duration-300`} />
-            {sidebarOpen && <span>Presupuestos</span>}
-          </button>
-          <button 
-            onClick={() => navigate('/admin/proyectos')}
-            className={`w-full flex items-center ${sidebarOpen ? 'gap-3 justify-start px-3 py-2' : 'justify-center py-3'} rounded-lg transition-colors ${window.location.pathname === '/admin/proyectos' ? 'bg-white/10 text-white' : 'text-white/60 hover:bg-white/5 hover:text-white'}`}
-          >
-            <RocketIcon className={`${sidebarOpen ? 'w-5 h-5' : 'w-7 h-7'} transition-all duration-300`} />
-            {sidebarOpen && <span>Proyectos</span>}
-          </button>
-          <button 
-            onClick={() => navigate('/admin/tareas')}
-            className={`w-full flex items-center ${sidebarOpen ? 'gap-3 justify-start px-3 py-2' : 'justify-center py-3'} rounded-lg transition-colors ${window.location.pathname === '/admin/tareas' ? 'bg-white/10 text-white' : 'text-white/60 hover:bg-white/5 hover:text-white'}`}
-          >
-            <CheckIcon className={`${sidebarOpen ? 'w-5 h-5' : 'w-7 h-7'} transition-all duration-300`} />
-            {sidebarOpen && <span>Tareas</span>}
-          </button>
-        </nav>
-        {/* Logout */}
-        <div className="p-4 border-t border-white/10 flex items-center justify-center">
-          <button
-            onClick={handleLogout}
-            className={`w-full flex items-center ${sidebarOpen ? 'gap-3 justify-start px-3 py-2' : 'justify-center py-3'} rounded-lg text-white/60 hover:bg-white/5 hover:text-white transition-colors`}
-          >
-            <ExitIcon className={`${sidebarOpen ? 'w-5 h-5' : 'w-7 h-7'} transition-all duration-300`} />
-            {sidebarOpen && <span>Cerrar sesión</span>}
-          </button>
+
+        <div className="bg-yellow-500/5 border border-yellow-500/10 rounded-lg p-4 hover:bg-yellow-500/8 transition-colors">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-yellow-400 text-sm">Pendientes</p>
+              <p className="text-2xl font-semibold text-yellow-400">{stats.pending}</p>
+            </div>
+            <ClockIcon className="w-6 h-6 text-yellow-400/30" />
+          </div>
+        </div>
+
+        <div className="bg-blue-500/5 border border-blue-500/10 rounded-lg p-4 hover:bg-blue-500/8 transition-colors">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-blue-400 text-sm">Confirmadas</p>
+              <p className="text-2xl font-semibold text-blue-400">{stats.confirmed}</p>
+            </div>
+            <CheckIcon className="w-6 h-6 text-blue-400/30" />
+          </div>
+        </div>
+
+        <div className="bg-green-500/5 border border-green-500/10 rounded-lg p-4 hover:bg-green-500/8 transition-colors">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-green-400 text-sm">Completadas</p>
+              <p className="text-2xl font-semibold text-green-400">{stats.completed}</p>
+            </div>
+            <StarIcon className="w-6 h-6 text-green-400/30" />
+          </div>
+        </div>
+
+        <div className="bg-red-500/5 border border-red-500/10 rounded-lg p-4 hover:bg-red-500/8 transition-colors">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-red-400 text-sm">Canceladas</p>
+              <p className="text-2xl font-semibold text-red-400">{stats.cancelled}</p>
+            </div>
+            <Cross2Icon className="w-6 h-6 text-red-400/30" />
+          </div>
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col">
-        {/* Header */}
-        <header className="bg-white/5 border-b border-white/10 p-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-semibold">Dashboard</h1>
-              <p className="text-white/60 text-sm mt-1">Resumen general del CRM</p>
-            </div>
-            
-            <button
-              onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
-            >
-              <DashboardIcon className="w-5 h-5" />
-            </button>
-          </div>
-        </header>
-
-        {/* Content */}
-        <main className="flex-1 p-6">
-          {/* Tarjetas de estadísticas generales (clientes y reuniones) */}
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
-            <div className="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/8 transition-colors">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-white/60 text-sm">Total</p>
-                  <p className="text-2xl font-semibold">{stats.total}</p>
-                </div>
-                <CalendarIcon className="w-6 h-6 text-white/30" />
-              </div>
-            </div>
-
-            <div className="bg-yellow-500/5 border border-yellow-500/10 rounded-lg p-4 hover:bg-yellow-500/8 transition-colors">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-yellow-400 text-sm">Pendientes</p>
-                  <p className="text-2xl font-semibold text-yellow-400">{stats.pending}</p>
-                </div>
-                <ClockIcon className="w-6 h-6 text-yellow-400/30" />
-              </div>
-            </div>
-
-            <div className="bg-blue-500/5 border border-blue-500/10 rounded-lg p-4 hover:bg-blue-500/8 transition-colors">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-blue-400 text-sm">Confirmadas</p>
-                  <p className="text-2xl font-semibold text-blue-400">{stats.confirmed}</p>
-                </div>
-                <CheckIcon className="w-6 h-6 text-blue-400/30" />
-              </div>
-            </div>
-
-            <div className="bg-green-500/5 border border-green-500/10 rounded-lg p-4 hover:bg-green-500/8 transition-colors">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-green-400 text-sm">Completadas</p>
-                  <p className="text-2xl font-semibold text-green-400">{stats.completed}</p>
-                </div>
-                <StarIcon className="w-6 h-6 text-green-400/30" />
-              </div>
-            </div>
-
-            <div className="bg-red-500/5 border border-red-500/10 rounded-lg p-4 hover:bg-red-500/8 transition-colors">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-red-400 text-sm">Canceladas</p>
-                  <p className="text-2xl font-semibold text-red-400">{stats.cancelled}</p>
-                </div>
-                <Cross2Icon className="w-6 h-6 text-red-400/30" />
-              </div>
-            </div>
-          </div>
-
-          {/* Resumen de próximas reuniones */}
-          <div className="mt-8">
-            <h2 className="text-lg font-semibold mb-2">Próximas reuniones</h2>
-            <div className="bg-white/5 border border-white/10 rounded-lg overflow-hidden">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="text-white/40 border-b border-white/10">
-                    <th className="py-2 px-2 font-medium text-left">Cliente</th>
-                    <th className="py-2 px-2 font-medium text-left">Empresa</th>
-                    <th className="py-2 px-2 font-medium text-left">Fecha</th>
-                    <th className="py-2 px-2 font-medium text-left">Hora</th>
-                    <th className="py-2 px-2 font-medium text-left">Tipo</th>
-                    <th className="py-2 px-2 font-medium text-left">Estado</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {upcomingMeetings.map((meeting) => (
-                    <tr key={meeting.id} className="border-b border-white/5 last:border-0 hover:bg-white/5 transition-colors group">
-                      <td className="py-2 px-2">{meeting.name}</td>
-                      <td className="py-2 px-2">{meeting.company}</td>
-                      <td className="py-2 px-2">{meeting.meeting_date}</td>
-                      <td className="py-2 px-2">{meeting.meeting_time}</td>
-                      <td className="py-2 px-2">{meeting.meeting_type_name}</td>
-                      <td className="py-2 px-2">{meeting.status === 'pending' ? 'Pendiente' : meeting.status === 'confirmed' ? 'Confirmada' : 'Otra'}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </main>
-
-        {/* Modal de detalles de reunión */}
-        <AnimatePresence>
-          {showModal && selectedMeeting && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50"
-              onClick={() => setShowModal(false)}
-            >
-              <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
-                className="bg-white/5 border border-white/10 rounded-lg p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto backdrop-blur-sm"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className="flex justify-between items-center mb-6">
-                  <h3 className="text-xl font-semibold">Detalles de la Reunión</h3>
-                  <button
-                    onClick={() => setShowModal(false)}
-                    className="text-white/50 hover:text-white hover:bg-white/5 rounded p-1 transition-colors"
-                  >
-                    <Cross2Icon className="w-5 h-5" />
-                  </button>
-                </div>
-
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-semibold text-white mb-2">Información del Cliente</h4>
-                    <div className="bg-white/5 border border-white/10 p-4 rounded-lg space-y-2">
-                      <p><strong>Nombre:</strong> {selectedMeeting.name}</p>
-                      <p><strong>Email:</strong> {selectedMeeting.email}</p>
-                      <p><strong>Empresa:</strong> {selectedMeeting.company}</p>
-                    </div>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold text-white mb-2">Detalles de la Reunión</h4>
-                    <div className="bg-white/5 border border-white/10 p-4 rounded-lg space-y-2">
-                      <p><strong>Fecha:</strong> {format(new Date(selectedMeeting.meeting_date), 'dd/MM/yyyy', { locale: es })}</p>
-                      <p><strong>Hora:</strong> {selectedMeeting.meeting_time}</p>
-                      <p><strong>Tipo:</strong> {selectedMeeting.meeting_type_name}</p>
-                      <p><strong>Estado:</strong> <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full border ${getStatusColor(selectedMeeting.status)}`}>
-                        {getStatusText(selectedMeeting.status)}
-                      </span></p>
-                    </div>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold text-white mb-2">Mensaje</h4>
-                    <div className="bg-white/5 border border-white/10 p-4 rounded-lg">
-                      <p className="text-white/70">{selectedMeeting.message}</p>
-                    </div>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold text-white mb-2">Información del Sistema</h4>
-                    <div className="bg-white/5 border border-white/10 p-4 rounded-lg space-y-2 text-sm text-white/50">
-                      <p><strong>Creado:</strong> {format(new Date(selectedMeeting.created_at), 'dd/MM/yyyy HH:mm', { locale: es })}</p>
-                      <p><strong>Actualizado:</strong> {format(new Date(selectedMeeting.updated_at), 'dd/MM/yyyy HH:mm', { locale: es })}</p>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+      {/* Próximas reuniones */}
+      <div>
+        <h2 className="text-xl font-semibold mb-4">Próximas reuniones</h2>
+        <div className="overflow-x-auto">
+          <table className="min-w-full bg-black/80 border border-white/10 rounded-lg">
+            <thead>
+              <tr>
+                <th className="px-4 py-2 text-left text-white/70">Cliente</th>
+                <th className="px-4 py-2 text-left text-white/70">Empresa</th>
+                <th className="px-4 py-2 text-left text-white/70">Fecha</th>
+                <th className="px-4 py-2 text-left text-white/70">Hora</th>
+                <th className="px-4 py-2 text-left text-white/70">Tipo</th>
+                <th className="px-4 py-2 text-left text-white/70">Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              {meetings.map((meeting, idx) => (
+                <tr key={idx} className="border-t border-white/10 hover:bg-white/5 transition-colors">
+                  <td className="px-4 py-2">{meeting.name}</td>
+                  <td className="px-4 py-2">{meeting.company}</td>
+                  <td className="px-4 py-2">{meeting.meeting_date}</td>
+                  <td className="px-4 py-2">{meeting.meeting_time}</td>
+                  <td className="px-4 py-2">{meeting.meeting_type_name}</td>
+                  <td className="px-4 py-2">{meeting.status === 'pending' ? 'Pendiente' : meeting.status === 'confirmed' ? 'Confirmada' : 'Otra'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

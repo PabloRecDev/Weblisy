@@ -119,7 +119,7 @@ export default function TestimonialsSection() {
         
         <div className="relative max-w-4xl mx-auto">
           {/* Carrusel */}
-          <div className="relative h-96 md:h-80">
+          <div className="relative h-96 md:h-80 mb-0">
             <AnimatePresence initial={false} custom={direction}>
               <motion.div
                 key={currentIndex}
@@ -146,7 +146,7 @@ export default function TestimonialsSection() {
                 }}
                 className="absolute w-full"
               >
-                <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 md:p-12 text-center">
+                <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 md:p-12 text-center h-full flex flex-col justify-center">
                   {/* Icono de comillas */}
                   <div className="flex justify-center mb-6">
                     <div className="w-16 h-16 bg-[#038e42]/20 rounded-full flex items-center justify-center">
@@ -175,7 +175,7 @@ export default function TestimonialsSection() {
                   </div>
 
                   {/* Estrellas de valoración */}
-                  <div className="flex justify-center gap-1">
+                  <div className="flex justify-center gap-1 mb-4">
                     {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
                       <span key={i} className="text-yellow-400 text-xl">★</span>
                     ))}
@@ -183,39 +183,39 @@ export default function TestimonialsSection() {
                 </div>
               </motion.div>
             </AnimatePresence>
+
+            {/* Botones de navegación */}
+            <button
+              onClick={prevSlide}
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-300 group z-10"
+            >
+              <FontAwesomeIcon 
+                icon={faChevronLeft} 
+                className="text-white group-hover:text-[#038e42] transition-colors" 
+              />
+            </button>
+
+            <button
+              onClick={nextSlide}
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-300 group z-10"
+            >
+              <FontAwesomeIcon 
+                icon={faChevronRight} 
+                className="text-white group-hover:text-[#038e42] transition-colors" 
+              />
+            </button>
           </div>
 
-          {/* Botones de navegación */}
-          <button
-            onClick={prevSlide}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-300 group"
-          >
-            <FontAwesomeIcon 
-              icon={faChevronLeft} 
-              className="text-white group-hover:text-[#038e42] transition-colors" 
-            />
-          </button>
-
-          <button
-            onClick={nextSlide}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-300 group"
-          >
-            <FontAwesomeIcon 
-              icon={faChevronRight} 
-              className="text-white group-hover:text-[#038e42] transition-colors" 
-            />
-          </button>
-
-          {/* Indicadores de puntos */}
-          <div className="flex justify-center mt-8 gap-2">
+          {/* Indicadores de puntos debajo de la tarjeta */}
+          <div className="flex justify-center gap-3 mt-8 z-20 relative">
             {testimonials.map((_, index) => (
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                className={`w-4 h-4 rounded-full border-2 border-white shadow-lg transition-all duration-300 focus:outline-none ${
                   index === currentIndex 
-                    ? 'bg-[#038e42] scale-125' 
-                    : 'bg-white/30 hover:bg-white/50'
+                    ? 'bg-[#038e42] scale-125 border-[#038e42]' 
+                    : 'bg-white/60 hover:bg-white/80'
                 }`}
               />
             ))}

@@ -1,6 +1,8 @@
 # robots.txt para Weblisy
 
 User-agent: *
+Disallow: /admin
+Disallow: /login
 Allow: /
 
-Sitemap: https://www.weblisy.es /sitemap.xml
+Sitemap: https://weblisy.com/sitemap.xml

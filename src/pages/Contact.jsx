@@ -148,10 +148,23 @@ export default function Contact() {
         <title>Contacto - Weblisy | Desarrollo Web Profesional</title>
         <meta name="description" content="Contáctanos para desarrollar tu proyecto web. Consultoría gratuita, presupuestos personalizados y soporte técnico especializado." />
         <meta name="keywords" content="contacto desarrollo web, presupuesto web, consultoría web, desarrollo a medida" />
+        <meta name="robots" content="index, follow" />
+        
+        {/* Open Graph */}
         <meta property="og:title" content="Contacto - Weblisy" />
         <meta property="og:description" content="Contáctanos para desarrollar tu proyecto web profesional" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://weblisy.com/contacto" />
+        <meta property="og:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Contacto - Weblisy" />
+        <meta name="twitter:description" content="Contáctanos para desarrollar tu proyecto web profesional" />
+        <meta name="twitter:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        
+        {/* Canonical */}
+        <link rel="canonical" href="https://weblisy.com/contacto" />
       </Helmet>
 
       {/* Hero Section */}
@@ -232,171 +245,168 @@ export default function Contact() {
               <div className="bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-2xl">
                 <h2 className="text-2xl font-bold text-white mb-6">Envíanos un mensaje</h2>
                 
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6" role="form" aria-label="Formulario de contacto">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-white font-medium mb-2">Nombre *</label>
+                      <label htmlFor="name" className="block text-sm font-medium text-white mb-2">
+                        Nombre completo *
+                      </label>
                       <input
                         type="text"
+                        id="name"
                         name="name"
                         value={formData.name}
-                        onChange={handleInputChange}
+                        onChange={(e) => setFormData({...formData, name: e.target.value})}
                         required
-                        className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-white placeholder-white/50 focus:border-white/20 focus:outline-none transition-all duration-300"
+                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/50 focus:border-[#038e42] focus:outline-none transition-colors"
                         placeholder="Tu nombre completo"
+                        aria-required="true"
                       />
                     </div>
                     
                     <div>
-                      <label className="block text-white font-medium mb-2">Email *</label>
+                      <label htmlFor="email" className="block text-sm font-medium text-white mb-2">
+                        Email *
+                      </label>
                       <input
                         type="email"
+                        id="email"
                         name="email"
                         value={formData.email}
-                        onChange={handleInputChange}
+                        onChange={(e) => setFormData({...formData, email: e.target.value})}
                         required
-                        className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-white placeholder-white/50 focus:border-white/20 focus:outline-none transition-all duration-300"
+                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/50 focus:border-[#038e42] focus:outline-none transition-colors"
                         placeholder="tu@email.com"
+                        aria-required="true"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-white font-medium mb-2">Teléfono</label>
+                      <label htmlFor="phone" className="block text-sm font-medium text-white mb-2">
+                        Teléfono
+                      </label>
                       <input
                         type="tel"
+                        id="phone"
                         name="phone"
                         value={formData.phone}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-white placeholder-white/50 focus:border-white/20 focus:outline-none transition-all duration-300"
+                        onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/50 focus:border-[#038e42] focus:outline-none transition-colors"
                         placeholder="+34 600 000 000"
                       />
                     </div>
                     
                     <div>
-                      <label className="block text-white font-medium mb-2">Empresa</label>
+                      <label htmlFor="company" className="block text-sm font-medium text-white mb-2">
+                        Empresa
+                      </label>
                       <input
                         type="text"
+                        id="company"
                         name="company"
                         value={formData.company}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-white placeholder-white/50 focus:border-white/20 focus:outline-none transition-all duration-300"
+                        onChange={(e) => setFormData({...formData, company: e.target.value})}
+                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/50 focus:border-[#038e42] focus:outline-none transition-colors"
                         placeholder="Nombre de tu empresa"
                       />
                     </div>
                   </div>
 
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium text-white mb-2">
+                      Mensaje *
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={(e) => setFormData({...formData, message: e.target.value})}
+                      required
+                      rows={6}
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/50 focus:border-[#038e42] focus:outline-none transition-colors resize-none"
+                      placeholder="Cuéntanos sobre tu proyecto, objetivos y cualquier detalle que consideres importante..."
+                      aria-required="true"
+                    />
+                  </div>
+
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-white font-medium mb-2">Tipo de proyecto</label>
+                      <label htmlFor="budget" className="block text-sm font-medium text-white mb-2">
+                        Presupuesto aproximado
+                      </label>
                       <select
-                        name="projectType"
-                        value={formData.projectType}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-white focus:border-white/20 focus:outline-none transition-all duration-300"
+                        id="budget"
+                        name="budget"
+                        value={formData.budget}
+                        onChange={(e) => setFormData({...formData, budget: e.target.value})}
+                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-[#038e42] focus:outline-none transition-colors"
                       >
-                        <option value="">Selecciona el tipo</option>
-                        <option value="website">Sitio web</option>
-                        <option value="ecommerce">Tienda online</option>
-                        <option value="webapp">Aplicación web</option>
-                        <option value="consulting">Consultoría</option>
-                        <option value="other">Otro</option>
+                        <option value="">Selecciona un rango</option>
+                        <option value="1000-3000">1.000€ - 3.000€</option>
+                        <option value="3000-5000">3.000€ - 5.000€</option>
+                        <option value="5000-10000">5.000€ - 10.000€</option>
+                        <option value="10000+">Más de 10.000€</option>
                       </select>
                     </div>
                     
                     <div>
-                      <label className="block text-white font-medium mb-2">Presupuesto</label>
+                      <label htmlFor="timeline" className="block text-sm font-medium text-white mb-2">
+                        Plazo de entrega
+                      </label>
                       <select
-                        name="budget"
-                        value={formData.budget}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-white focus:border-white/20 focus:outline-none transition-all duration-300"
+                        id="timeline"
+                        name="timeline"
+                        value={formData.timeline}
+                        onChange={(e) => setFormData({...formData, timeline: e.target.value})}
+                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-[#038e42] focus:outline-none transition-colors"
                       >
-                        <option value="">Selecciona un rango</option>
-                        <option value="1000-3000">€1,000 - €3,000</option>
-                        <option value="3000-5000">€3,000 - €5,000</option>
-                        <option value="5000-10000">€5,000 - €10,000</option>
-                        <option value="10000+">Más de €10,000</option>
+                        <option value="">Selecciona un plazo</option>
+                        <option value="1-2 meses">1-2 meses</option>
+                        <option value="2-3 meses">2-3 meses</option>
+                        <option value="3-6 meses">3-6 meses</option>
+                        <option value="6+ meses">Más de 6 meses</option>
                       </select>
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-white font-medium mb-2">Timeline</label>
+                    <label htmlFor="projectType" className="block text-sm font-medium text-white mb-2">
+                      Tipo de proyecto
+                    </label>
                     <select
-                      name="timeline"
-                      value={formData.timeline}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-white focus:border-white/20 focus:outline-none transition-all duration-300"
+                      id="projectType"
+                      name="projectType"
+                      value={formData.projectType}
+                      onChange={(e) => setFormData({...formData, projectType: e.target.value})}
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-[#038e42] focus:outline-none transition-colors"
                     >
-                      <option value="">Selecciona un timeline</option>
-                      <option value="1-2-weeks">1-2 semanas</option>
-                      <option value="1-month">1 mes</option>
-                      <option value="2-3-months">2-3 meses</option>
-                      <option value="3+months">Más de 3 meses</option>
+                      <option value="">Selecciona el tipo de proyecto</option>
+                      <option value="web-corporativa">Web Corporativa</option>
+                      <option value="e-commerce">Tienda Online</option>
+                      <option value="aplicacion-web">Aplicación Web</option>
+                      <option value="landing-page">Landing Page</option>
+                      <option value="mantenimiento">Mantenimiento</option>
+                      <option value="otro">Otro</option>
                     </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-white font-medium mb-2">Mensaje *</label>
-                    <textarea
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      required
-                      rows={5}
-                      className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-white placeholder-white/50 focus:border-white/20 focus:outline-none transition-all duration-300 resize-none"
-                      placeholder="Cuéntanos sobre tu proyecto, objetivos y cualquier detalle importante..."
-                    />
                   </div>
 
                   <motion.button
                     type="submit"
                     disabled={status === "loading"}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full py-4 bg-white/10 text-white font-semibold rounded-lg hover:bg-white/20 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed border border-white/10"
+                    className="w-full bg-[#038e42] text-white py-4 px-8 rounded-lg font-semibold hover:bg-[#038e42]/80 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    whileHover={{ scale: status !== "loading" ? 1.02 : 1 }}
+                    whileTap={{ scale: status !== "loading" ? 0.98 : 1 }}
+                    aria-describedby="submit-status"
                   >
-                    {status === "loading" ? (
-                      <div className="flex items-center justify-center">
-                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                        Enviando...
-                      </div>
-                    ) : (
-                      'Enviar Mensaje'
-                    )}
+                    {status === "loading" ? "Enviando..." : "Enviar Mensaje"}
                   </motion.button>
-
-                  <AnimatePresence mode="wait">
-                    {status === "success" && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        className="text-center p-4 bg-white/10 border border-white/20 rounded-lg"
-                      >
-                        <div className="flex items-center justify-center text-white">
-                          <CheckIcon className="w-5 h-5 mr-2" />
-                          ¡Mensaje enviado correctamente!
-                        </div>
-                      </motion.div>
-                    )}
-
-                    {status === "error" && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        className="text-center p-4 bg-red-500/10 border border-red-500/20 rounded-lg"
-                      >
-                        <div className="flex items-center justify-center text-red-400">
-                          <Cross2Icon className="w-5 h-5 mr-2" />
-                          Hubo un error al enviar el mensaje. Intenta nuevamente.
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                  
+                  <div id="submit-status" className="sr-only" aria-live="polite">
+                    {status === "success" && "Mensaje enviado correctamente"}
+                    {status === "error" && "Error al enviar el mensaje"}
+                  </div>
                 </form>
               </div>
             </motion.div>

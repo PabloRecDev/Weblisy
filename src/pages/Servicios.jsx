@@ -53,10 +53,27 @@ const services = [
 
 const ServiciosPage = () => {
   return (
-    <>
+    <div className="min-h-screen bg-black">
       <Helmet>
         <title>Servicios de Desarrollo Web y Aplicaciones | Weblisy</title>
         <meta name="description" content="Ofrecemos servicios de diseño web, desarrollo de aplicaciones a medida, e-commerce y mantenimiento. Soluciones tecnológicas para impulsar tu negocio." />
+        <meta name="keywords" content="servicios desarrollo web, diseño web, aplicaciones a medida, e-commerce, tiendas online, mantenimiento web, soporte técnico, agencia digital" />
+        <meta name="robots" content="index, follow" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Servicios de Desarrollo Web y Aplicaciones | Weblisy" />
+        <meta property="og:description" content="Ofrecemos servicios de diseño web, desarrollo de aplicaciones a medida, e-commerce y mantenimiento. Soluciones tecnológicas para impulsar tu negocio." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://weblisy.com/servicios" />
+        <meta property="og:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Servicios de Desarrollo Web | Weblisy" />
+        <meta name="twitter:description" content="Diseño web, aplicaciones a medida, e-commerce y mantenimiento. Soluciones tecnológicas para tu negocio." />
+        <meta name="twitter:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        
+        {/* Canonical */}
         <link rel="canonical" href="https://weblisy.com/servicios" />
       </Helmet>
 
@@ -137,7 +154,7 @@ const ServiciosPage = () => {
           </motion.div>
           </div>
       </section>
-    </>
+    </div>
   );
 };
 
