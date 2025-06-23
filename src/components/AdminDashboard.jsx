@@ -20,8 +20,12 @@ import {
   DashboardIcon,
   PersonIcon,
   GearIcon,
-  RocketIcon
+  RocketIcon,
+  EnvelopeClosedIcon,
+  PinRightIcon,
+  BellIcon
 } from '@radix-ui/react-icons';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, Line, CartesianGrid, Legend } from 'recharts';
 
 export default function AdminDashboard() {
   const [meetings, setMeetings] = useState([]);
@@ -36,12 +40,21 @@ export default function AdminDashboard() {
 
   // Estados para estadísticas
   const [stats, setStats] = useState({
-    total: 0,
-    pending: 0,
-    confirmed: 0,
-    completed: 0,
-    cancelled: 0
+    clients: 0,
+    leads: 0,
+    meetings: 0,
+    presupuestos: 0,
+    promociones: 0,
+    unreadNotifications: 0
   });
+  const [latest, setLatest] = useState({
+    notifications: [],
+    leads: [],
+    meetings: [],
+    presupuestos: []
+  });
+  const [leadsByMonth, setLeadsByMonth] = useState([]);
+  const [meetingsByMonth, setMeetingsByMonth] = useState([]);
 
   const navigate = useNavigate();
 
@@ -49,6 +62,9 @@ export default function AdminDashboard() {
     if (activeTab === 'meetings') {
       fetchMeetings();
     }
+    fetchDashboardData();
+    fetchLeadsByMonth();
+    fetchMeetingsByMonth();
   }, [activeTab]);
 
   const handleLogout = async () => {
@@ -271,6 +287,57 @@ export default function AdminDashboard() {
     }
   ];
 
+  const fetchDashboardData = async () => {
+    setLoading(true);
+    // Consultas en paralelo
+    const [clients, leads, meetings, presupuestos, promociones, notifications] = await Promise.all([
+      supabase.from('clients').select('*', { count: 'exact', head: true }),
+      supabase.from('leads').select('*', { count: 'exact', head: true }),
+      supabase.from('meetings').select('*', { count: 'exact', head: true }),
+      supabase.from('presupuesto_requests').select('*', { count: 'exact', head: true }),
+      supabase.from('promotion_requests').select('*', { count: 'exact', head: true }),
+      supabase.from('notifications').select('*', { count: 'exact', head: true }).eq('is_read', false)
+    ]);
+    // Últimos registros
+    const [latestNotifications, latestLeads, latestMeetings, latestPresupuestos] = await Promise.all([
+      supabase.from('notifications').select('*').order('created_at', { ascending: false }).limit(5),
+      supabase.from('leads').select('*').order('created_at', { ascending: false }).limit(5),
+      supabase.from('meetings').select('*').order('meeting_date', { ascending: true }).limit(3),
+      supabase.from('presupuesto_requests').select('*').order('created_at', { ascending: false }).limit(3)
+    ]);
+    setStats({
+      clients: clients.count || 0,
+      leads: leads.count || 0,
+      meetings: meetings.count || 0,
+      presupuestos: presupuestos.count || 0,
+      promociones: promociones.count || 0,
+      unreadNotifications: notifications.count || 0
+    });
+    setLatest({
+      notifications: latestNotifications.data || [],
+      leads: latestLeads.data || [],
+      meetings: latestMeetings.data || [],
+      presupuestos: latestPresupuestos.data || []
+    });
+    setLoading(false);
+  };
+
+  // Gráfica: leads por mes
+  const fetchLeadsByMonth = async () => {
+    const { data, error } = await supabase.rpc('leads_by_month');
+    if (!error && data) {
+      setLeadsByMonth(data.map(d => ({ ...d, month: d.month_name })));
+    }
+  };
+
+  // Gráfica: reuniones por mes
+  const fetchMeetingsByMonth = async () => {
+    const { data, error } = await supabase.rpc('meetings_by_month');
+    if (!error && data) {
+      setMeetingsByMonth(data.map(d => ({ ...d, month: d.month_name })));
+    }
+  };
+
   if (loading && activeTab === 'meetings') {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
@@ -283,88 +350,124 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="space-y-8">
-      {/* Tarjetas de estadísticas generales (clientes y reuniones) */}
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
-        <div className="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/8 transition-colors">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-white/60 text-sm">Total</p>
-              <p className="text-2xl font-semibold">{stats.total}</p>
-            </div>
-            <CalendarIcon className="w-6 h-6 text-white/30" />
-          </div>
+    <div className="space-y-10">
+      {/* Gráficas */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Leads por mes */}
+        <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+          <div className="font-bold text-white mb-3 flex items-center gap-2"><EnvelopeClosedIcon className="w-5 h-5 text-yellow-400" /> Leads por mes</div>
+          <ResponsiveContainer width="100%" height={220}>
+            <BarChart data={leadsByMonth} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#222" />
+              <XAxis dataKey="month" stroke="#fff" />
+              <YAxis stroke="#fff" allowDecimals={false} />
+              <Tooltip contentStyle={{ background: '#181818', border: '1px solid #333', color: '#fff' }} />
+              <Bar dataKey="count" fill="#038e42" radius={[4, 4, 0, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
         </div>
-
-        <div className="bg-yellow-500/5 border border-yellow-500/10 rounded-lg p-4 hover:bg-yellow-500/8 transition-colors">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-yellow-400 text-sm">Pendientes</p>
-              <p className="text-2xl font-semibold text-yellow-400">{stats.pending}</p>
-            </div>
-            <ClockIcon className="w-6 h-6 text-yellow-400/30" />
-          </div>
+        {/* Reuniones por mes */}
+        <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+          <div className="font-bold text-white mb-3 flex items-center gap-2"><CalendarIcon className="w-5 h-5 text-green-400" /> Reuniones por mes</div>
+          <ResponsiveContainer width="100%" height={220}>
+            <LineChart data={meetingsByMonth} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#222" />
+              <XAxis dataKey="month" stroke="#fff" />
+              <YAxis stroke="#fff" allowDecimals={false} />
+              <Tooltip contentStyle={{ background: '#181818', border: '1px solid #333', color: '#fff' }} />
+              <Legend />
+              <Line type="monotone" dataKey="count" stroke="#038e42" strokeWidth={3} dot={{ r: 4 }} />
+            </LineChart>
+          </ResponsiveContainer>
         </div>
-
-        <div className="bg-blue-500/5 border border-blue-500/10 rounded-lg p-4 hover:bg-blue-500/8 transition-colors">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-blue-400 text-sm">Confirmadas</p>
-              <p className="text-2xl font-semibold text-blue-400">{stats.confirmed}</p>
-            </div>
-            <CheckIcon className="w-6 h-6 text-blue-400/30" />
-          </div>
+      </div>
+      {/* Tarjetas resumen */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+        <div className="bg-white/5 rounded-xl p-6 flex flex-col items-center border border-white/10">
+          <PersonIcon className="w-8 h-8 text-blue-400 mb-2" />
+          <div className="text-3xl font-bold text-white">{stats.clients}</div>
+          <div className="text-white/60 text-sm">Clientes</div>
         </div>
-
-        <div className="bg-green-500/5 border border-green-500/10 rounded-lg p-4 hover:bg-green-500/8 transition-colors">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-green-400 text-sm">Completadas</p>
-              <p className="text-2xl font-semibold text-green-400">{stats.completed}</p>
-            </div>
-            <StarIcon className="w-6 h-6 text-green-400/30" />
-          </div>
+        <div className="bg-white/5 rounded-xl p-6 flex flex-col items-center border border-white/10">
+          <EnvelopeClosedIcon className="w-8 h-8 text-yellow-400 mb-2" />
+          <div className="text-3xl font-bold text-white">{stats.leads}</div>
+          <div className="text-white/60 text-sm">Leads/Mensajes</div>
         </div>
-
-        <div className="bg-red-500/5 border border-red-500/10 rounded-lg p-4 hover:bg-red-500/8 transition-colors">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-red-400 text-sm">Canceladas</p>
-              <p className="text-2xl font-semibold text-red-400">{stats.cancelled}</p>
-            </div>
-            <Cross2Icon className="w-6 h-6 text-red-400/30" />
-          </div>
+        <div className="bg-white/5 rounded-xl p-6 flex flex-col items-center border border-white/10">
+          <CalendarIcon className="w-8 h-8 text-green-400 mb-2" />
+          <div className="text-3xl font-bold text-white">{stats.meetings}</div>
+          <div className="text-white/60 text-sm">Reuniones</div>
+        </div>
+        <div className="bg-white/5 rounded-xl p-6 flex flex-col items-center border border-white/10">
+          <GearIcon className="w-8 h-8 text-purple-400 mb-2" />
+          <div className="text-3xl font-bold text-white">{stats.presupuestos}</div>
+          <div className="text-white/60 text-sm">Presupuestos</div>
+        </div>
+        <div className="bg-white/5 rounded-xl p-6 flex flex-col items-center border border-white/10">
+          <PinRightIcon className="w-8 h-8 text-pink-400 mb-2" />
+          <div className="text-3xl font-bold text-white">{stats.promociones}</div>
+          <div className="text-white/60 text-sm">Promociones</div>
+        </div>
+        <div className="bg-white/5 rounded-xl p-6 flex flex-col items-center border border-white/10">
+          <BellIcon className="w-8 h-8 text-[#038e42] mb-2" />
+          <div className="text-3xl font-bold text-white">{stats.unreadNotifications}</div>
+          <div className="text-white/60 text-sm">Notificaciones sin leer</div>
         </div>
       </div>
 
-      {/* Próximas reuniones */}
-      <div>
-        <h2 className="text-xl font-semibold mb-4">Próximas reuniones</h2>
-        <div className="overflow-x-auto">
-          <table className="min-w-full bg-black/80 border border-white/10 rounded-lg">
-            <thead>
-              <tr>
-                <th className="px-4 py-2 text-left text-white/70">Cliente</th>
-                <th className="px-4 py-2 text-left text-white/70">Empresa</th>
-                <th className="px-4 py-2 text-left text-white/70">Fecha</th>
-                <th className="px-4 py-2 text-left text-white/70">Hora</th>
-                <th className="px-4 py-2 text-left text-white/70">Tipo</th>
-                <th className="px-4 py-2 text-left text-white/70">Estado</th>
-              </tr>
-            </thead>
-            <tbody>
-              {meetings.map((meeting, idx) => (
-                <tr key={idx} className="border-t border-white/10 hover:bg-white/5 transition-colors">
-                  <td className="px-4 py-2">{meeting.name}</td>
-                  <td className="px-4 py-2">{meeting.company}</td>
-                  <td className="px-4 py-2">{meeting.meeting_date}</td>
-                  <td className="px-4 py-2">{meeting.meeting_time}</td>
-                  <td className="px-4 py-2">{meeting.meeting_type_name}</td>
-                  <td className="px-4 py-2">{meeting.status === 'pending' ? 'Pendiente' : meeting.status === 'confirmed' ? 'Confirmada' : 'Otra'}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      {/* Listas rápidas */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* Últimas notificaciones */}
+        <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+          <div className="font-bold text-white mb-3 flex items-center gap-2"><BellIcon className="w-5 h-5 text-[#038e42]" /> Últimas notificaciones</div>
+          <ul className="space-y-2">
+            {latest.notifications.length === 0 && <li className="text-white/40 text-sm">Sin notificaciones</li>}
+            {latest.notifications.map(n => (
+              <li key={n.id} className="text-white/80 text-sm border-b border-white/10 pb-1 last:border-0 last:pb-0">
+                <span className="font-semibold">{n.title}</span><br />
+                <span className="text-xs text-white/40">{format(new Date(n.created_at), 'dd/MM/yyyy HH:mm', { locale: es })}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        {/* Últimos leads */}
+        <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+          <div className="font-bold text-white mb-3 flex items-center gap-2"><EnvelopeClosedIcon className="w-5 h-5 text-yellow-400" /> Últimos leads</div>
+          <ul className="space-y-2">
+            {latest.leads.length === 0 && <li className="text-white/40 text-sm">Sin leads</li>}
+            {latest.leads.map(l => (
+              <li key={l.id} className="text-white/80 text-sm border-b border-white/10 pb-1 last:border-0 last:pb-0">
+                <span className="font-semibold">{l.name}</span> - {l.email}<br />
+                <span className="text-xs text-white/40">{format(new Date(l.created_at), 'dd/MM/yyyy HH:mm', { locale: es })}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        {/* Próximas reuniones */}
+        <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+          <div className="font-bold text-white mb-3 flex items-center gap-2"><CalendarIcon className="w-5 h-5 text-green-400" /> Próximas reuniones</div>
+          <ul className="space-y-2">
+            {latest.meetings.length === 0 && <li className="text-white/40 text-sm">Sin reuniones</li>}
+            {latest.meetings.map(m => (
+              <li key={m.id} className="text-white/80 text-sm border-b border-white/10 pb-1 last:border-0 last:pb-0">
+                <span className="font-semibold">{m.name}</span> - {m.meeting_type_name}<br />
+                <span className="text-xs text-white/40">{format(new Date(m.meeting_date), 'dd/MM/yyyy')}, {m.meeting_time}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        {/* Solicitudes de presupuesto recientes */}
+        <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+          <div className="font-bold text-white mb-3 flex items-center gap-2"><GearIcon className="w-5 h-5 text-purple-400" /> Últimos presupuestos</div>
+          <ul className="space-y-2">
+            {latest.presupuestos.length === 0 && <li className="text-white/40 text-sm">Sin presupuestos</li>}
+            {latest.presupuestos.map(p => (
+              <li key={p.id} className="text-white/80 text-sm border-b border-white/10 pb-1 last:border-0 last:pb-0">
+                <span className="font-semibold">{p.name}</span> - {p.email}<br />
+                <span className="text-xs text-white/40">{format(new Date(p.created_at), 'dd/MM/yyyy HH:mm', { locale: es })}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>

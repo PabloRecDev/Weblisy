@@ -206,4 +206,17 @@
 .bg-\[\#0d0d0d\] {
   scrollbar-color: #222 #111;
   scrollbar-width: thin;
+}
+
+/* Selects en modo dark */
+select, select option {
+  background-color: #181818 !important;
+  color: #fff !important;
+  border-color: #333 !important;
+}
+
+select:focus {
+  outline: none;
+  border-color: #038e42 !important;
+  box-shadow: 0 0 0 2px #038e4233;
 } 

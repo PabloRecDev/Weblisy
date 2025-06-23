@@ -22,6 +22,7 @@ export default function AdminLayout() {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [unreadCount, setUnreadCount] = useState(0);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -35,6 +36,19 @@ export default function AdminLayout() {
     checkIsMobile();
     window.addEventListener('resize', checkIsMobile);
     return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
+
+  useEffect(() => {
+    const fetchUnreadCount = async () => {
+      const { count, error } = await supabase
+        .from('notifications')
+        .select('*', { count: 'exact', head: true })
+        .eq('is_read', false);
+      if (!error) setUnreadCount(count || 0);
+    };
+    fetchUnreadCount();
+    const interval = setInterval(fetchUnreadCount, 10000); // cada 10s
+    return () => clearInterval(interval);
   }, []);
 
   const handleLogout = async () => {
@@ -157,9 +171,11 @@ export default function AdminLayout() {
               <BellIcon className={`${sidebarOpen ? 'w-5 h-5' : 'w-6 h-6'} transition-all duration-300`} />
               {sidebarOpen && <span className="text-sm lg:text-base">Notificaciones</span>}
               {/* Badge de notificaciones */}
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full flex items-center justify-center">
-                <span className="text-xs text-white font-bold">{notifications.length}</span>
-              </div>
+              {unreadCount > 0 && (
+                <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full flex items-center justify-center">
+                  <span className="text-xs text-white font-bold">{unreadCount}</span>
+                </div>
+              )}
             </button>
             {/* Dropdown de notificaciones */}
             {showNotifications && sidebarOpen && (
