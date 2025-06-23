@@ -27,17 +27,19 @@ export default function BlogPage() {
         <meta property="og:title" content="Blog | Weblisy - Artículos de Desarrollo Web y SEO" />
         <meta property="og:description" content="Lee los mejores artículos sobre desarrollo web, SEO, diseño y tendencias digitales." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://weblisy.com/blog" />
-        <meta property="og:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        <meta property="og:url" content="https://weblisy.es/blog" />
+        <meta property="og:image" content="https://weblisy.es/assets/Weblisy-logo-fondo.png" />
+        <meta property="og:image:alt" content="Blog Weblisy - Artículos de desarrollo web y SEO" />
         
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Blog | Weblisy" />
         <meta name="twitter:description" content="Artículos sobre desarrollo web, SEO y tendencias digitales." />
-        <meta name="twitter:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        <meta name="twitter:image" content="https://weblisy.es/assets/Weblisy-logo-fondo.png" />
+        <meta name="twitter:image:alt" content="Blog Weblisy - Artículos de desarrollo web y SEO" />
         
         {/* Canonical */}
-        <link rel="canonical" href="https://weblisy.com/blog" />
+        <link rel="canonical" href="https://weblisy.es/blog" />
       </Helmet>
       <div className="min-h-screen bg-black">
         <div className="max-w-6xl mx-auto px-4 md:px-8 py-16 sm:py-24">

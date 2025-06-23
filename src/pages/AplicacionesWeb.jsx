@@ -184,17 +184,19 @@ export default function AplicacionesWeb() {
         <meta property="og:title" content="Aplicaciones Web a Medida | Weblisy" />
         <meta property="og:description" content="Desarrollamos aplicaciones web personalizadas para tu negocio. Soluciones escalables y modernas." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://weblisy.com/aplicaciones-web" />
-        <meta property="og:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        <meta property="og:url" content="https://weblisy.es/aplicaciones-web" />
+        <meta property="og:image" content="https://weblisy.es/assets/Weblisy-logo-fondo.png" />
+        <meta property="og:image:alt" content="Aplicaciones Web a Medida - Weblisy" />
         
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Aplicaciones Web a Medida | Weblisy" />
         <meta name="twitter:description" content="Desarrollamos aplicaciones web personalizadas para tu negocio." />
-        <meta name="twitter:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        <meta name="twitter:image" content="https://weblisy.es/assets/Weblisy-logo-fondo.png" />
+        <meta name="twitter:image:alt" content="Aplicaciones Web a Medida - Weblisy" />
         
         {/* Canonical */}
-        <link rel="canonical" href="https://weblisy.com/aplicaciones-web" />
+        <link rel="canonical" href="https://weblisy.es/aplicaciones-web" />
       </Helmet>
 
       {/* Hero Section */}

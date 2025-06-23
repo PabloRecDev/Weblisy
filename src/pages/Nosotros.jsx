@@ -105,17 +105,19 @@ export default function Nosotros() {
         <meta property="og:title" content="Sobre Nosotros - Weblisy" />
         <meta property="og:description" content="Conoce nuestro equipo y nuestra pasión por el desarrollo web" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://weblisy.com/nosotros" />
-        <meta property="og:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        <meta property="og:url" content="https://weblisy.es/nosotros" />
+        <meta property="og:image" content="https://weblisy.es/assets/Weblisy-logo-fondo.png" />
+        <meta property="og:image:alt" content="Sobre Nosotros - Weblisy" />
         
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Sobre Nosotros - Weblisy" />
         <meta name="twitter:description" content="Conoce nuestro equipo y nuestra pasión por el desarrollo web" />
-        <meta name="twitter:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        <meta name="twitter:image" content="https://weblisy.es/assets/Weblisy-logo-fondo.png" />
+        <meta name="twitter:image:alt" content="Sobre Nosotros - Weblisy" />
         
         {/* Canonical */}
-        <link rel="canonical" href="https://weblisy.com/nosotros" />
+        <link rel="canonical" href="https://weblisy.es/nosotros" />
       </Helmet>
 
       {/* Hero Section */}

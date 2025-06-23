@@ -1,22 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Helmet } from 'react-helmet-async';
 import { StarIcon, RocketIcon } from '@radix-ui/react-icons';
 
 export default function HeroSection() {
   return (
     <section id="hero" className="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#0a0a0a] via-[#111111] to-[#1a1a1a] px-4 py-10 md:py-24">
-      <Helmet>
-        <meta name="description" content="Lleva tu negocio al siguiente nivel con una web profesional, moderna y rápida." />
-        <meta name="keywords" content="desarrollo web, web profesional, diseño web, soluciones digitales" />
-        <meta property="og:title" content="Lleva tu negocio al siguiente nivel con una web profesional" />
-        <meta property="og:description" content="Creamos sitios web modernos, rápidos y listos para convertir." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://weblisy.com/#hero" />
-        <meta name="twitter:title" content="Lleva tu negocio al siguiente nivel con una web profesional" />
-        <meta name="twitter:description" content="Creamos sitios web modernos, rápidos y listos para convertir." />
-      </Helmet>
-
       {/* Fondo animado sutil */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/3 w-32 h-32 bg-[#038e42]/10 rounded-full blur-2xl"></div>

@@ -79,17 +79,19 @@ const FAQPage = () => {
         <meta property="og:title" content="Preguntas Frecuentes (FAQ) | Weblisy" />
         <meta property="og:description" content="Encuentra respuestas a las preguntas más comunes sobre nuestros servicios de diseño web, precios y plazos." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://weblisy.com/faq" />
-        <meta property="og:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        <meta property="og:url" content="https://weblisy.es/faq" />
+        <meta property="og:image" content="https://weblisy.es/assets/Weblisy-logo-fondo.png" />
+        <meta property="og:image:alt" content="Preguntas Frecuentes - Weblisy" />
         
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Preguntas Frecuentes | Weblisy" />
         <meta name="twitter:description" content="Resuelve tus dudas sobre desarrollo web, precios y plazos." />
-        <meta name="twitter:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        <meta name="twitter:image" content="https://weblisy.es/assets/Weblisy-logo-fondo.png" />
+        <meta name="twitter:image:alt" content="Preguntas Frecuentes - Weblisy" />
         
         {/* Canonical */}
-        <link rel="canonical" href="https://weblisy.com/faq" />
+        <link rel="canonical" href="https://weblisy.es/faq" />
       </Helmet>
 
       {/* Hero Section */}

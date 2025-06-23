@@ -318,17 +318,19 @@ export default function ProyectoDetalle() {
         <meta property="og:title" content={`${project.title} | Weblisy`} />
         <meta property="og:description" content={project.description} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={`https://weblisy.com/proyecto/${project.id}`} />
-        <meta property="og:image" content={project.images[0] || "https://weblisy.com/assets/weblisy-logo.png"} />
+        <meta property="og:url" content={`https://weblisy.es/proyecto/${project.id}`} />
+        <meta property="og:image" content={project.images[0] || "https://weblisy.es/assets/Weblisy-logo-fondo.png"} />
+        <meta property="og:image:alt" content={`${project.title} - Proyecto Weblisy`} />
         
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`${project.title} | Weblisy`} />
         <meta name="twitter:description" content={project.description} />
-        <meta name="twitter:image" content={project.images[0] || "https://weblisy.com/assets/weblisy-logo.png"} />
+        <meta name="twitter:image" content={project.images[0] || "https://weblisy.es/assets/Weblisy-logo-fondo.png"} />
+        <meta name="twitter:image:alt" content={`${project.title} - Proyecto Weblisy`} />
         
         {/* Canonical */}
-        <link rel="canonical" href={`https://weblisy.com/proyecto/${project.id}`} />
+        <link rel="canonical" href={`https://weblisy.es/proyecto/${project.id}`} />
       </Helmet>
 
       {/* Hero Section */}

@@ -63,17 +63,19 @@ const ProcesoPage = () => {
         <meta property="og:title" content="Nuestro Proceso de Desarrollo | Weblisy" />
         <meta property="og:description" content="Descubre nuestro proceso de trabajo transparente y colaborativo para crear soluciones web exitosas." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://weblisy.com/proceso" />
-        <meta property="og:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        <meta property="og:url" content="https://weblisy.es/proceso" />
+        <meta property="og:image" content="https://weblisy.es/assets/Weblisy-logo-fondo.png" />
+        <meta property="og:image:alt" content="Proceso de Desarrollo - Weblisy" />
         
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Proceso de Desarrollo | Weblisy" />
         <meta name="twitter:description" content="Proceso transparente y colaborativo para crear soluciones web exitosas." />
-        <meta name="twitter:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        <meta name="twitter:image" content="https://weblisy.es/assets/Weblisy-logo-fondo.png" />
+        <meta name="twitter:image:alt" content="Proceso de Desarrollo - Weblisy" />
         
         {/* Canonical */}
-        <link rel="canonical" href="https://weblisy.com/proceso" />
+        <link rel="canonical" href="https://weblisy.es/proceso" />
       </Helmet>
 
       {/* Hero Section */}

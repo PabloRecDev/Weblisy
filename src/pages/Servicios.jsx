@@ -64,17 +64,19 @@ const ServiciosPage = () => {
         <meta property="og:title" content="Servicios de Desarrollo Web y Aplicaciones | Weblisy" />
         <meta property="og:description" content="Ofrecemos servicios de diseño web, desarrollo de aplicaciones a medida, e-commerce y mantenimiento. Soluciones tecnológicas para impulsar tu negocio." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://weblisy.com/servicios" />
-        <meta property="og:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        <meta property="og:url" content="https://weblisy.es/servicios" />
+        <meta property="og:image" content="https://weblisy.es/assets/Weblisy-logo-fondo.png" />
+        <meta property="og:image:alt" content="Servicios de Desarrollo Web - Weblisy" />
         
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Servicios de Desarrollo Web | Weblisy" />
         <meta name="twitter:description" content="Diseño web, aplicaciones a medida, e-commerce y mantenimiento. Soluciones tecnológicas para tu negocio." />
-        <meta name="twitter:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        <meta name="twitter:image" content="https://weblisy.es/assets/Weblisy-logo-fondo.png" />
+        <meta name="twitter:image:alt" content="Servicios de Desarrollo Web - Weblisy" />
         
         {/* Canonical */}
-        <link rel="canonical" href="https://weblisy.com/servicios" />
+        <link rel="canonical" href="https://weblisy.es/servicios" />
       </Helmet>
 
       {/* Hero Section */}

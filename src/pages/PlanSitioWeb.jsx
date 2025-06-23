@@ -77,17 +77,19 @@ export default function PlanSitioWeb() {
         <meta property="og:title" content="Sitio Web Profesional - Oferta Especial | Weblisy" />
         <meta property="og:description" content="Oferta especial: Sitio web profesional completo por solo 299€. Diseño personalizado, responsive y SEO optimizado." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://weblisy.com/plan-sitio-web" />
-        <meta property="og:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        <meta property="og:url" content="https://weblisy.es/plan-sitio-web" />
+        <meta property="og:image" content="https://weblisy.es/assets/Weblisy-logo-fondo.png" />
+        <meta property="og:image:alt" content="Oferta Sitio Web Profesional - Weblisy" />
         
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Sitio Web Profesional - Oferta Especial | Weblisy" />
-        <meta name="twitter:description" content="Sitio web profesional completo por solo 299€. ¡50% de descuento!" />
-        <meta name="twitter:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        <meta name="twitter:description" content="Oferta especial: Sitio web profesional por solo 299€. Diseño personalizado y SEO optimizado." />
+        <meta name="twitter:image" content="https://weblisy.es/assets/Weblisy-logo-fondo.png" />
+        <meta name="twitter:image:alt" content="Oferta Sitio Web Profesional - Weblisy" />
         
         {/* Canonical */}
-        <link rel="canonical" href="https://weblisy.com/plan-sitio-web" />
+        <link rel="canonical" href="https://weblisy.es/plan-sitio-web" />
       </Helmet>
 
       <main className="pt-0">

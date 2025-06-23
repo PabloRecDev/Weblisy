@@ -35,17 +35,19 @@ const DesarrolloWebPage = () => {
         <meta property="og:title" content="Diseño y Desarrollo Web Profesional | Weblisy" />
         <meta property="og:description" content="Creamos páginas web corporativas, landing pages y portfolios a medida. Diseño profesional y SEO optimizado." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://weblisy.com/servicios/desarrollo-web" />
-        <meta property="og:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        <meta property="og:url" content="https://weblisy.es/servicios/desarrollo-web" />
+        <meta property="og:image" content="https://weblisy.es/assets/Weblisy-logo-fondo.png" />
+        <meta property="og:image:alt" content="Desarrollo Web Profesional - Weblisy" />
         
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Desarrollo Web Profesional | Weblisy" />
         <meta name="twitter:description" content="Páginas web corporativas, landing pages y portfolios a medida con diseño profesional." />
-        <meta name="twitter:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        <meta name="twitter:image" content="https://weblisy.es/assets/Weblisy-logo-fondo.png" />
+        <meta name="twitter:image:alt" content="Desarrollo Web Profesional - Weblisy" />
         
         {/* Canonical */}
-        <link rel="canonical" href="https://weblisy.com/servicios/desarrollo-web" />
+        <link rel="canonical" href="https://weblisy.es/servicios/desarrollo-web" />
       </Helmet>
 
       <main>

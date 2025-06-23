@@ -5,4 +5,4 @@ Disallow: /admin
 Disallow: /login
 Allow: /
 
-Sitemap: https://weblisy.com/sitemap.xml
+Sitemap: https://weblisy.es/sitemap.xml

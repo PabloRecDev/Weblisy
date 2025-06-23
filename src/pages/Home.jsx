@@ -36,28 +36,30 @@ const HomePage = () => {
   return (
     <>
       <Helmet>
-        <title>Weblisy - Desarrollo Web Profesional | Diseño y Aplicaciones a Medida</title>
-        <meta name="description" content="Desarrollamos sitios web profesionales, aplicaciones a medida y tiendas online. Diseño moderno, SEO optimizado y soporte técnico especializado. Transformamos tu negocio digital." />
-        <meta name="keywords" content="desarrollo web, diseño web, aplicaciones web, tiendas online, e-commerce, SEO, WordPress, React, Node.js, programación web, agencia digital" />
+        <title>Weblisy - Agencia de Desarrollo Web, Apps y SEO en España</title>
+        <meta name="description" content="Agencia experta en desarrollo web, aplicaciones a medida y tiendas online. Diseño moderno, SEO avanzado, velocidad y soporte premium. ¡Haz crecer tu negocio digital con Weblisy!" />
+        <meta name="keywords" content="desarrollo web profesional, agencia diseño web, aplicaciones web a medida, tiendas online, ecommerce, SEO en España, optimización web, páginas web rápidas, soporte web, desarrollo React, desarrollo Node.js, diseño web moderno, agencia digital, web corporativa, web para empresas, web personalizada" />
         <meta name="robots" content="index, follow" />
         
         {/* Open Graph */}
-        <meta property="og:title" content="Weblisy - Desarrollo Web Profesional" />
-        <meta property="og:description" content="Desarrollamos sitios web profesionales, aplicaciones a medida y tiendas online. Diseño moderno y SEO optimizado." />
+        <meta property="og:title" content="Weblisy - Agencia de Desarrollo Web, Apps y SEO en España" />
+        <meta property="og:description" content="Desarrollo de webs, apps y tiendas online con diseño moderno, SEO y soporte premium. ¡Transforma tu presencia digital!" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://weblisy.com" />
-        <meta property="og:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        <meta property="og:url" content="https://weblisy.es" />
+        <meta property="og:image" content="https://weblisy.es/assets/Weblisy-logo-fondo.png" />
+        <meta property="og:image:alt" content="Logo Weblisy - Agencia de desarrollo web y apps" />
         <meta property="og:site_name" content="Weblisy" />
         <meta property="og:locale" content="es_ES" />
         
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Weblisy - Desarrollo Web Profesional" />
-        <meta name="twitter:description" content="Desarrollamos sitios web profesionales, aplicaciones a medida y tiendas online." />
-        <meta name="twitter:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        <meta name="twitter:title" content="Weblisy - Agencia de Desarrollo Web, Apps y SEO en España" />
+        <meta name="twitter:description" content="Desarrollo de webs, apps y tiendas online con diseño moderno, SEO y soporte premium." />
+        <meta name="twitter:image" content="https://weblisy.es/assets/Weblisy-logo-fondo.png" />
+        <meta name="twitter:image:alt" content="Logo Weblisy - Agencia de desarrollo web y apps" />
         
         {/* Canonical */}
-        <link rel="canonical" href="https://weblisy.com" />
+        <link rel="canonical" href="https://weblisy.es" />
         
         {/* Additional SEO */}
         <meta name="author" content="Weblisy" />

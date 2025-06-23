@@ -62,17 +62,19 @@ const MantenimientoPage = () => {
         <meta property="og:title" content="Mantenimiento Web y Soporte Técnico | Weblisy" />
         <meta property="og:description" content="Planes de mantenimiento web para mantener tu sitio seguro, rápido y actualizado." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://weblisy.com/servicios/mantenimiento" />
-        <meta property="og:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        <meta property="og:url" content="https://weblisy.es/servicios/mantenimiento" />
+        <meta property="og:image" content="https://weblisy.es/assets/Weblisy-logo-fondo.png" />
+        <meta property="og:image:alt" content="Mantenimiento Web - Weblisy" />
         
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Mantenimiento Web | Weblisy" />
         <meta name="twitter:description" content="Planes de mantenimiento web para mantener tu sitio seguro y actualizado." />
-        <meta name="twitter:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        <meta name="twitter:image" content="https://weblisy.es/assets/Weblisy-logo-fondo.png" />
+        <meta name="twitter:image:alt" content="Mantenimiento Web - Weblisy" />
         
         {/* Canonical */}
-        <link rel="canonical" href="https://weblisy.com/servicios/mantenimiento" />
+        <link rel="canonical" href="https://weblisy.es/servicios/mantenimiento" />
       </Helmet>
 
       <main>

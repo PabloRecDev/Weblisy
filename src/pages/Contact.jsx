@@ -154,17 +154,19 @@ export default function Contact() {
         <meta property="og:title" content="Contacto - Weblisy" />
         <meta property="og:description" content="Contáctanos para desarrollar tu proyecto web profesional" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://weblisy.com/contacto" />
-        <meta property="og:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        <meta property="og:url" content="https://weblisy.es/contacto" />
+        <meta property="og:image" content="https://weblisy.es/assets/Weblisy-logo-fondo.png" />
+        <meta property="og:image:alt" content="Contacto Weblisy - Desarrollo web profesional" />
         
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Contacto - Weblisy" />
         <meta name="twitter:description" content="Contáctanos para desarrollar tu proyecto web profesional" />
-        <meta name="twitter:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        <meta name="twitter:image" content="https://weblisy.es/assets/Weblisy-logo-fondo.png" />
+        <meta name="twitter:image:alt" content="Contacto Weblisy - Desarrollo web profesional" />
         
         {/* Canonical */}
-        <link rel="canonical" href="https://weblisy.com/contacto" />
+        <link rel="canonical" href="https://weblisy.es/contacto" />
       </Helmet>
 
       {/* Hero Section */}

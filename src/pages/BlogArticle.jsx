@@ -37,8 +37,9 @@ export default function BlogArticlePage() {
         <meta property="og:title" content={`${article.title} | Blog Weblisy`} />
         <meta property="og:description" content={article.summary || "Lee este artículo de Weblisy sobre desarrollo web, SEO y tendencias digitales."} />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content={`https://weblisy.com/blog/${article.slug}`} />
-        <meta property="og:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        <meta property="og:url" content={`https://weblisy.es/blog/${article.slug}`} />
+        <meta property="og:image" content="https://weblisy.es/assets/Weblisy-logo-fondo.png" />
+        <meta property="og:image:alt" content={`${article.title} - Blog Weblisy`} />
         <meta property="article:published_time" content={article.date} />
         <meta property="article:author" content="Weblisy" />
         
@@ -46,10 +47,11 @@ export default function BlogArticlePage() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`${article.title} | Blog Weblisy`} />
         <meta name="twitter:description" content={article.summary || "Lee este artículo de Weblisy sobre desarrollo web, SEO y tendencias digitales."} />
-        <meta name="twitter:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        <meta name="twitter:image" content="https://weblisy.es/assets/Weblisy-logo-fondo.png" />
+        <meta name="twitter:image:alt" content={`${article.title} - Blog Weblisy`} />
         
         {/* Canonical */}
-        <link rel="canonical" href={`https://weblisy.com/blog/${article.slug}`} />
+        <link rel="canonical" href={`https://weblisy.es/blog/${article.slug}`} />
       </Helmet>
       <main className="flex-1 pt-24 pb-12 px-4 md:px-0">
         <div className="max-w-2xl mx-auto">

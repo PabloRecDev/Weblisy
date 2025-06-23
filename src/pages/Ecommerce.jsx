@@ -35,17 +35,19 @@ const EcommercePage = () => {
         <meta property="og:title" content="Desarrollo de Tiendas Online (E-commerce) | Weblisy" />
         <meta property="og:description" content="Creamos tiendas online a medida, robustas y optimizadas para vender. Expertos en WooCommerce y Shopify." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://weblisy.com/servicios/ecommerce" />
-        <meta property="og:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        <meta property="og:url" content="https://weblisy.es/servicios/ecommerce" />
+        <meta property="og:image" content="https://weblisy.es/assets/Weblisy-logo-fondo.png" />
+        <meta property="og:image:alt" content="Desarrollo E-commerce - Weblisy" />
         
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Desarrollo E-commerce | Weblisy" />
         <meta name="twitter:description" content="Tiendas online a medida optimizadas para vender. WooCommerce y Shopify." />
-        <meta name="twitter:image" content="https://weblisy.com/assets/weblisy-logo.png" />
+        <meta name="twitter:image" content="https://weblisy.es/assets/Weblisy-logo-fondo.png" />
+        <meta name="twitter:image:alt" content="Desarrollo E-commerce - Weblisy" />
         
         {/* Canonical */}
-        <link rel="canonical" href="https://weblisy.com/servicios/ecommerce" />
+        <link rel="canonical" href="https://weblisy.es/servicios/ecommerce" />
       </Helmet>
 
       <main>
