@@ -86,69 +86,58 @@ export default function PricingSection() {
 
   const plans = [
     {
-      name: "Sitio Web Básico",
-      price: 499,
-      originalPrice: 699,
+      name: "Sitio Web Esencial",
+      price: "499€",
       period: "pago único",
-      description: "Perfecto para pequeñas empresas y emprendedores",
+      description: "La presencia online profesional que tu negocio necesita para empezar a destacar.",
       features: [
-        "Diseño web responsivo personalizado",
-        "Hasta 5 páginas",
-        "Formulario de contacto",
-        "Optimización SEO básica",
-        "Hosting incluido por 1 año",
-        "Dominio incluido por 1 año",
-        "Soporte técnico por 30 días",
-        "Entrega en 2 semanas",
-        "Garantía de satisfacción"
+        "Diseño 100% personalizado",
+        "Hasta 5 secciones (Inicio, Sobre nosotros, etc.)",
+        "Adaptado a móviles y tabletas",
+        "Formulario de contacto funcional",
+        "Optimización SEO básica inicial",
+        "Carga rápida y rendimiento optimizado",
+        "1 año de Hosting y Dominio gratis"
       ],
       popular: false,
-      color: "from-[#038e42] to-[#038e42]",
-      oneTimePayment: true
+      buttonText: "Empezar Proyecto",
+      isQuote: false
     },
     {
-      name: "Plan Profesional",
-      price: isAnnual ? 99 : 149,
-      period: isAnnual ? "mes (facturación anual)" : "mes",
-      description: "Ideal para empresas en crecimiento",
+      name: "Aplicación a Medida",
+      price: "Desde 1.999€",
+      period: "según proyecto",
+      description: "Soluciones a medida para optimizar tus procesos. Ideal para CRMs, ERPs, o sistemas de gestión.",
       features: [
-        "Sitio web responsivo completo",
-        "Hasta 15 páginas",
-        "Blog integrado",
-        "Panel de administración",
-        "SEO avanzado",
-        "Analytics y reportes",
-        "Soporte prioritario",
-        "Mantenimiento continuo",
-        "Actualizaciones de seguridad",
-        "Backups automáticos",
-        "Optimización de velocidad"
+        "Análisis y consultoría de requisitos",
+        "Desarrollo de lógica de negocio compleja",
+        "Panel de administración a medida",
+        "Base de datos escalable y segura",
+        "Integración con APIs y servicios de terceros",
+        "Fases de Testing y QA (Control de calidad)",
+        "Soporte y formación para el equipo"
       ],
       popular: true,
-      color: "from-[#038e42] to-[#038e42]",
-      oneTimePayment: false
+      buttonText: "Solicitar Presupuesto",
+      isQuote: true
     },
     {
-      name: "Plan Empresarial",
-      price: isAnnual ? 199 : 299,
-      period: isAnnual ? "mes (facturación anual)" : "mes",
-      description: "Para grandes empresas y aplicaciones complejas",
+      name: "E-commerce",
+      price: "Desde 999€",
+      period: "según funcionalidades",
+      description: "Una tienda online robusta y optimizada para convertir visitantes en clientes.",
       features: [
-        "Todo del plan Profesional",
-        "Páginas ilimitadas",
-        "Aplicación web completa",
-        "Integración con APIs",
-        "Base de datos personalizada",
-        "Soporte 24/7",
-        "Mantenimiento premium",
-        "Capacitación del equipo",
-        "Consultoría técnica",
-        "Escalabilidad garantizada",
-        "Monitoreo avanzado"
+        "Diseño de tienda único y atractivo",
+        "Catálogo de productos ilimitado",
+        "Integración con pasarelas de pago (Stripe, etc.)",
+        "Gestión de inventario y pedidos",
+        "Optimización para la conversión (CRO)",
+        "Fichas de producto optimizadas para SEO",
+        "Proceso de compra (checkout) seguro y fácil"
       ],
       popular: false,
-      color: "from-[#038e42] to-[#038e42]",
-      oneTimePayment: false
+      buttonText: "Solicitar Presupuesto",
+      isQuote: true
     }
   ];
 
@@ -211,32 +200,6 @@ export default function PricingSection() {
             Elige el plan que mejor se adapte a tus necesidades. 
             Todos incluyen soporte técnico y garantía de satisfacción.
           </motion.p>
-
-          {/* Toggle de facturación solo para planes de suscripción */}
-          <div className="flex items-center justify-center gap-4 mb-12">
-            <span className={`text-sm ${!isAnnual ? 'text-white' : 'text-gray-400'}`}>
-              Mensual
-            </span>
-            <motion.button
-              onClick={() => setIsAnnual(!isAnnual)}
-              className={`relative w-16 h-8 rounded-full p-1 transition-colors duration-300 ${
-                isAnnual ? 'bg-[#038e42]' : 'bg-gray-600'
-              }`}
-              whileTap={{ scale: 0.95 }}
-            >
-              <motion.div
-                className="w-6 h-6 bg-white rounded-full shadow-md"
-                animate={{ x: isAnnual ? 32 : 0 }}
-                transition={{ type: "spring", stiffness: 500, damping: 30 }}
-              />
-            </motion.button>
-            <span className={`text-sm ${isAnnual ? 'text-white' : 'text-gray-400'}`}>
-              Anual
-              <span className="ml-2 px-2 py-1 bg-[#038e42]/20 text-[#038e42] text-xs rounded-full">
-                -33%
-              </span>
-            </span>
-          </div>
         </motion.div>
 
         <motion.div 
@@ -262,70 +225,88 @@ export default function PricingSection() {
                   : 'border-[#038e42]/20 hover:border-[#038e42]/40'
               }`}
             >
-              {/* Badge popular */}
-              {plan.popular && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <div className="bg-gradient-to-r from-[#038e42] to-[#038e42] text-white px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-2 shadow-md">
-                    <StarIcon className="w-4 h-4" />
-                    Más Popular
-                  </div>
-                </div>
-              )}
-
-              {/* Badge de descuento para pago único */}
-              {plan.oneTimePayment && plan.originalPrice && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <div className="bg-gradient-to-r from-red-500 to-red-600 text-white px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-2 shadow-md">
-                    <span className="line-through">€{plan.originalPrice}</span>
-                    -29%
-                  </div>
-                </div>
-              )}
-
-              {/* Header del plan */}
-              <div className="text-center mb-6">
-                <h3 className="text-xl font-bold text-white mb-1">{plan.name}</h3>
-                <p className="text-gray-400 mb-4 text-sm">{plan.description}</p>
-                <div className="mb-4">
-                  <span className="text-3xl font-bold text-white">€{plan.price}</span>
-                  <span className="text-gray-400 text-base">/{plan.period}</span>
-                </div>
-
-                <motion.button
-                  whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(3, 142, 66, 0.3)" }}
-                  whileTap={{ scale: 0.95 }}
-                  className={`w-full py-2 px-4 rounded-md font-semibold text-sm transition-all duration-300 ${
-                    plan.popular
-                      ? 'bg-[#038e42] text-white hover:bg-[#038e42]/80'
-                      : 'bg-[#038e42]/10 text-[#038e42] border border-[#038e42] hover:bg-[#038e42] hover:text-white'
-                  }`}
-                >
-                  {plan.oneTimePayment ? 'Contratar Ahora' : 'Comenzar Plan'}
-                </motion.button>
-              </div>
-
-              {/* Lista de características */}
-              <div className="space-y-3">
-                <h4 className="font-semibold text-white mb-2 text-sm">Incluye:</h4>
-                {plan.features.map((feature, featureIndex) => (
-                  <motion.div
-                    key={featureIndex}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.4, delay: featureIndex * 0.1 }}
-                    viewport={{ once: true }}
-                    className="flex items-start gap-2"
+              <div 
+                className={`p-8 rounded-t-2xl bg-gradient-to-br ${
+                  plan.popular 
+                  ? 'from-[#038e42] to-green-500' 
+                  : 'from-gray-800 to-gray-700'
+                }`}
+              >
+                {plan.popular && (
+                  <motion.div 
+                    className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2"
+                    initial={{ y: 0 }}
+                    animate={{ y: [-5, 5] }}
+                    transition={{ 
+                      duration: 1, 
+                      repeat: Infinity, 
+                      repeatType: "reverse", 
+                      ease: "easeInOut" 
+                    }}
                   >
-                    <div className="w-4 h-4 rounded-full bg-[#038e42] flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <CheckIcon className="w-3 h-3 text-white" />
+                    <div className="bg-yellow-400 text-black px-4 py-1 rounded-full text-sm font-bold shadow-lg">
+                      MÁS POPULAR
                     </div>
-                    <span className="text-gray-300 text-xs">{feature}</span>
                   </motion.div>
-                ))}
+                )}
+                <h3 className="text-2xl font-bold text-white text-center">
+                  {plan.name}
+                </h3>
               </div>
 
-              {/* Efecto de brillo en hover */}
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-[#038e42]/0 via-[#038e42]/5 to-[#038e42]/0 opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+              <div className="p-8">
+                <motion.div 
+                  className="text-center mb-6"
+                  variants={priceVariants}
+                >
+                  <span className="text-4xl font-bold text-white">
+                    {plan.price}
+                  </span>
+                  <p className="text-gray-400 text-sm mt-1">
+                    {plan.period}
+                  </p>
+                </motion.div>
+
+                <p className="text-center text-gray-300 mb-8 h-12">
+                  {plan.description}
+                </p>
+
+                <motion.ul 
+                  className="space-y-4 mb-10"
+                  variants={{
+                    visible: { transition: { staggerChildren: 0.1 } }
+                  }}
+                >
+                  {plan.features.map((feature, i) => (
+                    <motion.li 
+                      key={i}
+                      className="flex items-start gap-3"
+                      variants={featureVariants}
+                    >
+                      <CheckIcon className="w-5 h-5 text-[#038e42] mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-300">{feature}</span>
+                    </motion.li>
+                  ))}
+                </motion.ul>
+
+                <div className="mt-auto">
+                  <Link to={plan.isQuote ? "/presupuesto" : "/contacto"}>
+                    <motion.button
+                      className={`w-full py-3 rounded-lg font-semibold text-lg transition-all duration-300 ${
+                        plan.popular 
+                        ? 'bg-[#038e42] text-white hover:bg-green-500 shadow-green-500/20 shadow-lg'
+                        : 'bg-black/30 backdrop-blur-sm border border-white/20 text-white hover:bg-white/10'
+                      }`}
+                      variants={buttonVariants}
+                      whileHover="hover"
+                      whileTap="tap"
+                    >
+                      {plan.buttonText}
+                      <ArrowRightIcon className="inline-block w-4 h-4 ml-2" />
+                    </motion.button>
+                  </Link>
+                </div>
+              </div>
             </motion.div>
           ))}
         </motion.div>

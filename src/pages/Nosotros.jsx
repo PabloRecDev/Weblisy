@@ -1,8 +1,6 @@
 import React from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 import { 
   RocketIcon, 
   StarIcon, 
@@ -96,7 +94,7 @@ export default function Nosotros() {
   ];
 
   return (
-    <div className="min-h-screen bg-black">
+    <>
       <Helmet>
         <title>Sobre Nosotros - Weblisy | Desarrollo Web Profesional</title>
         <meta name="description" content="Conoce nuestro equipo, valores y misión. Somos especialistas en desarrollo web y transformación digital con años de experiencia." />
@@ -106,8 +104,6 @@ export default function Nosotros() {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://weblisy.com/nosotros" />
       </Helmet>
-
-      <Navbar />
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4 md:px-8 relative overflow-hidden">
@@ -341,8 +337,6 @@ export default function Nosotros() {
           </motion.div>
         </div>
       </section>
-
-      <Footer />
-    </div>
+    </>
   );
 } 

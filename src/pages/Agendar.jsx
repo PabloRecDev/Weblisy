@@ -1,8 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import MeetingScheduler from '@/components/MeetingScheduler';
-import Footer from '@/components/Footer';
-import Navbar from '@/components/Navbar';
 
 export default function AgendarPage() {
   return (
@@ -27,13 +25,9 @@ export default function AgendarPage() {
         <link rel="canonical" href="https://weblisy.com/agendar" />
       </Helmet>
 
-      <div className="min-h-screen bg-black">
-        <Navbar brandName="WebLisy" />
-        <main className="pt-16">
-          <MeetingScheduler />
-        </main>
-        <Footer />
-      </div>
+      <main className="pt-24 min-h-screen bg-black">
+        <MeetingScheduler />
+      </main>
     </>
   );
 } 

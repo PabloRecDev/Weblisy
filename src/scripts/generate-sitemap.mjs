@@ -36,6 +36,7 @@ const projects = [
 const staticPages = [
   { url: '/', priority: '1.00', changefreq: 'daily' },
   { url: '/aplicaciones-web', priority: '0.90', changefreq: 'weekly' },
+  { url: '/proceso', priority: '0.80', changefreq: 'monthly' },
   { url: '/proyectos', priority: '0.80', changefreq: 'weekly' },
   { url: '/presupuesto', priority: '0.80', changefreq: 'monthly' },
   { url: '/agendar', priority: '0.80', changefreq: 'monthly' },

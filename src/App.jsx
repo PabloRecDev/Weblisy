@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import './App.css'
-import Navbar from './components/Navbar'
-import HeroSection from './components/HeroSection'
-import FeaturesSection from './components/FeaturesSection'
-import TestimonialsSection from './components/TestimonialsSection'
-import PricingSection from './components/PricingSection'
-import ContactSection from './components/ContactSection'
-import MeetingScheduler from './components/MeetingScheduler'
-import Footer from './components/Footer'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
-import SimpleLogin from './components/SimpleLogin'
-import AdminDashboard from './components/AdminDashboard'
 import { AuthProvider } from './components/AuthContext'
-import ProtectedRoute from './components/ProtectedRoute'
-import PrivacyPolicy from './pages/PrivacyPolicy';
+import { HelmetProvider, Helmet } from 'react-helmet-async';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
+
+// Layouts
+import MainLayout from './components/MainLayout';
+import AdminLayout from './components/AdminLayout';
+
+// Componentes y Páginas
+import ScrollToTop from './components/ScrollToTop';
+import LoadingScreen from './components/LoadingScreen';
+import SmoothScroll from './components/SmoothScroll';
+import { ThemeProvider } from './components/ThemeProvider';
+import ThemeToggle from './components/ThemeToggle';
+
+// Páginas Públicas
+import HomePage from './pages/Home';
 import PresupuestoPage from './pages/Presupuesto';
 import BlogPage from './pages/Blog';
 import BlogArticlePage from './pages/BlogArticle';
@@ -22,17 +27,17 @@ import AplicacionesWebPage from './pages/AplicacionesWeb';
 import ContactPage from './pages/Contact';
 import AgendarPage from './pages/Agendar';
 import NosotrosPage from './pages/Nosotros';
+import ProcesoPage from './pages/Proceso';
+import ServiciosPage from './pages/Servicios';
+import DesarrolloWebPage from './pages/DesarrolloWeb';
+import EcommercePage from './pages/Ecommerce';
+import MantenimientoPage from './pages/Mantenimiento';
 import ProyectoDetallePage from './pages/ProyectoDetalle';
+import FAQPage from './pages/FAQ';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+
+// Páginas de Admin
 import AdminDashboardPage from './pages/admin/Dashboard';
-import { useLocation } from 'react-router-dom';
-import ScrollToTop from './components/ScrollToTop';
-import { HelmetProvider, Helmet } from 'react-helmet-async';
-import LoadingScreen from './components/LoadingScreen';
-import { AnimatePresence, motion } from 'framer-motion';
-import SmoothScroll from './components/SmoothScroll';
-import ParticleBackground from './components/ParticleBackground';
-import { ThemeProvider } from './components/ThemeProvider';
-import ThemeToggle from './components/ThemeToggle';
 import AdminMeetingsPage from './pages/admin/Meetings';
 import AdminClientesPage from './pages/admin/Clientes';
 import AdminFacturasPage from './pages/admin/Facturas';
@@ -40,7 +45,8 @@ import AdminPresupuestosPage from './pages/admin/Presupuestos';
 import AdminProyectosPage from './pages/admin/Proyectos';
 import AdminTareasPage from './pages/admin/Tareas';
 import AdminLeadsPage from './pages/admin/Leads';
-import AdminLayout from './components/AdminLayout';
+import SimpleLogin from './components/SimpleLogin'
+import ProtectedRoute from './components/ProtectedRoute'
 
 function ScrollToHash() {
   const location = useLocation();
@@ -56,40 +62,33 @@ function ScrollToHash() {
   return null;
 }
 
+const PageWrapper = ({ children }) => {
+  const pageVariants = {
+    initial: { opacity: 0, y: 20 },
+    in: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+    out: { opacity: 0, y: -20, transition: { duration: 0.4, ease: "easeIn" } }
+  };
+
+  return (
+    <motion.div
+      variants={pageVariants}
+      initial="initial"
+      animate="in"
+      exit="out"
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simular tiempo de carga
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-
+    const timer = setTimeout(() => setIsLoading(false), 2000);
     return () => clearTimeout(timer);
   }, []);
-
-  const pageVariants = {
-    initial: {
-      opacity: 0,
-      y: 20
-    },
-    in: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut"
-      }
-    },
-    out: {
-      opacity: 0,
-      y: -20,
-      transition: {
-        duration: 0.4,
-        ease: "easeIn"
-      }
-    }
-  };
 
   return (
     <HelmetProvider>
@@ -103,210 +102,35 @@ function App() {
               <AnimatePresence mode="wait">
                 {isLoading && <LoadingScreen />}
               </AnimatePresence>
-              <Helmet>
-                <html lang="es" />
-                <meta charSet="utf-8" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <meta name="theme-color" content="#000000" />
-                <meta name="description" content="WebLisy - Desarrollo web profesional y soluciones digitales. Creamos aplicaciones web modernas y eficientes para impulsar tu negocio." />
-                <meta name="keywords" content="desarrollo web, aplicaciones web, diseño web, programación, soluciones digitales, páginas web, desarrollo de software" />
-                <meta name="author" content="WebLisy" />
-                <meta name="robots" content="index, follow" />
-                
-                {/* Open Graph / Facebook */}
-                <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://weblisy.com/" />
-                <meta property="og:title" content="WebLisy - Desarrollo Web Profesional" />
-                <meta property="og:description" content="Creamos aplicaciones web modernas y eficientes para impulsar tu negocio." />
-                <meta property="og:image" content="https://weblisy.com/assets/og-image.jpg" />
-
-                {/* Twitter */}
-                <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:url" content="https://weblisy.com/" />
-                <meta property="twitter:title" content="WebLisy - Desarrollo Web Profesional" />
-                <meta property="twitter:description" content="Creamos aplicaciones web modernas y eficientes para impulsar tu negocio." />
-                <meta property="twitter:image" content="https://weblisy.com/assets/twitter-image.jpg" />
-
-                {/* Canonical URL */}
-                <link rel="canonical" href="https://weblisy.com/" />
-
-                {/* Favicon */}
-                <link rel="icon" href="/favicon.ico" />
-                <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-
-                <title>Weblisy | Desarrollo de Páginas Web Profesionales</title>
-              </Helmet>
               
               <Routes>
-                {/* Rutas públicas */}
-                <Route path="/" element={
-                  <motion.div 
-                    className="min-h-screen relative overflow-hidden"
-                    variants={pageVariants}
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                  >
-                    {/* Fondo principal con gradiente */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-900 to-black"></div>
-                    
-                    {/* Partículas de fondo */}
-                    <ParticleBackground 
-                      particleCount={30}
-                      colors={['rgba(255,255,255,0.1)', 'rgba(255,255,255,0.2)', 'rgba(255,255,255,0.15)', 'rgba(255,255,255,0.05)', 'rgba(255,255,255,0.1)']}
-                      className="opacity-30"
-                    />
-                    
-                    {/* Contenido principal */}
-                    <div className="relative z-10">
-                      <Navbar brandName="WebLisy" />
-                      <main className="pt-16">
-                        <HeroSection />
-                        <FeaturesSection />
-                        <TestimonialsSection />
-                        <PricingSection />
-                        <ContactSection/>
-                      </main>
-                      <Footer/>
-                    </div>
-                  </motion.div>
-                } />
-                
-                <Route path="/presupuesto" element={
-                  <motion.div
-                    variants={pageVariants}
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                  >
-                    <PresupuestoPage />
-                  </motion.div>
-                } />
-                
-                <Route path="/blog" element={
-                  <motion.div
-                    variants={pageVariants}
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                  >
-                    <BlogPage />
-                  </motion.div>
-                } />
-                
-                <Route path="/proyectos" element={
-                  <motion.div
-                    variants={pageVariants}
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                  >
-                    <ProjectsPage />
-                  </motion.div>
-                } />
-                
-                <Route path="/blog/:slug" element={
-                  <motion.div
-                    variants={pageVariants}
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                  >
-                    <BlogArticlePage />
-                  </motion.div>
-                } />
-                
-                <Route path="/aplicaciones-web" element={
-                  <motion.div
-                    variants={pageVariants}
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                  >
-                    <AplicacionesWebPage />
-                  </motion.div>
-                } />
-                
-                <Route path="/privacidad" element={
-                  <motion.div
-                    variants={pageVariants}
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                  >
-                    <PrivacyPolicy />
-                  </motion.div>
-                } />
+                {/* Rutas Públicas con MainLayout */}
+                <Route path="/" element={<MainLayout><PageWrapper><HomePage /></PageWrapper></MainLayout>} />
+                <Route path="/presupuesto" element={<MainLayout><PageWrapper><PresupuestoPage /></PageWrapper></MainLayout>} />
+                <Route path="/blog" element={<MainLayout><PageWrapper><BlogPage /></PageWrapper></MainLayout>} />
+                <Route path="/blog/:slug" element={<MainLayout><PageWrapper><BlogArticlePage /></PageWrapper></MainLayout>} />
+                <Route path="/proyectos" element={<MainLayout><PageWrapper><ProjectsPage /></PageWrapper></MainLayout>} />
+                <Route path="/aplicaciones-web" element={<MainLayout><PageWrapper><AplicacionesWebPage /></PageWrapper></MainLayout>} />
+                <Route path="/contacto" element={<MainLayout><PageWrapper><ContactPage /></PageWrapper></MainLayout>} />
+                <Route path="/agendar" element={<MainLayout><PageWrapper><AgendarPage /></PageWrapper></MainLayout>} />
+                <Route path="/nosotros" element={<MainLayout><PageWrapper><NosotrosPage /></PageWrapper></MainLayout>} />
+                <Route path="/proceso" element={<MainLayout><PageWrapper><ProcesoPage /></PageWrapper></MainLayout>} />
+                <Route path="/servicios" element={<MainLayout><PageWrapper><ServiciosPage /></PageWrapper></MainLayout>} />
+                <Route path="/servicios/desarrollo-web" element={<MainLayout><PageWrapper><DesarrolloWebPage /></PageWrapper></MainLayout>} />
+                <Route path="/servicios/ecommerce" element={<MainLayout><PageWrapper><EcommercePage /></PageWrapper></MainLayout>} />
+                <Route path="/servicios/mantenimiento" element={<MainLayout><PageWrapper><MantenimientoPage /></PageWrapper></MainLayout>} />
+                <Route path="/proyectos/:slug" element={<MainLayout><PageWrapper><ProyectoDetallePage /></PageWrapper></MainLayout>} />
+                <Route path="/faq" element={<MainLayout><PageWrapper><FAQPage /></PageWrapper></MainLayout>} />
+                <Route path="/privacidad" element={<MainLayout><PageWrapper><PrivacyPolicy /></PageWrapper></MainLayout>} />
 
-                <Route path="/contacto" element={
-                  <motion.div
-                    variants={pageVariants}
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                  >
-                    <ContactPage />
-                  </motion.div>
-                } />
-
-                <Route path="/nosotros" element={
-                  <motion.div
-                    variants={pageVariants}
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                  >
-                    <NosotrosPage />
-                  </motion.div>
-                } />
-
-                <Route path="/agendar" element={
-                  <motion.div
-                    variants={pageVariants}
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                  >
-                    <AgendarPage />
-                  </motion.div>
-                } />
-
-                <Route path="/proyecto/:id" element={
-                  <motion.div
-                    variants={pageVariants}
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                  >
-                    <ProyectoDetallePage />
-                  </motion.div>
-                } />
-
-                {/* Rutas de administración */}
-                <Route path="/login" element={
-                  <motion.div
-                    variants={pageVariants}
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                  >
-                    <SimpleLogin />
-                  </motion.div>
-                } />
-                
+                {/* Rutas de Admin */}
+                <Route path="/login" element={<SimpleLogin />} />
                 <Route path="/admin" element={
                   <ProtectedRoute>
-                    <motion.div
-                      variants={pageVariants}
-                      initial="initial"
-                      animate="in"
-                      exit="out"
-                    >
-                      <AdminLayout />
-                    </motion.div>
+                    <AdminLayout />
                   </ProtectedRoute>
                 }>
-                  <Route index element={<AdminDashboardPage />} />
+                  <Route index element={<Navigate to="dashboard" replace />} />
                   <Route path="dashboard" element={<AdminDashboardPage />} />
                   <Route path="reuniones" element={<AdminMeetingsPage />} />
                   <Route path="leads" element={<AdminLeadsPage />} />
@@ -316,15 +140,13 @@ function App() {
                   <Route path="proyectos" element={<AdminProyectosPage />} />
                   <Route path="tareas" element={<AdminTareasPage />} />
                 </Route>
-                
-                <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </SmoothScroll>
           </ThemeProvider>
         </AuthProvider>
       </Router>
     </HelmetProvider>
-  )
+  );
 }
 
-export default App
+export default App;

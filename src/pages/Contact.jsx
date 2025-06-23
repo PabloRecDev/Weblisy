@@ -1,8 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 import { 
   EnvelopeClosedIcon, 
   CheckIcon, 
@@ -155,8 +153,6 @@ export default function Contact() {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://weblisy.com/contacto" />
       </Helmet>
-
-      <Navbar />
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4 md:px-8 relative overflow-hidden">
@@ -517,7 +513,6 @@ export default function Contact() {
         </div>
       </section>
 
-      <Footer />
     </div>
   );
 } 

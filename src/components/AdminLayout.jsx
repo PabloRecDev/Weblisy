@@ -16,7 +16,7 @@ import {
   EnvelopeClosedIcon
 } from '@radix-ui/react-icons';
 
-export default function AdminLayout({ children }) {
+export default function AdminLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [showNotifications, setShowNotifications] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
@@ -266,11 +266,9 @@ export default function AdminLayout({ children }) {
           </div>
         </header>
 
-        {/* Content */}
-        <main className="flex-1 overflow-y-auto">
-          <div className="p-4 lg:p-6">
-            <Outlet />
-          </div>
+        {/* Page content */}
+        <main className="flex-1 p-4 lg:p-6 overflow-y-auto">
+          <Outlet />
         </main>
       </div>
     </div>

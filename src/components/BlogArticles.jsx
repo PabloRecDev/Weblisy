@@ -124,6 +124,161 @@ const articles = {
       </>
     ),
   },
+  "wordpress-vs-desarrollo-medida": {
+    title: "WordPress vs Desarrollo a medida: ¿Cuál elegir?",
+    summary: "Comparativa completa entre WordPress y desarrollo personalizado para ayudarte a tomar la mejor decisión.",
+    keywords: ["WordPress", "desarrollo a medida", "CMS"],
+    date: "2025-02-15",
+    image: {
+      src: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?auto=format&fit=crop&w=800&q=80",
+      alt: "Comparación entre WordPress y desarrollo a medida"
+    },
+    content: (
+      <>
+        <img src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?auto=format&fit=crop&w=800&q=80" alt="Comparación entre WordPress y desarrollo a medida" className="mb-6 rounded-xl shadow-lg w-full object-cover max-h-72" loading="lazy" />
+        <p className="mb-4">WordPress y el desarrollo a medida son dos opciones válidas pero muy diferentes. Te explicamos cuándo usar cada una:</p>
+        <h3 className="text-xl font-semibold mb-2 mt-6">WordPress: Ideal para</h3>
+        <ul className="list-disc pl-6 mb-4">
+          <li>Blogs y sitios web informativos</li>
+          <li>Pequeñas empresas con presupuesto limitado</li>
+          <li>Proyectos que requieren actualizaciones frecuentes</li>
+          <li>Lanzamientos rápidos</li>
+        </ul>
+        <h3 className="text-xl font-semibold mb-2 mt-6">Desarrollo a medida: Perfecto para</h3>
+        <ul className="list-disc pl-6 mb-4">
+          <li>Funcionalidades específicas y complejas</li>
+          <li>Integración con sistemas empresariales</li>
+          <li>Máximo control sobre el diseño y funcionalidades</li>
+          <li>Proyectos escalables a largo plazo</li>
+        </ul>
+        <p className="mb-4">La elección depende de tus necesidades específicas. Nuestro equipo puede asesorarte para tomar la mejor decisión.</p>
+      </>
+    ),
+  },
+  "optimizacion-velocidad-web": {
+    title: "Cómo optimizar la velocidad de tu web en 2025",
+    summary: "Técnicas avanzadas para mejorar el rendimiento y la experiencia de usuario de tu sitio web.",
+    keywords: ["velocidad", "optimización", "rendimiento"],
+    date: "2025-02-01",
+    image: {
+      src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+      alt: "Optimización de velocidad web con gráficos de rendimiento"
+    },
+    content: (
+      <>
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Optimización de velocidad web con gráficos de rendimiento" className="mb-6 rounded-xl shadow-lg w-full object-cover max-h-72" loading="lazy" />
+        <p className="mb-4">La velocidad de carga es crucial para el SEO y la experiencia de usuario. Aquí tienes las mejores técnicas:</p>
+        <h3 className="text-xl font-semibold mb-2 mt-6">Optimización de imágenes</h3>
+        <ul className="list-disc pl-6 mb-4">
+          <li>Usa formatos modernos como WebP</li>
+          <li>Implementa lazy loading</li>
+          <li>Comprime imágenes sin perder calidad</li>
+          <li>Usa CDN para distribución global</li>
+        </ul>
+        <h3 className="text-xl font-semibold mb-2 mt-6">Optimización de código</h3>
+        <ul className="list-disc pl-6 mb-4">
+          <li>Minifica CSS, JavaScript y HTML</li>
+          <li>Elimina código no utilizado</li>
+          <li>Usa compresión Gzip</li>
+          <li>Optimiza el Critical Rendering Path</li>
+        </ul>
+        <p className="mb-4">Una web rápida mejora las conversiones y el posicionamiento. ¿Quieres que auditemos la velocidad de tu web?</p>
+      </>
+    ),
+  },
+  "ecommerce-tendencias-2025": {
+    title: "Tendencias de e-commerce para 2025",
+    summary: "Descubre las nuevas tecnologías y estrategias que dominarán el comercio electrónico este año.",
+    keywords: ["e-commerce", "tendencias", "ventas online"],
+    date: "2025-01-20",
+    image: {
+      src: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=80",
+      alt: "Tendencias de e-commerce 2025: compra online moderna"
+    },
+    content: (
+      <>
+        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=80" alt="Tendencias de e-commerce 2025: compra online moderna" className="mb-6 rounded-xl shadow-lg w-full object-cover max-h-72" loading="lazy" />
+        <p className="mb-4">El e-commerce evoluciona constantemente. Estas son las tendencias que marcarán 2025:</p>
+        <h3 className="text-xl font-semibold mb-2 mt-6">Nuevas tecnologías</h3>
+        <ul className="list-disc pl-6 mb-4">
+          <li>Inteligencia Artificial para personalización</li>
+          <li>Realidad Aumentada para probar productos</li>
+          <li>Pagos con criptomonedas</li>
+          <li>Voz como método de búsqueda</li>
+        </ul>
+        <h3 className="text-xl font-semibold mb-2 mt-6">Experiencia de usuario</h3>
+        <ul className="list-disc pl-6 mb-4">
+          <li>Checkout de un solo clic</li>
+          <li>Chatbots inteligentes 24/7</li>
+          <li>Recomendaciones personalizadas</li>
+          <li>Múltiples opciones de entrega</li>
+        </ul>
+        <p className="mb-4">Adaptarse a estas tendencias es clave para competir en el mercado digital. ¿Quieres modernizar tu tienda online?</p>
+      </>
+    ),
+  },
+  "seguridad-web-empresas": {
+    title: "Seguridad web: Protege tu negocio digital",
+    summary: "Guía completa sobre cómo proteger tu sitio web y los datos de tus clientes.",
+    keywords: ["seguridad", "protección", "datos"],
+    date: "2025-01-10",
+    image: {
+      src: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=800&q=80",
+      alt: "Seguridad web empresarial: escudo de protección digital"
+    },
+    content: (
+      <>
+        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=800&q=80" alt="Seguridad web empresarial: escudo de protección digital" className="mb-6 rounded-xl shadow-lg w-full object-cover max-h-72" loading="lazy" />
+        <p className="mb-4">La seguridad web es fundamental para proteger tu negocio y la confianza de tus clientes. Implementa estas medidas:</p>
+        <h3 className="text-xl font-semibold mb-2 mt-6">Medidas básicas de seguridad</h3>
+        <ul className="list-disc pl-6 mb-4">
+          <li>Certificado SSL (HTTPS)</li>
+          <li>Contraseñas fuertes y autenticación de dos factores</li>
+          <li>Actualizaciones regulares de software</li>
+          <li>Copias de seguridad automáticas</li>
+        </ul>
+        <h3 className="text-xl font-semibold mb-2 mt-6">Protección avanzada</h3>
+        <ul className="list-disc pl-6 mb-4">
+          <li>Firewall de aplicación web (WAF)</li>
+          <li>Monitoreo de seguridad 24/7</li>
+          <li>Encriptación de datos sensibles</li>
+          <li>Auditorías de seguridad regulares</li>
+        </ul>
+        <p className="mb-4">La seguridad es una inversión, no un gasto. Protege tu negocio digital con las mejores prácticas.</p>
+      </>
+    ),
+  },
+  "redes-sociales-marketing-digital": {
+    title: "Redes sociales y marketing digital: Estrategia completa",
+    summary: "Cómo integrar las redes sociales en tu estrategia de marketing digital para maximizar resultados.",
+    keywords: ["redes sociales", "marketing", "estrategia"],
+    date: "2025-01-05",
+    image: {
+      src: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=800&q=80",
+      alt: "Marketing digital y redes sociales: estrategia integral"
+    },
+    content: (
+      <>
+        <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=800&q=80" alt="Marketing digital y redes sociales: estrategia integral" className="mb-6 rounded-xl shadow-lg w-full object-cover max-h-72" loading="lazy" />
+        <p className="mb-4">Las redes sociales son fundamentales en cualquier estrategia de marketing digital. Te contamos cómo aprovecharlas:</p>
+        <h3 className="text-xl font-semibold mb-2 mt-6">Plataformas principales</h3>
+        <ul className="list-disc pl-6 mb-4">
+          <li>Instagram: Ideal para productos visuales y B2C</li>
+          <li>LinkedIn: Perfecto para B2B y networking</li>
+          <li>Facebook: Amplio alcance y publicidad efectiva</li>
+          <li>TikTok: Para audiencias jóvenes y contenido viral</li>
+        </ul>
+        <h3 className="text-xl font-semibold mb-2 mt-6">Estrategias efectivas</h3>
+        <ul className="list-disc pl-6 mb-4">
+          <li>Contenido de valor y consistente</li>
+          <li>Interacción activa con la audiencia</li>
+          <li>Publicidad segmentada</li>
+          <li>Análisis de métricas y optimización</li>
+        </ul>
+        <p className="mb-4">Una estrategia bien ejecutada en redes sociales puede transformar tu negocio. ¿Quieres que te ayudemos a crear la tuya?</p>
+      </>
+    ),
+  },
 };
 
 export function getArticle(slug) {

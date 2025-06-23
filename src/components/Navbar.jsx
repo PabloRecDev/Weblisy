@@ -9,13 +9,18 @@ import {
   CalendarIcon,
   ChevronDownIcon,
   PersonIcon,
-  EnvelopeClosedIcon
+  EnvelopeClosedIcon,
+  QuestionMarkCircledIcon,
+  Component1Icon,
+  DesktopIcon,
+  RocketIcon
 } from '@radix-ui/react-icons';
 import { useTheme } from './ThemeProvider';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   const [agencyOpen, setAgencyOpen] = useState(false);
   const location = useLocation();
   const { theme, toggleTheme } = useTheme();
@@ -33,6 +38,7 @@ const Navbar = () => {
   useEffect(() => {
     setIsOpen(false);
     setAgencyOpen(false);
+    setServicesOpen(false);
   }, [location.pathname]);
 
   // Prevenir scroll del body cuando el menú móvil está abierto
@@ -49,8 +55,15 @@ const Navbar = () => {
   }, [isOpen]);
 
   const navItems = [
-    { name: 'Aplicaciones Web', href: '/aplicaciones-web' },
     { name: 'Blog', href: '/blog' },
+  ];
+
+  const servicesDropdown = [
+    { name: 'Desarrollo Web', href: '/servicios/desarrollo-web', description: 'Sitios web profesionales y modernos.', icon: DesktopIcon },
+    { name: 'E-commerce', href: '/servicios/ecommerce', description: 'Tiendas online que venden.', icon: Component1Icon },
+    { name: 'Aplicaciones Web', href: '/aplicaciones-web', description: 'Soluciones complejas y a medida.', icon: RocketIcon },
+    { name: 'Mantenimiento', href: '/servicios/mantenimiento', description: 'Soporte y actualizaciones.', icon: Component1Icon },
+    { name: 'Todos los Servicios', href: '/servicios', description: 'Una vista general completa.', icon: Component1Icon },
   ];
 
   const isActive = (href) => {
@@ -64,7 +77,7 @@ const Navbar = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b-[0.1px] border-white/10
+      className={`relative transition-all duration-300 border-b-[0.1px] border-white/10
         ${scrolled
           ? 'bg-[#0a0a0a] lg:bg-[#0a0a0a]/90 lg:backdrop-blur-md'
           : 'bg-[#0a0a0a]'}
@@ -90,6 +103,61 @@ const Navbar = () => {
 
             {/* Menú y botones a la derecha (desktop) */}
             <div className="hidden lg:flex items-center space-x-6 xl:space-x-8 lg:mr-8">
+              {/* Menú Servicios */}
+              <div
+                className="relative"
+                onMouseEnter={() => setServicesOpen(true)}
+                onMouseLeave={() => setServicesOpen(false)}
+              >
+                <button
+                  className="flex items-center gap-1 text-sm font-medium text-gray-300 hover:text-[#038e42] hover:bg-white/5 focus:text-[#038e42] focus:outline-none focus:ring-2 focus:ring-[#038e42]/50 transition-colors duration-200 px-3 py-2 rounded-lg"
+                  onClick={() => setServicesOpen((v) => !v)}
+                  tabIndex={0}
+                >
+                  Servicios
+                  <motion.span
+                    animate={{ rotate: servicesOpen ? 180 : 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="inline-block"
+                  >
+                    <ChevronDownIcon className="w-4 h-4" />
+                  </motion.span>
+                </button>
+                <AnimatePresence>
+                  {servicesOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute left-0 mt-2 w-72 bg-[#181818]/95 backdrop-blur-md border border-white/10 rounded-xl shadow-2xl z-50 py-3"
+                    >
+                      {servicesDropdown.map((item) => (
+                        <Link
+                          key={item.name}
+                          to={item.href}
+                          className="block px-4 py-3 text-sm group hover:bg-white/5 rounded-lg mx-2 transition-colors"
+                          onClick={() => setServicesOpen(false)}
+                        >
+                          <div className="flex items-start gap-3">
+                            <item.icon className="w-5 h-5 text-[#038e42] mt-0.5 flex-shrink-0" />
+                            <div>
+                              <div className="text-gray-200 group-hover:text-[#038e42] transition-colors font-medium">
+                                {item.name}
+                              </div>
+                              <div className="text-gray-400 text-xs mt-1">
+                                {item.description}
+                              </div>
+                            </div>
+                          </div>
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* Blog */}
               {navItems.map((item, index) => (
                 <Link
                   key={item.name}
@@ -151,6 +219,23 @@ const Navbar = () => {
                         </div>
                       </Link>
                       <Link
+                        to="/faq"
+                        className="block px-4 py-3 text-sm group hover:bg-white/5 rounded-lg mx-2 transition-colors"
+                        onClick={() => setAgencyOpen(false)}
+                      >
+                        <div className="flex items-start gap-3">
+                          <QuestionMarkCircledIcon className="w-5 h-5 text-[#038e42] mt-0.5 flex-shrink-0" />
+                          <div>
+                            <div className="text-gray-200 group-hover:text-[#038e42] transition-colors font-medium">
+                              Preguntas Frecuentes
+                            </div>
+                            <div className="text-gray-400 text-xs mt-1">
+                              Resolvemos todas tus dudas
+                            </div>
+                          </div>
+                        </div>
+                      </Link>
+                      <Link
                         to="/contacto"
                         className="block px-4 py-3 text-sm group hover:bg-white/5 rounded-lg mx-2 transition-colors"
                         onClick={() => setAgencyOpen(false)}
@@ -171,6 +256,15 @@ const Navbar = () => {
                   )}
                 </AnimatePresence>
               </div>
+              
+              {/* Correo de contacto */}
+              <a
+                href="mailto:contacto@weblisy.es"
+                className="hidden lg:flex items-center gap-2 text-sm text-gray-300 hover:text-[#038e42] transition-colors duration-200 px-3 py-2 rounded-lg hover:bg-white/5"
+              >
+                <EnvelopeClosedIcon className="w-4 h-4" />
+                <span className="hidden xl:inline">contacto@weblisy.es</span>
+              </a>
               
               {/* Botón Agendar */}
               <Link
@@ -269,10 +363,59 @@ const Navbar = () => {
 
             {/* Navegación móvil */}
             <nav className="flex-1 p-6 space-y-4">
-              {/* Enlaces principales */}
+              {/* Menú Servicios móvil */}
               <div className="space-y-2">
                 <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
-                  Navegación
+                  Servicios
+                </h3>
+                <div className="space-y-1">
+                  <Link
+                    to="/servicios/desarrollo-web"
+                    className="flex items-center gap-3 px-4 py-2 rounded-lg text-gray-200 hover:text-[#038e42] hover:bg-white/5 transition-all duration-200"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <DesktopIcon className="w-4 h-4 text-[#038e42] flex-shrink-0" />
+                    <span className="text-sm">Desarrollo Web</span>
+                  </Link>
+                  <Link
+                    to="/servicios/ecommerce"
+                    className="flex items-center gap-3 px-4 py-2 rounded-lg text-gray-200 hover:text-[#038e42] hover:bg-white/5 transition-all duration-200"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <Component1Icon className="w-4 h-4 text-[#038e42] flex-shrink-0" />
+                    <span className="text-sm">E-commerce</span>
+                  </Link>
+                  <Link
+                    to="/aplicaciones-web"
+                    className="flex items-center gap-3 px-4 py-2 rounded-lg text-gray-200 hover:text-[#038e42] hover:bg-white/5 transition-all duration-200"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <RocketIcon className="w-4 h-4 text-[#038e42] flex-shrink-0" />
+                    <span className="text-sm">Aplicaciones Web</span>
+                  </Link>
+                  <Link
+                    to="/servicios/mantenimiento"
+                    className="flex items-center gap-3 px-4 py-2 rounded-lg text-gray-200 hover:text-[#038e42] hover:bg-white/5 transition-all duration-200"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <Component1Icon className="w-4 h-4 text-[#038e42] flex-shrink-0" />
+                    <span className="text-sm">Mantenimiento</span>
+                  </Link>
+                  <Link
+                    to="/servicios"
+                    className="flex items-center gap-3 px-4 py-2 rounded-lg text-gray-200 hover:text-[#038e42] hover:bg-white/5 transition-all duration-200"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <Component1Icon className="w-4 h-4 text-[#038e42] flex-shrink-0" />
+                    <span className="text-sm">Todos los Servicios</span>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Blog móvil */}
+              <div className="space-y-2">
+                <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
+                  Contenido
                 </h3>
                 {navItems.map((item) => (
                   <Link
@@ -322,6 +465,14 @@ const Navbar = () => {
                             <span className="text-sm">Sobre nosotros</span>
                           </Link>
                           <Link
+                            to="/faq"
+                            className="flex items-center gap-3 px-4 py-2 rounded-lg text-gray-200 hover:text-[#038e42] hover:bg-white/5 transition-all duration-200"
+                            onClick={() => { setAgencyOpen(false); setIsOpen(false); }}
+                          >
+                            <QuestionMarkCircledIcon className="w-4 h-4 text-[#038e42] flex-shrink-0" />
+                            <span className="text-sm">Preguntas Frecuentes</span>
+                          </Link>
+                          <Link
                             to="/contacto"
                             className="flex items-center gap-3 px-4 py-2 rounded-lg text-gray-200 hover:text-[#038e42] hover:bg-white/5 transition-all duration-200"
                             onClick={() => { setAgencyOpen(false); setIsOpen(false); }}
@@ -334,6 +485,18 @@ const Navbar = () => {
                     )}
                   </AnimatePresence>
                 </div>
+              </div>
+
+              {/* Correo de contacto móvil */}
+              <div className="pt-4">
+                <a
+                  href="mailto:contacto@weblisy.es"
+                  className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-white/10 border border-white/20 text-white font-medium rounded-lg hover:bg-white/20 hover:border-white/30 transition-all duration-200"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <EnvelopeClosedIcon className="w-4 h-4" />
+                  contacto@weblisy.es
+                </a>
               </div>
 
               {/* Botón Agendar móvil */}

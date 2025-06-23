@@ -1,18 +1,187 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { supabase } from '../lib/supabase';
+import { 
+  CheckIcon, 
+  DesktopIcon, 
+  Component1Icon, 
+  MobileIcon,
+  ArrowRightIcon,
+  ArrowLeftIcon
+} from '@radix-ui/react-icons';
+
+const steps = [
+  { id: 1, name: 'Servicio' },
+  { id: 2, name: 'Detalles' },
+  { id: 3, name: 'Presupuesto' },
+  { id: 4, name: 'Contacto' }
+];
+
+const serviceOptions = [
+  { 
+    name: "Sitio Web Esencial", 
+    description: "Presencia online profesional y moderna.",
+    icon: <DesktopIcon className="w-8 h-8" /> 
+  },
+  { 
+    name: "E-commerce", 
+    description: "Tienda online optimizada para vender.",
+    icon: <Component1Icon className="w-8 h-8" /> 
+  },
+  { 
+    name: "Aplicación a Medida", 
+    description: "Soluciones complejas (CRM, ERP, etc).",
+    icon: <MobileIcon className="w-8 h-8" /> 
+  },
+];
+
+const Step1_Service = ({ formData, setFormData, nextStep }) => (
+  <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 50 }}>
+    <h3 className="text-2xl font-bold text-white mb-2">¿Qué tipo de proyecto tienes en mente?</h3>
+    <p className="text-gray-400 mb-8">Selecciona el servicio que mejor se adapte a tus necesidades.</p>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {serviceOptions.map(opt => (
+        <button
+          key={opt.name}
+          onClick={() => {
+            setFormData({ ...formData, project_type: opt.name });
+            nextStep();
+          }}
+          className={`p-6 rounded-lg border-2 text-left transition-all duration-300 ${
+            formData.project_type === opt.name
+              ? 'border-[#038e42] bg-[#038e42]/10'
+              : 'border-white/20 bg-black/30 hover:border-white/40'
+          }`}
+        >
+          <div className="text-[#038e42] mb-3">{opt.icon}</div>
+          <h4 className="font-bold text-white text-lg mb-1">{opt.name}</h4>
+          <p className="text-gray-400 text-sm">{opt.description}</p>
+        </button>
+      ))}
+    </div>
+  </motion.div>
+);
+
+const Step2_Details = ({ formData, setFormData }) => (
+  <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 50 }} className="space-y-6">
+    <div>
+      <h3 className="text-2xl font-bold text-white mb-2">Cuéntanos más sobre tu proyecto</h3>
+      <p className="text-gray-400">Estos detalles nos ayudarán a darte un presupuesto más acertado.</p>
+    </div>
+    <div className="space-y-2">
+      <Label htmlFor="features" className="text-white">Funcionalidades clave que necesitas</Label>
+      <Textarea
+        id="features"
+        name="features"
+        value={formData.features || ''}
+        onChange={(e) => setFormData({ ...formData, features: e.target.value })}
+        placeholder="Ej: Login de usuarios, panel de administración, integración con pasarelas de pago, blog, etc."
+        className="bg-black/30 border-white/20 text-white placeholder-gray-500 min-h-[120px]"
+      />
+    </div>
+    <div className="space-y-2">
+      <Label htmlFor="inspiration" className="text-white">¿Alguna web o app que te inspire? (Opcional)</Label>
+      <Input
+        id="inspiration"
+        name="inspiration"
+        value={formData.inspiration || ''}
+        onChange={(e) => setFormData({ ...formData, inspiration: e.target.value })}
+        placeholder="Pega aquí algunos enlaces de referencia"
+        className="bg-black/30 border-white/20 text-white placeholder-gray-500"
+      />
+    </div>
+  </motion.div>
+);
+
+const Step3_Budget = ({ formData, setFormData }) => {
+  const budgetOptions = ["< 1.000€", "1.000€ - 3.000€", "3.000€ - 7.000€", "7.000€ - 15.000€", "> 15.000€"];
+  const timelineOptions = ["Urgente (1-2 semanas)", "Flexible (1-2 meses)", "Sin prisa (3+ meses)"];
+
+  return (
+    <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 50 }} className="space-y-8">
+      <div>
+        <h3 className="text-2xl font-bold text-white mb-2">Presupuesto y Plazos</h3>
+        <p className="text-gray-400">Danos una idea de tu presupuesto y plazos para ajustar la propuesta.</p>
+      </div>
+      <div>
+        <Label className="text-white font-semibold mb-4 block">Presupuesto estimado</Label>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+          {budgetOptions.map(opt => (
+            <button
+              key={opt}
+              onClick={() => setFormData({ ...formData, budget: opt })}
+              className={`p-4 rounded-lg border-2 text-center transition-all duration-200 ${
+                formData.budget === opt ? 'border-[#038e42] bg-[#038e42]/10' : 'border-white/20 bg-black/30 hover:border-white/40'
+              }`}
+            >
+              <span className="text-white font-medium">{opt}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+      <div>
+        <Label className="text-white font-semibold mb-4 block">Plazo de entrega deseado</Label>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          {timelineOptions.map(opt => (
+             <button
+              key={opt}
+              onClick={() => setFormData({ ...formData, timeline: opt })}
+              className={`p-4 rounded-lg border-2 text-center transition-all duration-200 ${
+                formData.timeline === opt ? 'border-[#038e42] bg-[#038e42]/10' : 'border-white/20 bg-black/30 hover:border-white/40'
+              }`}
+            >
+              <span className="text-white font-medium">{opt}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+const Step4_Contact = ({ formData, setFormData }) => (
+  <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 50 }} className="space-y-6">
+    <div>
+      <h3 className="text-2xl font-bold text-white mb-2">¡Ya casi estamos!</h3>
+      <p className="text-gray-400">Déjanos tus datos para enviarte la propuesta.</p>
+    </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="space-y-2">
+        <Label htmlFor="name" className="text-white">Nombre</Label>
+        <Input id="name" name="name" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder="Tu nombre completo" required className="bg-black/30 border-white/20"/>
+      </div>
+      <div className="space-y-2">
+        <Label htmlFor="email" className="text-white">Correo electrónico</Label>
+        <Input id="email" name="email" type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} placeholder="tu@email.com" required className="bg-black/30 border-white/20"/>
+      </div>
+    </div>
+     <div className="space-y-2">
+        <Label htmlFor="company" className="text-white">Empresa (Opcional)</Label>
+        <Input id="company" name="company" value={formData.company || ''} onChange={(e) => setFormData({ ...formData, company: e.target.value })} placeholder="El nombre de tu empresa" className="bg-black/30 border-white/20"/>
+      </div>
+  </motion.div>
+);
 
 export default function PresupuestoSection() {
+  const [currentStep, setCurrentStep] = useState(1);
   const [status, setStatus] = useState("idle");
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    company: '',
     project_type: '',
-    message: ''
+    features: '',
+    inspiration: '',
+    budget: '',
+    timeline: '',
   });
+
+  const nextStep = () => setCurrentStep(prev => Math.min(prev + 1, steps.length));
+  const prevStep = () => setCurrentStep(prev => Math.max(prev - 1, 1));
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -24,187 +193,143 @@ export default function PresupuestoSection() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (currentStep !== steps.length) {
+      nextStep();
+      return;
+    }
     setStatus("loading");
+    
+    // Unir los detalles en un solo mensaje para la base de datos
+    const message = `
+      Tipo de Proyecto: ${formData.project_type}
+      Funcionalidades: ${formData.features}
+      Inspiración: ${formData.inspiration || 'No especificada'}
+      Presupuesto: ${formData.budget}
+      Plazo: ${formData.timeline}
+    `;
 
     try {
-      // Preparar los datos para Supabase
       const leadData = {
         name: formData.name,
         email: formData.email,
-        project_type: formData.project_type,
-        message: formData.message,
-        source: 'budget',
+        company: formData.company,
+        message: message,
+        source: 'Presupuesto Multi-paso',
         status: 'new'
       };
 
-      // Insertar en Supabase
-      const { error } = await supabase
-        .from('leads')
-        .insert([leadData]);
+      const { error } = await supabase.from('leads').insert([leadData]);
 
       if (error) throw error;
 
-      // Éxito
       setStatus("success");
-      setFormData({
-        name: '',
-        email: '',
-        project_type: '',
-        message: ''
-      });
-
-      setTimeout(() => {
-        setStatus("idle");
-      }, 4000);
     } catch (error) {
       console.error('Error al enviar el formulario:', error);
       setStatus("error");
     }
   };
 
+  if (status === 'success') {
+    return (
+      <section id="presupuesto" className="py-20 px-4 md:py-32 md:px-8 bg-black">
+        <div className="container mx-auto max-w-3xl text-center">
+            <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, ease: "easeOut" }}>
+              <div className="inline-block bg-green-500/10 p-4 rounded-full border-2 border-green-500/20 mb-6">
+                <CheckIcon className="w-16 h-16 text-green-400" />
+              </div>
+              <h2 className="text-3xl font-bold text-white mb-4">¡Solicitud recibida!</h2>
+              <p className="text-gray-300 text-lg max-w-xl mx-auto mb-8">
+                Gracias por tu interés. Hemos recibido tus datos y nuestro equipo se pondrá en contacto contigo en menos de 24 horas con una propuesta detallada.
+              </p>
+              <Button onClick={() => window.location.reload()} className="bg-[#038e42] hover:bg-green-500">
+                Enviar otra solicitud
+              </Button>
+            </motion.div>
+        </div>
+      </section>
+    )
+  }
+
   return (
-    <section id="presupuesto" className="py-20 px-4 md:py-32 md:px-8 bg-customBlack relative overflow-hidden">
-      {/* Fondo decorativo con gradientes y blur */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute -top-32 -left-32 w-96 h-96 bg-gradient-to-br from-black/10 via-black/10 to-transparent rounded-full blur-3xl animate-float-slow"></div>
-        <div className="absolute bottom-0 right-0 w-80 h-80 bg-gradient-to-tr from-black/10 via-black/10 to-transparent rounded-full blur-2xl animate-float-slower"></div>
-      </div>
+    <section id="presupuesto" className="py-20 px-4 md:py-32 md:px-8 bg-black relative overflow-hidden">
+      <div className="absolute inset-0 z-0 pointer-events-none bg-grid-pattern"></div>
+       <div className="absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-black via-transparent to-black"></div>
 
       <div className="container mx-auto max-w-3xl relative z-10">
-        {/* Beneficios clave */}
-        <div className="flex flex-col md:flex-row justify-center items-center gap-8 mb-12 animate-fade-in">
-          <div className="flex flex-col items-center">
-            <span className="text-green-400 text-3xl mb-2">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-10 h-10"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-            </span>
-            <span className="text-white font-semibold">Propuesta en 24h</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <span className="text-[#038e42] text-3xl mb-2">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-10 h-10"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 1.343-3 3 0 1.657 1.343 3 3 3s3-1.343 3-3c0-1.657-1.343-3-3-3zm0 10c-4.418 0-8-1.79-8-4V7a2 2 0 012-2h12a2 2 0 012 2v7c0 2.21-3.582 4-8 4z" /></svg>
-            </span>
-            <span className="text-white font-semibold">Trato confidencial</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <span className="text-green-400 text-3xl mb-2">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-10 h-10"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-2a4 4 0 118 0v2" /></svg>
-            </span>
-            <span className="text-white font-semibold">Acompañamiento experto</span>
-          </div>
-        </div>
-        {/* Título y subtítulo animados */}
-        <div className="text-center mb-12 animate-fade-in-up">
+        <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Solicita tu presupuesto</h2>
-          <p className="text-white opacity-90 max-w-xl mx-auto">
+          <p className="text-white/80 max-w-xl mx-auto">
             Cuéntanos qué necesitas y te enviaremos una propuesta personalizada lo antes posible.
           </p>
-          <div className="mt-6">
-            <span className="inline-block bg-green-700/20 text-green-300 px-4 py-2 rounded-full text-sm font-medium animate-fade-in">
-              Respuesta rápida y sin compromiso
-            </span>
+        </div>
+
+        {/* Barra de Progreso */}
+        <div className="mb-12">
+          <div className="flex items-center justify-between">
+            {steps.map((step, index) => (
+              <React.Fragment key={step.id}>
+                <div className="flex flex-col items-center">
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
+                    currentStep >= step.id ? 'bg-[#038e42]' : 'bg-black/30 border-2 border-white/20'
+                  }`}>
+                    {currentStep > step.id ? <CheckIcon className="w-6 h-6 text-white"/> : <span className="text-white font-bold">{step.id}</span>}
+                  </div>
+                  <p className={`mt-2 text-xs text-center transition-all duration-300 ${
+                    currentStep >= step.id ? 'text-white' : 'text-gray-400'
+                  }`}>{step.name}</p>
+                </div>
+                {index < steps.length - 1 && (
+                  <div className={`flex-1 h-1 mx-4 transition-all duration-300 ${
+                    currentStep > index + 1 ? 'bg-[#038e42]' : 'bg-white/20'
+                  }`}></div>
+                )}
+              </React.Fragment>
+            ))}
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6 bg-customBlack p-8 rounded-xl shadow-xl animate-fade-in-up">
-          <div className="space-y-2">
-            <Label htmlFor="name" className="text-white">Nombre</Label>
-            <Input
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleInputChange}
-              placeholder="Tu nombre"
-              required
-              className="bg-customBlack border-white border-opacity-5 text-white placeholder-gray-400"
-            />
-          </div>
+        <div className="bg-black/50 backdrop-blur-sm border border-white/10 p-8 rounded-2xl min-h-[300px]">
+          <AnimatePresence mode="wait">
+            {currentStep === 1 && (
+              <Step1_Service formData={formData} setFormData={setFormData} nextStep={nextStep} />
+            )}
+            {currentStep === 2 && (
+              <Step2_Details formData={formData} setFormData={setFormData} />
+            )}
+            {currentStep === 3 && (
+              <Step3_Budget formData={formData} setFormData={setFormData} />
+            )}
+            {currentStep === 4 && (
+              <Step4_Contact formData={formData} setFormData={setFormData} />
+            )}
+            {status === "error" && (
+              <p className="text-red-500 text-center mt-4">
+                ❌ Hubo un error al enviar la solicitud. Por favor, inténtalo de nuevo o contáctanos directamente.
+              </p>
+            )}
+          </AnimatePresence>
+        </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="email" className="text-white">Correo electrónico</Label>
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={handleInputChange}
-              placeholder="tunombre@email.com"
-              required
-              className="bg-customBlack border-white border-opacity-5 text-white placeholder-gray-400"
-            />
-          </div>
-
-          <div className="space-y-2">
-            <Label className="text-white">Tipo de proyecto</Label>
-            <div className="flex flex-col gap-2">
-              <label className="flex items-center gap-2">
-                <input
-                  type="radio"
-                  name="project_type"
-                  value="Sitio web profesional"
-                  checked={formData.project_type === "Sitio web profesional"}
-                  onChange={handleInputChange}
-                  required
-                  className="accent-black"
-                />
-                <span className="text-white">Sitio web profesional</span>
-              </label>
-              <label className="flex items-center gap-2">
-                <input
-                  type="radio"
-                  name="project_type"
-                  value="Aplicación web a medida"
-                  checked={formData.project_type === "Aplicación web a medida"}
-                  onChange={handleInputChange}
-                  required
-                  className="accent-black"
-                />
-                <span className="text-white">Aplicación web a medida</span>
-              </label>
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="message" className="text-white">Detalles o necesidades</Label>
-            <Textarea
-              id="message"
-              name="message"
-              value={formData.message}
-              onChange={handleInputChange}
-              placeholder="Cuéntanos sobre tu proyecto, funcionalidades, plazos, etc."
-              required
-              className="bg-customBlack border-white border-opacity-5 text-white placeholder-gray-400 min-h-[150px]"
-            />
-          </div>
-
+        {/* Botones de Navegación */}
+        <div className="mt-8 flex justify-between">
+          {currentStep > 1 ? (
+            <Button onClick={prevStep} variant="outline" className="bg-transparent text-white hover:bg-white/10 border-white/20">
+              <ArrowLeftIcon className="mr-2 h-4 w-4" /> Anterior
+            </Button>
+          ) : <div></div>}
+          
           <Button 
-            type="submit" 
-            disabled={status === "loading"}
-            className="w-full bg-white text-black border border-white/10 transition-colors duration-300 disabled:opacity-50"
+            onClick={handleSubmit} 
+            className="bg-[#038e42] hover:bg-green-500"
+            disabled={status === 'loading'}
           >
-            {status === "loading" ? (
-              <div className="flex items-center justify-center">
-                <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin mr-2"></div>
-                Enviando...
-              </div>
+            {currentStep === steps.length ? (
+              status === 'loading' ? 'Enviando...' : 'Finalizar y Enviar'
             ) : (
-              "Solicitar presupuesto"
+              <>Siguiente <ArrowRightIcon className="ml-2 h-4 w-4" /></>
             )}
           </Button>
-
-          {/* Mensaje de éxito */}
-          {status === "success" && (
-            <p className="text-green-600 text-center mt-4">
-              ✅ ¡Solicitud enviada correctamente!
-            </p>
-          )}
-
-          {/* Mensaje de error */}
-          {status === "error" && (
-            <p className="text-red-500 text-center mt-4">
-              ❌ Hubo un error al enviar la solicitud. Intenta nuevamente.
-            </p>
-          )}
-        </form>
+        </div>
       </div>
     </section>
   );

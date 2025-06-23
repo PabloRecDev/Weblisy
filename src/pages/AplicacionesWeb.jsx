@@ -2,8 +2,6 @@ import React from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 import { 
   CodeIcon, 
   RocketIcon, 
@@ -187,8 +185,6 @@ export default function AplicacionesWeb() {
         <link rel="canonical" href="https://weblisy.com/aplicaciones-web" />
       </Helmet>
 
-      <Navbar />
-
       {/* Hero Section */}
       <section className="py-20 px-4 md:py-32 md:px-8 relative overflow-hidden bg-black">
         <div className="absolute inset-0 bg-gradient-to-br from-black/10 via-black/10 to-black/10"></div>
@@ -335,6 +331,7 @@ export default function AplicacionesWeb() {
                   <div className="mb-6">  
                     <h4 className="text-sm font-semibold text-white mb-2">Características:</h4>
                     <ul className="space-y-1">
+                      
                       {project.features.slice(0, 3).map((feature, index) => (
                         <li key={index} className="flex items-center gap-2 text-gray-300 text-sm">
                           <CheckIcon className="w-3 h-3 text-[#038e42] flex-shrink-0" />
@@ -416,7 +413,34 @@ export default function AplicacionesWeb() {
         </div>
       </section>
 
-      <Footer />
+      {/* Botón CTA */}
+      <section className="py-20 px-4 md:px-8 bg-black">
+        <div className="container mx-auto max-w-6xl text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              ¿Tienes una idea para una aplicación web?
+            </h2>
+            <p className="text-white/80 max-w-2xl mx-auto text-lg mb-8">
+              Nos encantaría escucharla. Contáctanos para una consultoría gratuita y sin compromiso.
+            </p>
+            <Link to="/contacto">
+              <motion.button
+                className="bg-[#038e42] text-white px-8 py-4 rounded-lg font-semibold hover:bg-[#038e42]/80 transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Contáctanos ahora
+              </motion.button>
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
     </div>
   );
 } 

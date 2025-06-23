@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 import { 
   ArrowLeftIcon,
   ExternalLinkIcon,
@@ -319,8 +317,6 @@ export default function ProyectoDetalle() {
         <meta property="og:url" content={`https://weblisy.com/proyecto/${project.id}`} />
       </Helmet>
 
-      <Navbar />
-
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4 md:px-8 relative overflow-hidden">
         <div className="container mx-auto max-w-6xl relative z-10">
@@ -601,8 +597,6 @@ export default function ProyectoDetalle() {
           </motion.div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 } 

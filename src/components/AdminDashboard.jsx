@@ -22,7 +22,6 @@ import {
   GearIcon,
   RocketIcon
 } from '@radix-ui/react-icons';
-import ClientsSection from './ClientsSection';
 
 export default function AdminDashboard() {
   const [meetings, setMeetings] = useState([]);
@@ -429,9 +428,6 @@ export default function AdminDashboard() {
               </div>
             </div>
           </div>
-
-          {/* Tabla de clientes */}
-          <ClientsSection />
 
           {/* Resumen de próximas reuniones */}
           <div className="mt-8">
