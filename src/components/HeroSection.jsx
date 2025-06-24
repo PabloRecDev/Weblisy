@@ -45,8 +45,8 @@ export default function HeroSection() {
 
           {/* Estadísticas */}
           <div className="flex gap-4 justify-center md:justify-start items-center text-white/90 text-base mt-2">
-            <span className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10"><StarIcon className="w-5 h-5 text-yellow-400" aria-hidden="true" /> 3+ años experiencia</span>
-            <span className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10"><RocketIcon className="w-5 h-5 text-[#038e42]" aria-hidden="true" /> 50+ proyectos</span>
+            <span className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10"><StarIcon className="w-5 h-5 text-yellow-400" aria-hidden="true" /> 100% personalizado</span>
+            <span className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10"><RocketIcon className="w-5 h-5 text-[#038e42]" aria-hidden="true" /> 20+ proyectos</span>
           </div>
         </div>
         {/* Columna derecha: mockup visual (solo visible en desktop) */}

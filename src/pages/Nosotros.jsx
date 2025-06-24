@@ -87,9 +87,9 @@ export default function Nosotros() {
   ];
 
   const stats = [
-    { number: "50+", label: "Proyectos Completados" },
-    { number: "30+", label: "Clientes Satisfechos" },
-    { number: "3+", label: "Años de Experiencia" },
+    { number: "20+", label: "Proyectos Completados" },
+    { number: "15+", label: "Clientes Satisfechos" },
+    { number: "100%", label: "Personalizado" },
     { number: "100%", label: "Compromiso con la Calidad" }
   ];
 
