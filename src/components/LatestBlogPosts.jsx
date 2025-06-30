@@ -85,13 +85,13 @@ export default function LatestBlogPosts() {
         <motion.div 
           className="text-center mb-20"
           initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, ease: "easeOut" }}
         >
           <motion.div
             className="inline-block mb-8"
             initial={{ scale: 0, rotate: -180 }}
-            animate={isInView ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -180 }}
+            animate={{ scale: 1, rotate: 0 }}
             transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
           >
             <div className="w-20 h-20 bg-gradient-to-br from-[#038e42] to-[#038e42]/80 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -104,7 +104,7 @@ export default function LatestBlogPosts() {
           <motion.h2 
             className="text-4xl md:text-6xl font-bold mb-8 text-white"
             initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
           >
             Últimos <span className="text-[#038e42]">artículos</span> del blog
@@ -113,7 +113,7 @@ export default function LatestBlogPosts() {
           <motion.p 
             className="text-white/70 text-lg md:text-xl max-w-4xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.7, ease: "easeOut" }}
           >
             Mantente al día con las últimas tendencias en desarrollo web, SEO y marketing digital. 
@@ -125,7 +125,7 @@ export default function LatestBlogPosts() {
         <motion.div 
           className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16"
           initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.9, ease: "easeOut" }}
         >
           {latestArticles.map((article, index) => (
@@ -133,7 +133,7 @@ export default function LatestBlogPosts() {
               key={article.slug}
               className="group relative"
               initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.1 + index * 0.2, ease: "easeOut" }}
               whileHover={{ y: -8 }}
             >
@@ -248,7 +248,7 @@ export default function LatestBlogPosts() {
         <motion.div 
           className="text-center"
           initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.8, ease: "easeOut" }}
         >
           <Link to="/blog">
