@@ -7,6 +7,13 @@
         @apply bg-primary text-text-primary min-h-screen;
     }
     
+    /* Mostrar cursor normal en todos los dispositivos */
+    @media (max-width: 768px) {
+        body {
+            cursor: auto;
+        }
+    }
+    
     h1, h2, h3, h4, h5, h6 {
         @apply text-secondary font-bold;
     }

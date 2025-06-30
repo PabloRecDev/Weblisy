@@ -1,6 +1,7 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef, useEffect, useState } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { ArrowRightIcon, CalendarIcon, ClockIcon } from '@radix-ui/react-icons';
 import articlesObject from './BlogArticles';
 
 const articles = Object.entries(articlesObject).map(([slug, art]) => ({
@@ -15,221 +16,245 @@ const latestArticles = articles
   .sort((a, b) => new Date(b.date) - new Date(a.date))
   .slice(0, 3);
 
+// Hook personalizado para detectar elementos en vista
+const useInViewCustom = (ref, threshold = 0.3) => {
+  const [isInView, setIsInView] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+        }
+      },
+      { threshold }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, [ref, threshold]);
+
+  return isInView;
+};
+
 export default function LatestBlogPosts() {
+  const ref = useRef(null);
+  const isInView = useInViewCustom(ref);
+
   return (
-    <section className="py-20 px-4 md:py-32 md:px-8 bg-black relative overflow-hidden">
-      {/* Patrón de cuadros invisibles por defecto */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `
-            linear-gradient(rgba(3, 142, 66, 0) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(3, 142, 66, 0) 1px, transparent 1px)
-          `,
-          backgroundSize: '40px 40px',
-          filter: 'drop-shadow(0 0 2px rgba(3, 142, 66, 0.3))'
-        }} />
-      </div>
-
-      {/* Luz verde dinámica que ilumina los cuadros */}
-      <div className="absolute inset-0">
-        <div 
-          className="absolute w-96 h-96 rounded-full opacity-60 blur-3xl animate-pulse"
-          style={{
-            background: 'radial-gradient(circle, rgba(3, 142, 66, 0.8) 0%, rgba(3, 142, 66, 0.4) 30%, rgba(3, 142, 66, 0.1) 60%, transparent 80%)',
-            animation: 'moveLight 8s ease-in-out infinite',
-            top: '20%',
-            left: '10%',
-            mixBlendMode: 'screen'
-          }}
-        />
-        <div 
-          className="absolute w-64 h-64 rounded-full opacity-70 blur-2xl animate-pulse"
-          style={{
-            background: 'radial-gradient(circle, rgba(3, 142, 66, 0.9) 0%, rgba(3, 142, 66, 0.5) 40%, rgba(3, 142, 66, 0.2) 70%, transparent 90%)',
-            animation: 'moveLight2 12s ease-in-out infinite reverse',
-            top: '60%',
-            right: '15%',
-            mixBlendMode: 'screen'
-          }}
-        />
-        <div 
-          className="absolute w-80 h-80 rounded-full opacity-50 blur-3xl animate-pulse"
-          style={{
-            background: 'radial-gradient(circle, rgba(3, 142, 66, 0.7) 0%, rgba(3, 142, 66, 0.3) 50%, rgba(3, 142, 66, 0.1) 80%, transparent 100%)',
-            animation: 'moveLight3 15s ease-in-out infinite',
-            top: '40%',
-            left: '50%',
-            mixBlendMode: 'screen'
-          }}
-        />
-      </div>
-
-      {/* Estilos CSS para las animaciones */}
-      <style jsx>{`
-        @keyframes moveLight {
-          0%, 100% { 
-            transform: translate(0, 0) scale(1);
-            box-shadow: 0 0 50px rgba(3, 142, 66, 0.3);
-          }
-          25% { 
-            transform: translate(100px, -50px) scale(1.2);
-            box-shadow: 0 0 80px rgba(3, 142, 66, 0.5);
-          }
-          50% { 
-            transform: translate(200px, 100px) scale(0.8);
-            box-shadow: 0 0 30px rgba(3, 142, 66, 0.2);
-          }
-          75% { 
-            transform: translate(-50px, 150px) scale(1.1);
-            box-shadow: 0 0 60px rgba(3, 142, 66, 0.4);
-          }
-        }
-        
-        @keyframes moveLight2 {
-          0%, 100% { 
-            transform: translate(0, 0) scale(1);
-            box-shadow: 0 0 40px rgba(3, 142, 66, 0.4);
-          }
-          33% { 
-            transform: translate(-150px, -100px) scale(1.3);
-            box-shadow: 0 0 70px rgba(3, 142, 66, 0.6);
-          }
-          66% { 
-            transform: translate(100px, -200px) scale(0.9);
-            box-shadow: 0 0 25px rgba(3, 142, 66, 0.3);
-          }
-        }
-        
-        @keyframes moveLight3 {
-          0%, 100% { 
-            transform: translate(0, 0) scale(1);
-            box-shadow: 0 0 45px rgba(3, 142, 66, 0.3);
-          }
-          20% { 
-            transform: translate(120px, 80px) scale(1.1);
-            box-shadow: 0 0 65px rgba(3, 142, 66, 0.5);
-          }
-          40% { 
-            transform: translate(-80px, -120px) scale(0.9);
-            box-shadow: 0 0 35px rgba(3, 142, 66, 0.4);
-          }
-          60% { 
-            transform: translate(200px, -50px) scale(1.2);
-            box-shadow: 0 0 75px rgba(3, 142, 66, 0.6);
-          }
-          80% { 
-            transform: translate(-150px, 100px) scale(0.8);
-            box-shadow: 0 0 20px rgba(3, 142, 66, 0.2);
-          }
-        }
-      `}</style>
+    <section 
+      ref={ref}
+      className="py-24 px-4 md:py-40 md:px-8 bg-[#0a0a0a] relative overflow-hidden"
+    >
+      {/* Elementos decorativos animados */}
+      <motion.div 
+        className="absolute top-20 left-10 w-32 h-32 bg-[#038e42]/10 rounded-full blur-3xl"
+        animate={{ 
+          scale: [1, 1.1, 1],
+          opacity: [0.2, 0.4, 0.2]
+        }}
+        transition={{ 
+          duration: 6,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      <motion.div 
+        className="absolute bottom-20 right-10 w-40 h-40 bg-[#038e42]/5 rounded-full blur-3xl"
+        animate={{ 
+          scale: [1.1, 1, 1.1],
+          opacity: [0.1, 0.3, 0.1]
+        }}
+        transition={{ 
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 2
+        }}
+      />
       
-      <div className="container mx-auto max-w-6xl relative z-10">
+      <div className="container mx-auto max-w-7xl relative z-10">
+        {/* Header con animación */}
         <motion.div 
-          className="text-center mb-16"
+          className="text-center mb-20"
           initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
-            Últimos artículos del blog
-          </h2>
-          <p className="text-white/80 max-w-2xl mx-auto">
-            Mantente al día con las últimas tendencias en desarrollo web, SEO y marketing digital.
-          </p>
+          <motion.div
+            className="inline-block mb-8"
+            initial={{ scale: 0, rotate: -180 }}
+            animate={isInView ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -180 }}
+            transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+          >
+            <div className="w-20 h-20 bg-gradient-to-br from-[#038e42] to-[#038e42]/80 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+              </svg>
+            </div>
+          </motion.div>
+          
+          <motion.h2 
+            className="text-4xl md:text-6xl font-bold mb-8 text-white"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
+          >
+            Últimos <span className="text-[#038e42]">artículos</span> del blog
+          </motion.h2>
+          
+          <motion.p 
+            className="text-white/70 text-lg md:text-xl max-w-4xl mx-auto leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 1, delay: 0.7, ease: "easeOut" }}
+          >
+            Mantente al día con las últimas tendencias en desarrollo web, SEO y marketing digital. 
+            Descubre consejos, tutoriales y mejores prácticas para hacer crecer tu negocio online.
+          </motion.p>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Grid de artículos mejorado */}
+        <motion.div 
+          className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16"
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+          transition={{ duration: 1.2, delay: 0.9, ease: "easeOut" }}
+        >
           {latestArticles.map((article, index) => (
             <motion.article
               key={article.slug}
-              className="bg-black/40 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden hover:border-white/20 transition-all duration-300 group"
+              className="group relative"
               initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -5 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.8, delay: 1.1 + index * 0.2, ease: "easeOut" }}
+              whileHover={{ y: -8 }}
             >
-              {/* Imagen del artículo */}
-              <div className="relative overflow-hidden">
-                <img
-                  src={article.image?.src || "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80"}
-                  alt={article.image?.alt || "Artículo de blog"}
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                  loading="lazy"
+              {/* Tarjeta principal */}
+              <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 rounded-3xl overflow-hidden h-full relative">
+                {/* Efecto de brillo */}
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent"
+                  animate={{ x: ["-100%", "200%"] }}
+                  transition={{ 
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "linear",
+                    delay: index * 0.5
+                  }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-              </div>
-
-              {/* Contenido del artículo */}
-              <div className="p-6">
-                {/* Fecha */}
-                <div className="text-sm text-[#038e42] mb-3">
-                  {new Date(article.date).toLocaleDateString('es-ES', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}
+                
+                {/* Imagen del artículo */}
+                <div className="relative overflow-hidden h-64">
+                  <motion.img
+                    src={article.image?.src || "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80"}
+                    alt={article.image?.alt || "Artículo de blog"}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  
+                  {/* Overlay con información */}
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <div className="flex items-center gap-4 text-white/80 text-sm mb-2">
+                      <div className="flex items-center gap-1">
+                        <CalendarIcon className="w-4 h-4" />
+                        <span>
+                          {new Date(article.date).toLocaleDateString('es-ES', {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric'
+                          })}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <ClockIcon className="w-4 h-4" />
+                        <span>5 min lectura</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
-                {/* Título */}
-                <h3 className="text-xl font-bold mb-3 text-white group-hover:text-[#038e42] transition-colors">
-                  <Link to={`/blog/${article.slug}`}>
-                    {article.title}
-                  </Link>
-                </h3>
+                {/* Contenido del artículo */}
+                <div className="p-8 relative z-10">
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {article.keywords.slice(0, 3).map((keyword) => (
+                      <motion.span
+                        key={keyword}
+                        className="bg-[#038e42]/20 text-[#038e42] px-3 py-1 rounded-full text-xs font-medium border border-[#038e42]/30"
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        #{keyword}
+                      </motion.span>
+                    ))}
+                  </div>
 
-                {/* Resumen */}
-                <p className="text-gray-300 mb-4 line-clamp-3">
-                  {article.summary}
-                </p>
-
-                {/* Tags */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {article.keywords.slice(0, 2).map((keyword) => (
-                    <span
-                      key={keyword}
-                      className="bg-[#038e42]/20 text-[#038e42] px-2 py-1 rounded-full text-xs font-medium"
-                    >
-                      #{keyword}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Botón leer más */}
-                <Link
-                  to={`/blog/${article.slug}`}
-                  className="inline-flex items-center gap-2 text-[#038e42] font-semibold hover:text-[#038e42]/80 transition-colors group-hover:gap-3"
-                >
-                  Leer más
-                  <svg 
-                    className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    strokeWidth="2" 
-                    viewBox="0 0 24 24"
+                  {/* Título */}
+                  <motion.h3 
+                    className="text-2xl font-bold mb-4 text-white group-hover:text-[#038e42] transition-colors duration-300 line-clamp-2"
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.2 }}
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                  </svg>
-                </Link>
+                    <Link to={`/blog/${article.slug}`}>
+                      {article.title}
+                    </Link>
+                  </motion.h3>
+
+                  {/* Resumen */}
+                  <p className="text-white/70 mb-6 line-clamp-3 leading-relaxed">
+                    {article.summary}
+                  </p>
+
+                  {/* Botón leer más */}
+                  <motion.div
+                    className="flex items-center justify-between"
+                    whileHover={{ x: 5 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Link
+                      to={`/blog/${article.slug}`}
+                      className="inline-flex items-center gap-2 text-[#038e42] font-semibold hover:text-[#038e42]/80 transition-colors group-hover:gap-3"
+                    >
+                      Leer artículo completo
+                      <ArrowRightIcon className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                    </Link>
+                    
+                    <div className="flex items-center gap-1 text-white/50 text-sm">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                      </svg>
+                      <span>1.2k</span>
+                    </div>
+                  </motion.div>
+                </div>
               </div>
             </motion.article>
           ))}
-        </div>
+        </motion.div>
 
         {/* Botón ver todos los artículos */}
         <motion.div 
-          className="text-center mt-12"
+          className="text-center"
           initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          viewport={{ once: true }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, delay: 1.8, ease: "easeOut" }}
         >
           <Link to="/blog">
             <motion.button
-              className="bg-[#038e42] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#038e42]/80 transition-colors"
-              whileHover={{ scale: 1.05 }}
+              className="bg-gradient-to-r from-[#038e42] to-[#038e42]/80 text-white px-10 py-4 rounded-2xl font-semibold text-lg hover:from-[#038e42]/90 hover:to-[#038e42]/70 transition-all duration-300 shadow-lg shadow-[#038e42]/20"
+              whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(3, 142, 66, 0.3)" }}
               whileTap={{ scale: 0.95 }}
             >
               Ver todos los artículos

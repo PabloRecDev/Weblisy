@@ -1,13 +1,41 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import { CheckIcon, StarIcon, ArrowRightIcon } from '@radix-ui/react-icons';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { CheckIcon, StarIcon, ArrowRightIcon, RocketIcon, Component1Icon, GearIcon } from '@radix-ui/react-icons';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
+// Hook personalizado para detectar elementos en vista
+const useInViewCustom = (ref, threshold = 0.3) => {
+  const [isInView, setIsInView] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+        }
+      },
+      { threshold }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, [ref, threshold]);
+
+  return isInView;
+};
+
 export default function PricingSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInViewCustom(ref);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"]
@@ -44,13 +72,21 @@ export default function PricingSection() {
         duration: 0.6,
         ease: "easeOut"
       }
+    },
+    hover: {
+      y: -10,
+      scale: 1.02,
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut"
+      }
     }
   };
 
   const buttonVariants = {
     hover: {
       scale: 1.05,
-      boxShadow: "0 20px 40px rgba(0, 0, 0, 0.3)",
+      boxShadow: "0 20px 40px rgba(3, 142, 66, 0.3)",
       transition: {
         duration: 0.3,
         ease: "easeInOut"
@@ -103,7 +139,9 @@ export default function PricingSection() {
       buttonText: "Empezar Proyecto",
       isQuote: false,
       oldPrice: "599€",
-      offerBadge: true
+      offerBadge: true,
+      icon: Component1Icon,
+      gradient: "from-blue-500/20 to-purple-500/20"
     },
     {
       name: "Aplicación a Medida",
@@ -121,7 +159,9 @@ export default function PricingSection() {
       ],
       popular: true,
       buttonText: "Solicitar Presupuesto",
-      isQuote: true
+      isQuote: true,
+      icon: RocketIcon,
+      gradient: "from-[#038e42]/20 to-emerald-500/20"
     },
     {
       name: "E-commerce",
@@ -139,7 +179,9 @@ export default function PricingSection() {
       ],
       popular: false,
       buttonText: "Solicitar Presupuesto",
-      isQuote: true
+      isQuote: true,
+      icon: GearIcon,
+      gradient: "from-orange-500/20 to-red-500/20"
     }
   ];
 
@@ -149,33 +191,33 @@ export default function PricingSection() {
       id='pricingSection'
       className="py-20 px-4 md:py-32 md:px-8 bg-gradient-to-b from-[#111111] to-[#0a0a0a] relative overflow-hidden"
     >
-      {/* Fondo animado */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(0,0,0,0.1)_0%,transparent_50%)]"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(0,0,0,0.1)_0%,transparent_50%)]"></div>
+      {/* Fondo animado mejorado */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(3,142,66,0.05)_0%,transparent_50%)]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(3,142,66,0.03)_0%,transparent_50%)]"></div>
       
-      {/* Partículas flotantes */}
-      {[...Array(15)].map((_, i) => (
+      {/* Partículas flotantes mejoradas */}
+      {[...Array(20)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-1 h-1 bg-white/20 rounded-full"
+          className="absolute w-1 h-1 bg-[#038e42]/30 rounded-full"
           style={{
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
           }}
           animate={{
-            y: [0, -50, 0],
+            y: [0, -100, 0],
             opacity: [0, 1, 0],
             scale: [0, 1, 0]
           }}
           transition={{
-            duration: Math.random() * 4 + 3,
+            duration: Math.random() * 6 + 4,
             repeat: Infinity,
-            delay: Math.random() * 2,
+            delay: Math.random() * 3,
           }}
         />
       ))}
 
-      <div className="container mx-auto max-w-6xl relative z-10">
+      <div className="container mx-auto max-w-7xl relative z-10">
         <motion.div 
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
@@ -189,7 +231,7 @@ export default function PricingSection() {
             transition={{ duration: 0.6, delay: 0.4 }}
           >
             Planes{' '}
-            <span className="bg-gradient-to-r from-[#038e42] to-[#038e42] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#038e42] to-emerald-400 bg-clip-text text-transparent">
               transparentes
             </span>
           </motion.h2>
@@ -199,148 +241,153 @@ export default function PricingSection() {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            Elige el plan que mejor se adapte a tus necesidades. 
-            Todos incluyen soporte técnico y garantía de satisfacción.
+            Elige el plan que mejor se adapte a tus necesidades. Sin sorpresas, sin costes ocultos.
           </motion.p>
         </motion.div>
-
+        
         <motion.div 
-          className="mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
+          className="grid grid-cols-1 lg:grid-cols-3 gap-8"
         >
           {plans.map((plan, index) => (
-            <motion.div
+            <motion.div 
               key={plan.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ 
-                scale: 1.02,
-                boxShadow: "0 20px 40px rgba(3, 142, 66, 0.2)"
-              }}
-              className={`relative p-5 md:p-6 lg:p-5 xl:p-6 rounded-xl bg-gradient-to-br from-[#111111] to-[#1a1a1a] border transition-all duration-300 min-h-[520px] flex flex-col justify-between ${
-                plan.popular 
-                  ? 'border-[#038e42] shadow-lg shadow-[#038e42]/20' 
-                  : 'border-[#038e42]/20 hover:border-[#038e42]/40'
-              }`}
+              variants={cardVariants}
+              whileHover="hover"
+              className={`relative group ${plan.popular ? 'lg:scale-105' : ''}`}
             >
-              <div 
-                className={`p-8 rounded-t-2xl bg-gradient-to-br ${
-                  plan.popular 
-                  ? 'from-[#038e42] to-green-500' 
-                  : 'from-gray-800 to-gray-700'
-                }`}
-              >
-                {plan.popular && (
-                  <motion.div 
-                    className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2"
-                    initial={{ y: 0 }}
-                    animate={{ y: [-5, 5] }}
-                    transition={{ 
-                      duration: 1, 
-                      repeat: Infinity, 
-                      repeatType: "reverse", 
-                      ease: "easeInOut" 
-                    }}
-                  >
-                    <div className="bg-yellow-400 text-black px-4 py-1 rounded-full text-sm font-bold shadow-lg">
-                      MÁS POPULAR
-                    </div>
-                  </motion.div>
-                )}
-                <h3 className="text-2xl font-bold text-white text-center">
-                  {plan.name}
-                </h3>
-              </div>
-
-              <div className="p-8">
-                <motion.div 
-                  className="text-center mb-6"
-                  variants={priceVariants}
+              {/* Badge de oferta */}
+              {plan.offerBadge && (
+                <motion.div
+                  initial={{ scale: 0, rotate: -180 }}
+                  animate={isInView ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -180 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 + 0.8, ease: "backOut" }}
+                  className="absolute -top-4 -right-4 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full z-20"
                 >
-                  {plan.oldPrice && (
-                    <div className="text-sm text-white/50 mb-1">Antes <span className="line-through">{plan.oldPrice}</span></div>
-                  )}
-                  <span className="text-4xl font-bold text-[#038e42]">
-                    {plan.price}
-                  </span>
-                  <p className="text-gray-400 text-sm mt-1">
-                    {plan.period}
-                  </p>
+                  ¡50% OFF!
+                </motion.div>
+              )}
+
+              {/* Badge de popular */}
+              {plan.popular && (
+                <motion.div
+                  initial={{ scale: 0, rotate: -180 }}
+                  animate={isInView ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -180 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 + 0.8, ease: "backOut" }}
+                  className="absolute -top-4 -right-4 bg-gradient-to-r from-[#038e42] to-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full z-20 flex items-center gap-1"
+                >
+                  <StarIcon className="w-3 h-3" />
+                  Más Popular
+                </motion.div>
+              )}
+
+              <motion.div
+                className={`relative p-8 rounded-3xl border transition-all duration-300 ${
+                  plan.popular 
+                    ? 'bg-gradient-to-br from-white/10 to-white/5 border-[#038e42]/30 shadow-2xl shadow-[#038e42]/20' 
+                    : 'bg-gradient-to-br from-white/5 to-white/10 border-white/10 hover:border-[#038e42]/30'
+                }`}
+                whileHover={{ 
+                  boxShadow: plan.popular 
+                    ? "0 25px 50px rgba(3, 142, 66, 0.3)" 
+                    : "0 20px 40px rgba(0, 0, 0, 0.3)"
+                }}
+              >
+                {/* Icono del plan */}
+                <motion.div
+                  className={`w-16 h-16 mb-6 rounded-2xl bg-gradient-to-br ${plan.gradient} flex items-center justify-center border border-white/10`}
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <plan.icon className="w-8 h-8 text-[#038e42]" />
                 </motion.div>
 
-                <p className="text-center text-gray-300 mb-8 h-12">
-                  {plan.description}
-                </p>
+                {/* Nombre del plan */}
+                <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
+                
+                {/* Descripción */}
+                <p className="text-white/70 text-sm mb-6">{plan.description}</p>
 
-                <motion.ul 
-                  className="space-y-4 mb-10"
-                  variants={{
-                    visible: { transition: { staggerChildren: 0.1 } }
-                  }}
-                >
-                  {plan.features.map((feature, i) => (
-                    <motion.li 
-                      key={i}
-                      className="flex items-start gap-3"
+                {/* Precio */}
+                <div className="mb-6">
+                  <motion.div
+                    variants={priceVariants}
+                    className="flex items-baseline gap-2"
+                  >
+                    {plan.oldPrice && (
+                      <span className="text-white/50 line-through text-lg">{plan.oldPrice}</span>
+                    )}
+                    <span className="text-4xl font-bold text-white">{plan.price}</span>
+                  </motion.div>
+                  <p className="text-white/60 text-sm">{plan.period}</p>
+                </div>
+
+                {/* Características */}
+                <ul className="space-y-3 mb-8">
+                  {plan.features.map((feature, featureIndex) => (
+                    <motion.li
+                      key={feature}
                       variants={featureVariants}
+                      className="flex items-start gap-3 text-white/80 text-sm"
                     >
                       <CheckIcon className="w-5 h-5 text-[#038e42] mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300">{feature}</span>
+                      <span>{feature}</span>
                     </motion.li>
                   ))}
-                </motion.ul>
+                </ul>
 
-                <div className="mt-auto">
-                  <Link to={plan.isQuote ? "/presupuesto" : "/contacto"}>
-                    <motion.button
-                      className={`w-full py-3 rounded-lg font-semibold text-lg transition-all duration-300 ${
-                        plan.popular 
-                        ? 'bg-[#038e42] text-white hover:bg-green-500 shadow-green-500/20 shadow-lg'
-                        : 'bg-black/30 backdrop-blur-sm border border-white/20 text-white hover:bg-white/10'
+                {/* Botón */}
+                <motion.div
+                  variants={buttonVariants}
+                  whileHover="hover"
+                  whileTap="tap"
+                  className="w-full"
+                >
+                  {plan.isQuote ? (
+                    <Link
+                      to="/presupuesto"
+                      className={`w-full py-4 px-6 rounded-xl font-bold text-lg transition-all duration-300 flex items-center justify-center gap-2 ${
+                        plan.popular
+                          ? 'bg-gradient-to-r from-[#038e42] to-emerald-500 text-white hover:from-[#038e42]/90 hover:to-emerald-500/90'
+                          : 'bg-white/10 text-white border border-white/20 hover:bg-white/20'
                       }`}
-                      variants={buttonVariants}
-                      whileHover="hover"
-                      whileTap="tap"
                     >
                       {plan.buttonText}
-                      <ArrowRightIcon className="inline-block w-4 h-4 ml-2" />
-                    </motion.button>
-                  </Link>
-                </div>
-              </div>
+                      <ArrowRightIcon className="w-5 h-5" />
+                    </Link>
+                  ) : (
+                    <Link
+                      to="/agendar"
+                      className={`w-full py-4 px-6 rounded-xl font-bold text-lg transition-all duration-300 flex items-center justify-center gap-2 ${
+                        plan.popular
+                          ? 'bg-gradient-to-r from-[#038e42] to-emerald-500 text-white hover:from-[#038e42]/90 hover:to-emerald-500/90'
+                          : 'bg-white/10 text-white border border-white/20 hover:bg-white/20'
+                      }`}
+                    >
+                      {plan.buttonText}
+                      <ArrowRightIcon className="w-5 h-5" />
+                    </Link>
+                  )}
+                </motion.div>
+              </motion.div>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* CTA adicional */}
+        {/* Información adicional */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mt-16"
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
+          className="text-center mt-12"
         >
-          <div className="inline-flex items-center px-6 py-3 rounded-full bg-[#038e42]/10 border border-[#038e42]/20 text-[#038e42] text-sm font-medium mb-8">
-            <span className="w-2 h-2 bg-[#038e42] rounded-full mr-2 animate-pulse"></span>
-            Garantía de satisfacción del 100%
-          </div>
-          
-          <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-            ¿Necesitas algo personalizado? Contáctanos para obtener un presupuesto 
-            a medida para tu proyecto específico.
+          <p className="text-white/60 text-sm">
+            Todos los planes incluyen soporte técnico y garantía de satisfacción. 
+            <br />
+            ¿Necesitas algo personalizado? <Link to="/contacto" className="text-[#038e42] hover:underline">Contáctanos</Link>
           </p>
-
-          <motion.button
-            whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(3, 142, 66, 0.3)" }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 bg-[#038e42] text-white font-semibold rounded-lg hover:bg-[#038e42]/80 transition-all duration-300"
-          >
-            Solicitar Presupuesto Personalizado
-          </motion.button>
         </motion.div>
       </div>
     </section>
