@@ -221,13 +221,13 @@ export default function PricingSection() {
         <motion.div 
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <motion.h2 
             className="text-4xl md:text-5xl font-bold mb-4 text-white"
             initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
             Planes{' '}
@@ -238,7 +238,7 @@ export default function PricingSection() {
           <motion.p 
             className="text-white/80 max-w-2xl mx-auto text-lg"
             initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
             Elige el plan que mejor se adapte a tus necesidades. Sin sorpresas, sin costes ocultos.
@@ -248,7 +248,7 @@ export default function PricingSection() {
         <motion.div 
           variants={containerVariants}
           initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
+          animate="visible"
           className="grid grid-cols-1 lg:grid-cols-3 gap-8"
         >
           {plans.map((plan, index) => (
