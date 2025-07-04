@@ -24,15 +24,32 @@ const Chatbot = () => {
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
+  const [showQuickActions, setShowQuickActions] = useState(false);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+  };
+
+  // Scroll optimizado para móviles
+  const scrollToBottomMobile = () => {
+    if (isMobile()) {
+      // En móviles, usar un scroll más suave
+      setTimeout(() => {
+        messagesEndRef.current?.scrollIntoView({ 
+          behavior: "smooth", 
+          block: "end",
+          inline: "nearest"
+        });
+      }, 100);
+    } else {
+      scrollToBottom();
+    }
   };
 
   useEffect(() => {
-    scrollToBottom();
+    scrollToBottomMobile();
   }, [messages]);
 
   // Respuestas predefinidas para casos comunes
@@ -347,6 +364,21 @@ const Chatbot = () => {
     }
   };
 
+  // Detectar si es dispositivo móvil
+  const isMobile = () => {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  };
+
+  // Manejar el foco del input en móviles
+  const handleInputFocus = () => {
+    if (isMobile()) {
+      // Scroll suave hacia el input en móviles
+      setTimeout(() => {
+        inputRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 300);
+    }
+  };
+
   const toggleChat = () => {
     setIsOpen(!isOpen);
     if (!isOpen) {
@@ -360,21 +392,37 @@ const Chatbot = () => {
     setIsMinimized(!isMinimized);
   };
 
+  // Acciones rápidas para móviles
+  const quickActions = [
+    { text: "¿Cuánto cuesta?", action: "precio" },
+    { text: "¿Qué servicios ofrecen?", action: "servicios" },
+    { text: "¿Cuánto tiempo toma?", action: "tiempo" },
+    { text: "¿Tienen garantía?", action: "garantía" },
+    { text: "¿Hacen ecommerce?", action: "ecommerce" },
+    { text: "¿Ofrecen hosting?", action: "hosting" }
+  ];
+
+  const handleQuickAction = (action) => {
+    setInputValue(action);
+    handleSendMessage();
+    setShowQuickActions(false);
+  };
+
   return (
     <>
       {/* Botón flotante del chatbot */}
       <motion.div
-        className="fixed bottom-6 right-6 z-50"
+        className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ delay: 2, type: "spring", stiffness: 260, damping: 20 }}
       >
         <button
           onClick={toggleChat}
-          className="bg-black/20 backdrop-blur-md border border-white/20 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 hover:bg-black/30"
+          className="bg-black/20 backdrop-blur-md border border-white/20 text-white p-3 md:p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 hover:bg-black/30 touch-manipulation"
           aria-label="Abrir chat"
         >
-          <MessageCircle size={24} />
+          <MessageCircle size={20} className="md:w-6 md:h-6" />
         </button>
       </motion.div>
 
@@ -382,37 +430,37 @@ const Chatbot = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed bottom-24 right-6 z-50 w-96 max-h-[600px] bg-black/20 backdrop-blur-md border border-white/20 rounded-2xl shadow-2xl overflow-hidden"
+            className="fixed bottom-20 right-4 left-4 md:bottom-24 md:right-6 md:left-auto z-50 w-auto md:w-96 max-h-[80vh] md:max-h-[600px] bg-black/20 backdrop-blur-md border border-white/20 rounded-2xl shadow-2xl overflow-hidden"
             initial={{ opacity: 0, scale: 0.8, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 20 }}
             transition={{ duration: 0.3 }}
           >
             {/* Header */}
-            <div className="bg-black/40 backdrop-blur-md border-b border-white/20 text-white p-4 flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
-                  <Bot size={16} />
+            <div className="bg-black/40 backdrop-blur-md border-b border-white/20 text-white p-3 md:p-4 flex items-center justify-between">
+              <div className="flex items-center space-x-2 md:space-x-3">
+                <div className="w-6 h-6 md:w-8 md:h-8 bg-white/20 rounded-full flex items-center justify-center">
+                  <Bot size={14} className="md:w-4 md:h-4" />
                 </div>
                 <div>
-                  <h3 className="font-semibold">Asistente Weblisy</h3>
+                  <h3 className="font-semibold text-sm md:text-base">Asistente Weblisy</h3>
                   <p className="text-xs opacity-90">En línea</p>
                 </div>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-1 md:space-x-2">
                 <button
                   onClick={toggleMinimize}
-                  className="p-1 hover:bg-white/20 rounded transition-colors"
+                  className="p-1 hover:bg-white/20 rounded transition-colors touch-manipulation"
                   aria-label="Minimizar"
                 >
-                  {isMinimized ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                  {isMinimized ? <ChevronUp size={14} className="md:w-4 md:h-4" /> : <ChevronDown size={14} className="md:w-4 md:h-4" />}
                 </button>
                 <button
                   onClick={toggleChat}
-                  className="p-1 hover:bg-white/20 rounded transition-colors"
+                  className="p-1 hover:bg-white/20 rounded transition-colors touch-manipulation"
                   aria-label="Cerrar chat"
                 >
-                  <X size={16} />
+                  <X size={14} className="md:w-4 md:h-4" />
                 </button>
               </div>
             </div>
@@ -421,7 +469,7 @@ const Chatbot = () => {
             {!isMinimized && (
               <>
                 {/* Mensajes */}
-                <div className="h-96 overflow-y-auto p-4 space-y-4">
+                <div className="h-80 md:h-96 overflow-y-auto p-3 md:p-4 space-y-3 md:space-y-4">
                   {messages.map((message) => (
                     <motion.div
                       key={message.id}
@@ -430,18 +478,18 @@ const Chatbot = () => {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.3 }}
                     >
-                                             <div
-                         className={`max-w-[80%] p-3 rounded-2xl ${
+                                                                    <div
+                         className={`max-w-[85%] md:max-w-[80%] p-2.5 md:p-3 rounded-2xl ${
                            message.sender === 'user'
                              ? 'bg-white/20 backdrop-blur-md border border-white/20 text-white'
                              : 'bg-black/40 backdrop-blur-md border border-white/20 text-white'
                          }`}
                        >
-                        <p className="text-sm">{message.text}</p>
-                        <p className="text-xs opacity-70 mt-1">
-                          {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                        </p>
-                      </div>
+                         <p className="text-xs md:text-sm leading-relaxed">{message.text}</p>
+                         <p className="text-xs opacity-70 mt-1">
+                           {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                         </p>
+                       </div>
                     </motion.div>
                   ))}
                   
@@ -451,40 +499,93 @@ const Chatbot = () => {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                     >
-                                           <div className="bg-black/40 backdrop-blur-md border border-white/20 text-white p-3 rounded-2xl">
+                                           <div className="bg-black/40 backdrop-blur-md border border-white/20 text-white p-2.5 md:p-3 rounded-2xl">
                        <div className="flex items-center space-x-2">
-                         <Loader2 size={16} className="animate-spin" />
-                         <span className="text-sm">Escribiendo...</span>
+                         <div className="flex space-x-1">
+                           <motion.div
+                             className="w-2 h-2 bg-white/60 rounded-full"
+                             animate={{ scale: [1, 1.2, 1] }}
+                             transition={{ duration: 0.6, repeat: Infinity, delay: 0 }}
+                           />
+                           <motion.div
+                             className="w-2 h-2 bg-white/60 rounded-full"
+                             animate={{ scale: [1, 1.2, 1] }}
+                             transition={{ duration: 0.6, repeat: Infinity, delay: 0.2 }}
+                           />
+                           <motion.div
+                             className="w-2 h-2 bg-white/60 rounded-full"
+                             animate={{ scale: [1, 1.2, 1] }}
+                             transition={{ duration: 0.6, repeat: Infinity, delay: 0.4 }}
+                           />
+                         </div>
+                         <span className="text-xs md:text-sm">Escribiendo...</span>
                        </div>
                      </div>
                     </motion.div>
                   )}
                   
-                  <div ref={messagesEndRef} />
+                                    <div ref={messagesEndRef} />
                 </div>
 
-                                 {/* Input */}
-                 <div className="p-4 border-t border-white/20">
-                   <div className="flex space-x-2">
-                     <input
-                       ref={inputRef}
-                       type="text"
-                       value={inputValue}
-                       onChange={(e) => setInputValue(e.target.value)}
-                       onKeyPress={handleKeyPress}
-                       placeholder="Escribe tu mensaje..."
-                       className="flex-1 px-4 py-2 bg-black/20 backdrop-blur-md border border-white/20 rounded-full focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent text-white placeholder-white/60"
-                       disabled={isLoading}
-                     />
-                     <button
-                       onClick={handleSendMessage}
-                       disabled={!inputValue.trim() || isLoading}
-                       className="bg-white/20 backdrop-blur-md border border-white/20 hover:bg-white/30 disabled:opacity-50 disabled:cursor-not-allowed text-white p-2 rounded-full transition-all duration-200"
-                     >
-                       <Send size={16} />
-                     </button>
-                   </div>
-                 </div>
+                {/* Acciones rápidas para móviles */}
+                {isMobile() && messages.length === 1 && (
+                  <motion.div
+                    className="px-3 md:px-4 pb-3"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: 0.5 }}
+                  >
+                    <p className="text-xs text-white/60 mb-2">Preguntas rápidas:</p>
+                    <div className="flex flex-wrap gap-2">
+                      {quickActions.map((action, index) => (
+                        <motion.button
+                          key={action.action}
+                          onClick={() => handleQuickAction(action.action)}
+                          className="px-3 py-1.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-xs text-white hover:bg-white/20 transition-all duration-200 touch-manipulation"
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ duration: 0.3, delay: 0.6 + index * 0.1 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          {action.text}
+                        </motion.button>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* Input */}
+                <div className="p-3 md:p-4 border-t border-white/20">
+                  <div className="flex space-x-2">
+                    <input
+                      ref={inputRef}
+                      type="text"
+                      value={inputValue}
+                      onChange={(e) => setInputValue(e.target.value)}
+                      onKeyPress={handleKeyPress}
+                      placeholder="Escribe tu mensaje..."
+                      className="flex-1 px-3 md:px-4 py-2 bg-black/20 backdrop-blur-md border border-white/20 rounded-full focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent text-white placeholder-white/60 text-sm md:text-base"
+                      disabled={isLoading}
+                      onFocus={handleInputFocus}
+                    />
+                    <button
+                      onClick={handleSendMessage}
+                      disabled={!inputValue.trim() || isLoading}
+                      className="bg-white/20 backdrop-blur-md border border-white/20 hover:bg-white/30 disabled:opacity-50 disabled:cursor-not-allowed text-white p-1.5 md:p-2 rounded-full transition-all duration-200 touch-manipulation"
+                    >
+                      <Send size={14} className="md:w-4 md:h-4" />
+                    </button>
+                    {isMobile() && (
+                      <button
+                        onClick={() => inputRef.current?.blur()}
+                        className="bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 text-white p-1.5 md:p-2 rounded-full transition-all duration-200 touch-manipulation"
+                        title="Ocultar teclado"
+                      >
+                        <ChevronDown size={14} className="md:w-4 md:h-4" />
+                      </button>
+                    )}
+                  </div>
+                </div>
               </>
             )}
           </motion.div>
