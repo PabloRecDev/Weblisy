@@ -394,12 +394,12 @@ const Chatbot = () => {
 
   // Acciones rápidas para móviles
   const quickActions = [
-    { text: "¿Cuánto cuesta?", action: "precio" },
-    { text: "¿Qué servicios ofrecen?", action: "servicios" },
-    { text: "¿Cuánto tiempo toma?", action: "tiempo" },
-    { text: "¿Tienen garantía?", action: "garantía" },
-    { text: "¿Hacen ecommerce?", action: "ecommerce" },
-    { text: "¿Ofrecen hosting?", action: "hosting" }
+    { text: "¿Cuánto vale?", action: "precio" },
+    { text: "¿Qué hacéis?", action: "servicios" },
+    { text: "¿Cuánto tarda?", action: "tiempo" },
+    { text: "¿Tenéis garantía?", action: "garantía" },
+    { text: "¿Hacéis tiendas online?", action: "ecommerce" },
+    { text: "¿Tenéis hosting?", action: "hosting" }
   ];
 
   const handleQuickAction = (action) => {
