@@ -548,25 +548,31 @@ const EnhancedCTASection = () => {
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            <motion.Link
-              to="/agendar"
+            <motion.div
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-[#038e42] text-white font-bold rounded-xl text-lg shadow-xl hover:bg-[#038e42]/90 transition-all duration-300 flex items-center gap-2 group"
             >
-              <CalendarIcon className="w-5 h-5" />
-              Agendar Consulta Gratuita
-              <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </motion.Link>
-            <motion.Link
-              to="/contacto"
+              <Link
+                to="/agendar"
+                className="px-8 py-4 bg-[#038e42] text-white font-bold rounded-xl text-lg shadow-xl hover:bg-[#038e42]/90 transition-all duration-300 flex items-center gap-2 group"
+              >
+                <CalendarIcon className="w-5 h-5" />
+                Agendar Consulta Gratuita
+                <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </motion.div>
+            <motion.div
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-white/10 text-white font-bold rounded-xl text-lg border border-white/20 hover:bg-white/20 transition-all duration-300 flex items-center gap-2 group"
             >
-              <EnvelopeClosedIcon className="w-5 h-5" />
-              Contactar Ahora
-            </motion.Link>
+              <Link
+                to="/contacto"
+                className="px-8 py-4 bg-white/10 text-white font-bold rounded-xl text-lg border border-white/20 hover:bg-white/20 transition-all duration-300 flex items-center gap-2 group"
+              >
+                <EnvelopeClosedIcon className="w-5 h-5" />
+                Contactar Ahora
+              </Link>
+            </motion.div>
           </motion.div>
           
           <motion.div

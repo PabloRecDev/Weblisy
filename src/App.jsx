@@ -16,6 +16,7 @@ import LoadingScreen from './components/LoadingScreen';
 import SmoothScroll from './components/SmoothScroll';
 import { ThemeProvider } from './components/ThemeProvider';
 import ThemeToggle from './components/ThemeToggle';
+import Chatbot from './components/Chatbot';
 
 // Páginas Públicas
 import HomePage from './pages/Home';
@@ -103,6 +104,7 @@ function App() {
               <ScrollToHash />
               <ScrollToTop />
               <ThemeToggle />
+              <Chatbot />
               <AnimatePresence mode="wait">
                 {isLoading && <LoadingScreen />}
               </AnimatePresence>
