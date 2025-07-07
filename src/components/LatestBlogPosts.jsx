@@ -55,7 +55,7 @@ export default function LatestBlogPosts() {
     >
       {/* Elementos decorativos animados */}
       <motion.div 
-        className="absolute top-20 left-10 w-32 h-32 bg-[#038e42]/10 rounded-full blur-3xl"
+        className="absolute top-20 left-10 w-32 h-32 bg-[#006239]/10 rounded-full blur-3xl"
         animate={{ 
           scale: [1, 1.1, 1],
           opacity: [0.2, 0.4, 0.2]
@@ -67,7 +67,7 @@ export default function LatestBlogPosts() {
         }}
       />
       <motion.div 
-        className="absolute bottom-20 right-10 w-40 h-40 bg-[#038e42]/5 rounded-full blur-3xl"
+        className="absolute bottom-20 right-10 w-40 h-40 bg-[#006239]/5 rounded-full blur-3xl"
         animate={{ 
           scale: [1.1, 1, 1.1],
           opacity: [0.1, 0.3, 0.1]
@@ -94,7 +94,7 @@ export default function LatestBlogPosts() {
             animate={{ scale: 1, rotate: 0 }}
             transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
           >
-            <div className="w-20 h-20 bg-gradient-to-br from-[#038e42] to-[#038e42]/80 rounded-full flex items-center justify-center mx-auto mb-6">
+            <div className="w-20 h-20 bg-gradient-to-br from-[#006239] to-[#006239]/80 rounded-full flex items-center justify-center mx-auto mb-6">
               <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
               </svg>
@@ -107,7 +107,7 @@ export default function LatestBlogPosts() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
           >
-            Últimos <span className="text-[#038e42]">artículos</span> del blog
+            Últimos <span className="text-[#006239]">artículos</span> del blog
           </motion.h2>
           
           <motion.p 
@@ -191,7 +191,7 @@ export default function LatestBlogPosts() {
                     {article.keywords.slice(0, 3).map((keyword) => (
                       <motion.span
                         key={keyword}
-                        className="bg-[#038e42]/20 text-[#038e42] px-3 py-1 rounded-full text-xs font-medium border border-[#038e42]/30"
+                        className="bg-[#006239]/20 text-[#006239] px-3 py-1 rounded-full text-xs font-medium border border-[#006239]/30"
                         whileHover={{ scale: 1.05 }}
                         transition={{ duration: 0.2 }}
                       >
@@ -202,7 +202,7 @@ export default function LatestBlogPosts() {
 
                   {/* Título */}
                   <motion.h3 
-                    className="text-2xl font-bold mb-4 text-white group-hover:text-[#038e42] transition-colors duration-300 line-clamp-2"
+                                            className="text-2xl font-bold mb-4 text-white group-hover:text-[#006239] transition-colors duration-300 line-clamp-2"
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.2 }}
                   >
@@ -224,7 +224,7 @@ export default function LatestBlogPosts() {
                   >
                     <Link
                       to={`/blog/${article.slug}`}
-                      className="inline-flex items-center gap-2 text-[#038e42] font-semibold hover:text-[#038e42]/80 transition-colors group-hover:gap-3"
+                                              className="inline-flex items-center gap-2 text-[#006239] font-semibold hover:text-[#006239]/80 transition-colors group-hover:gap-3"
                     >
                       Leer artículo completo
                       <ArrowRightIcon className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -253,7 +253,7 @@ export default function LatestBlogPosts() {
         >
           <Link to="/blog">
             <motion.button
-              className="bg-gradient-to-r from-[#038e42] to-[#038e42]/80 text-white px-10 py-4 rounded-2xl font-semibold text-lg hover:from-[#038e42]/90 hover:to-[#038e42]/70 transition-all duration-300 shadow-lg shadow-[#038e42]/20"
+                              className="bg-gradient-to-r from-[#006239] to-[#006239]/80 text-white px-10 py-4 rounded-2xl font-semibold text-lg hover:from-[#006239]/90 hover:to-[#006239]/70 transition-all duration-300 shadow-lg shadow-[#006239]/20"
               whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(3, 142, 66, 0.3)" }}
               whileTap={{ scale: 0.95 }}
             >

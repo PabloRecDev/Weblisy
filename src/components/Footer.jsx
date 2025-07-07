@@ -114,9 +114,9 @@ export default function Footer() {
           >
             <div className="flex items-center mb-6">
               <motion.img 
-                src="/assets/weblisy-logo.png" 
+                src="/assets/logo.png" 
                 alt="Weblisy Logo" 
-                className="h-16 w-auto mr-4"
+                className="h-32 w-auto mr-4"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.3 }}
               />

@@ -55,7 +55,7 @@ const Chatbot = () => {
   // Respuestas predefinidas para casos comunes
   const predefinedResponses = {
     // Información básica
-    'precio': 'Nuestros precios varían según el proyecto. Te recomiendo solicitar un presupuesto personalizado en nuestra página de presupuesto.',
+    'precio': 'Nuestros precios son muy competitivos: Sitio Web Esencial desde 299€, Sitio Web con IA desde 499€, E-commerce Básico desde 799€, E-commerce Premium desde 1.499€, y Aplicaciones a Medida desde 1.499€. ¿Te gustaría conocer más detalles?',
     'servicios': 'Ofrecemos desarrollo web, aplicaciones web, ecommerce, mantenimiento de sitios web y más. ¿Te gustaría conocer más detalles?',
     'contacto': 'Puedes contactarnos a través de nuestro formulario de contacto o agendar una reunión directamente desde nuestra web.',
     'tiempo': 'Los tiempos de desarrollo dependen de la complejidad del proyecto. Un sitio web básico puede tomar 2-4 semanas.',
@@ -70,9 +70,11 @@ const Chatbot = () => {
     'css': 'Utilizamos CSS moderno y frameworks como Tailwind para crear diseños atractivos.',
     
     // Servicios específicos
-    'ecommerce': 'Desarrollamos tiendas online completas con todas las funcionalidades necesarias para vender online.',
+    'ecommerce': 'Desarrollamos tiendas online completas. Tenemos dos planes: E-commerce Básico desde 799€ (hasta 50 productos) y E-commerce Premium desde 1.499€ (productos ilimitados). Ambos incluyen pasarelas de pago y gestión de inventario.',
     'landing': 'Creamos landing pages optimizadas para conversión que ayudan a capturar leads y aumentar ventas.',
     'app': 'Desarrollamos aplicaciones web progresivas (PWAs) que funcionan como apps nativas.',
+    'ia': 'Ofrecemos sitios web con asistente IA integrado desde 499€. Incluye chatbot inteligente, respuestas automáticas personalizadas e integración con WhatsApp Business. Puedes ver más detalles en nuestra página especial: /plan-sitio-web-ia',
+    'chatbot': 'Nuestro plan de Sitio Web con IA incluye un chatbot inteligente que mejora la atención al cliente y aumenta las conversiones.',
     'blog': 'Creamos blogs personalizados con sistemas de gestión de contenido.',
     'cms': 'Implementamos sistemas de gestión de contenido para facilitar la administración.',
     
@@ -126,7 +128,7 @@ const Chatbot = () => {
     'freelancer': 'Creamos portafolios profesionales para freelancers.',
     'restaurante': 'Desarrollamos sitios web especializados para restaurantes y gastronomía.',
     'tienda': 'Creamos tiendas online completas para vender productos.',
-    'servicios': 'Desarrollamos sitios web para empresas de servicios.',
+    'servicios-especializados': 'Desarrollamos sitios web para empresas de servicios.',
     
     // Funcionalidades Específicas
     'formulario': 'Implementamos formularios de contacto y captura de leads.',
@@ -184,7 +186,7 @@ const Chatbot = () => {
     // Tecnologías Específicas
     'api': 'Desarrollamos APIs personalizadas para conectar diferentes sistemas.',
     'webhook': 'Implementamos webhooks para automatizar procesos.',
-    'cms': 'Utilizamos sistemas de gestión de contenido como WordPress, Drupal y otros.',
+    'cms-avanzado': 'Utilizamos sistemas de gestión de contenido como WordPress, Drupal y otros.',
     'framework': 'Trabajamos con frameworks modernos como React, Vue, Angular y más.',
     'base de datos': 'Implementamos bases de datos optimizadas para cada proyecto.',
     'servidor': 'Configuramos servidores optimizados para el mejor rendimiento.',
@@ -198,15 +200,15 @@ const Chatbot = () => {
     'email marketing': 'Desarrollamos campañas de email marketing efectivas.',
     
     // Mantenimiento Continuo
-    'actualización': 'Mantenemos tus sitios web actualizados con las últimas tecnologías.',
+    'actualización-continua': 'Mantenemos tus sitios web actualizados con las últimas tecnologías.',
     'monitoreo': 'Monitoreamos el rendimiento de tus sitios web 24/7.',
-    'backup': 'Realizamos backups automáticos para proteger tu información.',
-    'seguridad': 'Implementamos medidas de seguridad continuas.',
-    'optimización': 'Optimizamos constantemente el rendimiento de tus sitios web.',
+    'backup-automático': 'Realizamos backups automáticos para proteger tu información.',
+    'seguridad-continua': 'Implementamos medidas de seguridad continuas.',
+    'optimización-continua': 'Optimizamos constantemente el rendimiento de tus sitios web.',
     
     // Soporte y Mantenimiento
     'soporte 24/7': 'Ofrecemos soporte técnico disponible las 24 horas.',
-    'emergencia': 'Tenemos un equipo de emergencia para problemas críticos.',
+    'emergencia-soporte': 'Tenemos un equipo de emergencia para problemas críticos.',
     'mantenimiento preventivo': 'Realizamos mantenimiento preventivo regular.',
     'monitoreo continuo': 'Monitoreamos tus sitios web de forma continua.',
     
@@ -217,18 +219,18 @@ const Chatbot = () => {
     'ajustes': 'Realizamos ajustes sin costo adicional durante el desarrollo.',
     
     // Proceso de Trabajo Detallado
-    'consulta': 'Comenzamos con una consulta gratuita para entender tus necesidades.',
-    'diseño': 'Creamos diseños personalizados según tu marca.',
+    'consulta-gratuita': 'Comenzamos con una consulta gratuita para entender tus necesidades.',
+    'diseño-personalizado': 'Creamos diseños personalizados según tu marca.',
     'desarrollo': 'Desarrollamos tu proyecto con las mejores tecnologías.',
     'pruebas': 'Realizamos pruebas exhaustivas antes del lanzamiento.',
     'lanzamiento': 'Lanzamos tu proyecto con todas las optimizaciones necesarias.',
     'seguimiento': 'Hacemos seguimiento post-lanzamiento para asegurar el éxito.',
     
     // Comunicación y Colaboración
-    'comunicación': 'Mantenemos comunicación constante durante todo el proceso.',
+    'comunicación-constante': 'Mantenemos comunicación constante durante todo el proceso.',
     'colaboración': 'Trabajamos en estrecha colaboración contigo.',
     'feedback': 'Valoramos tu feedback en cada etapa del proyecto.',
-    'reuniones': 'Agendamos reuniones regulares para mantenerte informado.',
+    'reuniones-regulares': 'Agendamos reuniones regulares para mantenerte informado.',
     
     // Presupuesto y Financiamiento
     'presupuesto flexible': 'Ofrecemos opciones de pago flexibles.',
@@ -258,7 +260,7 @@ const Chatbot = () => {
     'certificaciones': 'Nuestro equipo cuenta con certificaciones en las mejores tecnologías.',
     'estándares': 'Seguimos los estándares más altos de la industria.',
     'mejores prácticas': 'Implementamos las mejores prácticas en todos nuestros proyectos.',
-    'calidad': 'La calidad es nuestra marca registrada.',
+    'calidad-premium': 'La calidad es nuestra marca registrada.',
     
     // Soporte Post-venta
     'post-venta': 'Ofrecemos soporte completo después del lanzamiento.',
@@ -269,7 +271,7 @@ const Chatbot = () => {
     // Tecnologías Emergentes
     'ai': 'Integramos inteligencia artificial en nuestros desarrollos.',
     'machine learning': 'Implementamos machine learning para personalización.',
-    'chatbot': 'Desarrollamos chatbots inteligentes para atención al cliente.',
+    'chatbot-inteligente': 'Desarrollamos chatbots inteligentes para atención al cliente.',
     'automatización': 'Automatizamos procesos para mayor eficiencia.',
     
     // Accesibilidad
@@ -399,6 +401,7 @@ const Chatbot = () => {
     { text: "¿Cuánto tarda?", action: "tiempo" },
     { text: "¿Tenéis garantía?", action: "garantía" },
     { text: "¿Hacéis tiendas online?", action: "ecommerce" },
+    { text: "¿Sitio web con IA?", action: "ia" },
     { text: "¿Tenéis hosting?", action: "hosting" }
   ];
 

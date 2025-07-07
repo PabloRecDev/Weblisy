@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import Navbar from './Navbar';
-import SubNavbar from './SubNavbar';
 import Footer from './Footer';
 
 const MainLayout = ({ children }) => {
@@ -10,9 +9,7 @@ const MainLayout = ({ children }) => {
   return (
     <>
       <header className="sticky top-0 z-50">
-        <AnimatePresence>
-          {isSubNavVisible && <SubNavbar setIsVisible={setIsSubNavVisible} />}
-        </AnimatePresence>
+        {/* SubNavbar eliminado */}
         <Navbar />
       </header>
       

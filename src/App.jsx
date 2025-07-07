@@ -12,10 +12,9 @@ import AdminLayout from './components/AdminLayout';
 
 // Componentes y Páginas
 import ScrollToTop from './components/ScrollToTop';
-import LoadingScreen from './components/LoadingScreen';
+
 import SmoothScroll from './components/SmoothScroll';
 import { ThemeProvider } from './components/ThemeProvider';
-import ThemeToggle from './components/ThemeToggle';
 import Chatbot from './components/Chatbot';
 
 // Páginas Públicas
@@ -37,6 +36,10 @@ import ProyectoDetallePage from './pages/ProyectoDetalle';
 import FAQPage from './pages/FAQ';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import PlanSitioWeb from './pages/PlanSitioWeb';
+import PlanSitioWebIA from './pages/PlanSitioWebIA';
+import CvMasterPage from './pages/CvMaster';
+import CvMasterAppPage from './pages/CvMasterApp';
+import CvMasterTestPage from './pages/CvMasterTest';
 
 // Páginas de Admin
 import AdminDashboardPage from './pages/admin/Dashboard';
@@ -88,13 +91,6 @@ const PageWrapper = ({ children }) => {
 
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 2000);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <HelmetProvider>
       <ThemeProvider>
@@ -103,11 +99,7 @@ function App() {
             <SmoothScroll>
               <ScrollToHash />
               <ScrollToTop />
-              <ThemeToggle />
               <Chatbot />
-              <AnimatePresence mode="wait">
-                {isLoading && <LoadingScreen />}
-              </AnimatePresence>
               
               {/* Global SEO and Accessibility */}
               <div className="App" role="application" aria-label="Weblisy - Agencia de Desarrollo Web">
@@ -116,6 +108,7 @@ function App() {
                   <Route path="/" element={<MainLayout><PageWrapper><HomePage /></PageWrapper></MainLayout>} />
                   <Route path="/presupuesto" element={<MainLayout><PageWrapper><PresupuestoPage /></PageWrapper></MainLayout>} />
                   <Route path="/plan-sitio-web" element={<MainLayout><PageWrapper><PlanSitioWeb /></PageWrapper></MainLayout>} />
+                  <Route path="/plan-sitio-web-ia" element={<MainLayout><PageWrapper><PlanSitioWebIA /></PageWrapper></MainLayout>} />
                   <Route path="/blog" element={<MainLayout><PageWrapper><BlogPage /></PageWrapper></MainLayout>} />
                   <Route path="/blog/:slug" element={<MainLayout><PageWrapper><BlogArticlePage /></PageWrapper></MainLayout>} />
                   <Route path="/proyectos" element={<MainLayout><PageWrapper><ProjectsPage /></PageWrapper></MainLayout>} />
@@ -131,6 +124,9 @@ function App() {
                   <Route path="/proyectos/:slug" element={<MainLayout><PageWrapper><ProyectoDetallePage /></PageWrapper></MainLayout>} />
                   <Route path="/faq" element={<MainLayout><PageWrapper><FAQPage /></PageWrapper></MainLayout>} />
                   <Route path="/privacidad" element={<MainLayout><PageWrapper><PrivacyPolicy /></PageWrapper></MainLayout>} />
+                  <Route path="/cv-master" element={<CvMasterPage />} />
+                  <Route path="/cv-master/app/*" element={<CvMasterAppPage />} />
+                  <Route path="/cv-master-test" element={<CvMasterTestPage />} />
 
                   {/* Admin Routes */}
                   <Route path="/login" element={<SimpleLogin />} />
