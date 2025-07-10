@@ -116,10 +116,26 @@ export default function CvMaster() {
           <nav className="container mx-auto px-4 py-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-gradient-to-r from-violet-500 to-purple-500 rounded-xl flex items-center justify-center">
-                  <PersonIcon className="w-6 h-6 text-white" />
-                </div>
-                <span className="text-2xl font-bold text-white">CV Master</span>
+                <img 
+                  src="/assets/cv.png" 
+                  alt="CV Master"
+                  className="w-10 h-10 rounded-lg object-cover"
+                  style={{
+                    filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.3))'
+                  }}
+                />
+                <span 
+                  className="text-white"
+                  style={{ 
+                    fontFamily: 'Circular, "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+                    fontWeight: 700,
+                    fontSize: '18px',
+                    lineHeight: '24px',
+                    letterSpacing: '-0.01em'
+                  }}
+                >
+                  cv master
+                </span>
               </div>
               
               <div className="hidden md:flex items-center gap-8">
@@ -425,10 +441,26 @@ export default function CvMaster() {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-8 h-8 bg-gradient-to-r from-violet-500 to-purple-500 rounded-lg flex items-center justify-center">
-                    <PersonIcon className="w-5 h-5 text-white" />
-                  </div>
-                  <span className="text-xl font-bold text-white">CV Master</span>
+                  <img 
+                    src="/assets/cv.png" 
+                    alt="CV Master"
+                    className="w-8 h-8 rounded-lg object-cover"
+                    style={{
+                      filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.3))'
+                    }}
+                  />
+                  <span 
+                    className="text-white"
+                    style={{ 
+                      fontFamily: 'Circular, "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+                      fontWeight: 700,
+                      fontSize: '18px',
+                      lineHeight: '24px',
+                      letterSpacing: '-0.01em'
+                    }}
+                  >
+                    cv master
+                  </span>
                 </div>
                 <p className="text-white/60 mb-4">
                   Crea CVs profesionales con IA. Optimizado para ATS y diseñado para conseguir más entrevistas.

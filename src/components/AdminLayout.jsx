@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 import { useNavigate, useLocation, Outlet } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { 
@@ -47,7 +46,7 @@ export default function AdminLayout() {
       if (!error) setUnreadCount(count || 0);
     };
     fetchUnreadCount();
-    const interval = setInterval(fetchUnreadCount, 10000); // cada 10s
+    const interval = setInterval(fetchUnreadCount, 10000);
     return () => clearInterval(interval);
   }, []);
 
@@ -63,16 +62,16 @@ export default function AdminLayout() {
   };
 
   const menuItems = [
-    { path: '/admin/dashboard', icon: DashboardIcon, label: 'Dashboard' },
-    { path: '/admin/reuniones', icon: CalendarIcon, label: 'Reuniones' },
-    { path: '/admin/leads', icon: EnvelopeClosedIcon, label: 'Leads/Mensajes' },
-    { path: '/admin/solicitudes-presupuesto', icon: EnvelopeClosedIcon, label: 'Solic. Presupuesto' },
-    { path: '/admin/promociones', icon: PinRightIcon, label: 'Promociones' },
-    { path: '/admin/clientes', icon: PersonIcon, label: 'Clientes' },
-    { path: '/admin/facturas', icon: StarIcon, label: 'Facturas' },
-    { path: '/admin/presupuestos', icon: GearIcon, label: 'Presupuestos' },
-    { path: '/admin/proyectos', icon: RocketIcon, label: 'Proyectos' },
-    { path: '/admin/tareas', icon: CheckIcon, label: 'Tareas' }
+    { path: '/admin/dashboard', icon: DashboardIcon, label: 'Dashboard', color: '#00c573' },
+    { path: '/admin/reuniones', icon: CalendarIcon, label: 'Reuniones', color: '#3b82f6' },
+    { path: '/admin/leads', icon: EnvelopeClosedIcon, label: 'Leads/Mensajes', color: '#8b5cf6' },
+    { path: '/admin/solicitudes-presupuesto', icon: EnvelopeClosedIcon, label: 'Solic. Presupuesto', color: '#f59e0b' },
+    { path: '/admin/promociones', icon: PinRightIcon, label: 'Promociones', color: '#ef4444' },
+    { path: '/admin/clientes', icon: PersonIcon, label: 'Clientes', color: '#06b6d4' },
+    { path: '/admin/facturas', icon: StarIcon, label: 'Facturas', color: '#10b981' },
+    { path: '/admin/presupuestos', icon: GearIcon, label: 'Presupuestos', color: '#f97316' },
+    { path: '/admin/proyectos', icon: RocketIcon, label: 'Proyectos', color: '#ec4899' },
+    { path: '/admin/tareas', icon: CheckIcon, label: 'Tareas', color: '#6366f1' }
   ];
 
   // Datos de ejemplo para notificaciones
@@ -101,11 +100,11 @@ export default function AdminLayout() {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white flex">
+    <div className="min-h-screen bg-gradient-to-br from-[#121212] via-[#0a0a0a] to-[#121212] text-white flex">
       {/* Overlay para móvil */}
       {isMobile && sidebarOpen && (
         <div 
-          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
@@ -114,22 +113,35 @@ export default function AdminLayout() {
       <div className={`
         ${isMobile ? 'fixed z-50 h-full' : 'sticky top-0 h-screen'}
         ${sidebarOpen ? 'translate-x-0' : isMobile ? '-translate-x-full' : 'w-20'}
-        ${isMobile ? 'w-80' : sidebarOpen ? 'w-64' : 'w-20'} 
-        bg-[#0d0d0d] border-r border-white/10 
+        ${isMobile ? 'w-80' : sidebarOpen ? 'w-72' : 'w-20'} 
+        bg-gradient-to-b from-[#121212]/95 via-[#0a0a0a]/95 to-[#121212]/95 
+        backdrop-blur-xl border-r border-gray-700/30 shadow-2xl
         transition-all duration-300 ease-in-out
         flex flex-col
       `}>
         {/* Logo */}
-        <div className="p-4 lg:p-6 border-b border-white/10 flex items-center justify-between">
-          <div className="flex items-center">
-            <img src="/assets/weblisy-logo.png" alt="WebLisy" className={`${sidebarOpen ? 'h-8' : 'h-10'} transition-all duration-300`} />
-            {sidebarOpen && <span className="text-lg font-semibold ml-3">CRM</span>}
+        <div className="p-6 border-b border-gray-700/30 flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <div className="relative">
+              <img 
+                src="/assets/weblisy-logo.png" 
+                alt="WebLisy" 
+                className={`${sidebarOpen ? 'h-10' : 'h-12'} transition-all duration-300 drop-shadow-lg`} 
+              />
+              <div className="absolute -inset-1 bg-gradient-to-r from-green-500/20 to-blue-500/20 rounded-lg blur opacity-60"></div>
+            </div>
+            {sidebarOpen && (
+              <div className="flex flex-col">
+                <span className="text-xl font-bold text-white">CRM</span>
+                <span className="text-sm text-gray-400">Admin Panel</span>
+              </div>
+            )}
           </div>
           {/* Botón cerrar en móvil */}
           {isMobile && (
             <button
               onClick={() => setSidebarOpen(false)}
-              className="lg:hidden p-2 rounded-lg hover:bg-white/10 transition-colors"
+                              className="lg:hidden p-2 rounded-xl hover:bg-gray-700/30 transition-colors"
             >
               <ExitIcon className="w-5 h-5" />
             </button>
@@ -137,7 +149,7 @@ export default function AdminLayout() {
         </div>
         
         {/* Navigation */}
-        <nav className="flex-1 p-4 flex flex-col gap-2 overflow-y-auto">
+        <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
           {menuItems.map((item) => {
             const Icon = item.icon;
             const isActive = location.pathname === item.path;
@@ -149,47 +161,81 @@ export default function AdminLayout() {
                   navigate(item.path);
                   if (isMobile) setSidebarOpen(false);
                 }}
-                className={`w-full flex items-center ${sidebarOpen ? 'gap-3 justify-start px-3 py-2' : 'justify-center py-3'} rounded-lg transition-colors ${
-                  isActive ? 'bg-white/10 text-white' : 'text-white/60 hover:bg-white/5 hover:text-white'
+                className={`group relative w-full flex items-center ${sidebarOpen ? 'gap-4 justify-start px-4 py-3' : 'justify-center py-4'} 
+                  rounded-xl transition-all duration-300 ${
+                  isActive 
+                    ? 'bg-gradient-to-r from-green-500/20 to-green-600/10 text-white shadow-lg border border-green-500/30' 
+                    : 'text-gray-400 hover:bg-gray-700/30 hover:text-white'
                 }`}
               >
-                <Icon className={`${sidebarOpen ? 'w-5 h-5' : 'w-6 h-6'} transition-all duration-300`} />
-                {sidebarOpen && <span className="text-sm lg:text-base">{item.label}</span>}
+                {isActive && (
+                  <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-green-400 to-green-600 rounded-r-full"></div>
+                )}
+                <div className={`relative ${isActive ? 'text-green-400' : 'group-hover:text-white'} transition-colors`}>
+                  <Icon className={`${sidebarOpen ? 'w-5 h-5' : 'w-6 h-6'} transition-all duration-300`} />
+                  {isActive && (
+                    <div className="absolute -inset-2 bg-green-500/20 rounded-lg blur opacity-60"></div>
+                  )}
+                </div>
+                {sidebarOpen && (
+                  <span className="text-sm font-medium">{item.label}</span>
+                )}
+                {/* Tooltip para sidebar collapsed */}
+                {!sidebarOpen && (
+                  <div className="absolute left-full ml-4 px-3 py-2 bg-[#121212] text-white text-sm rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 whitespace-nowrap z-50 shadow-xl border border-gray-600">
+                    {item.label}
+                    <div className="absolute right-full top-1/2 -translate-y-1/2 border-4 border-transparent border-r-[#121212]"></div>
+                  </div>
+                )}
               </button>
             );
           })}
         </nav>
         
         {/* Bottom Actions */}
-        <div className="p-4 border-t border-white/10 space-y-2">
+        <div className="p-4 border-t border-gray-700/30 space-y-3">
           {/* Notificaciones */}
           <div className="relative group" onMouseEnter={() => setShowNotifications(true)} onMouseLeave={() => setShowNotifications(false)}>
             <button
               onClick={() => navigate('/admin/notificaciones')}
-              className={`w-full flex items-center ${sidebarOpen ? 'gap-3 justify-start px-3 py-2' : 'justify-center py-3'} rounded-lg text-white/60 hover:bg-white/5 hover:text-white transition-colors relative`}
+              className={`w-full flex items-center ${sidebarOpen ? 'gap-4 justify-start px-4 py-3' : 'justify-center py-4'} 
+                rounded-xl text-gray-400 hover:bg-gray-700/30 hover:text-white transition-all duration-300 relative group`}
             >
-              <BellIcon className={`${sidebarOpen ? 'w-5 h-5' : 'w-6 h-6'} transition-all duration-300`} />
-              {sidebarOpen && <span className="text-sm lg:text-base">Notificaciones</span>}
-              {/* Badge de notificaciones */}
-              {unreadCount > 0 && (
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full flex items-center justify-center">
-                  <span className="text-xs text-white font-bold">{unreadCount}</span>
+              <div className="relative">
+                <BellIcon className={`${sidebarOpen ? 'w-5 h-5' : 'w-6 h-6'} transition-all duration-300`} />
+                {unreadCount > 0 && (
+                  <div className="absolute -top-2 -right-2 w-5 h-5 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center shadow-lg">
+                    <span className="text-xs text-white font-bold">{unreadCount > 9 ? '9+' : unreadCount}</span>
+                  </div>
+                )}
+              </div>
+              {sidebarOpen && <span className="text-sm font-medium">Notificaciones</span>}
+              
+              {/* Tooltip para sidebar collapsed */}
+              {!sidebarOpen && (
+                <div className="absolute left-full ml-4 px-3 py-2 bg-[#121212] text-white text-sm rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 whitespace-nowrap z-50 shadow-xl border border-gray-600">
+                  Notificaciones
+                  <div className="absolute right-full top-1/2 -translate-y-1/2 border-4 border-transparent border-r-[#121212]"></div>
                 </div>
               )}
             </button>
+
             {/* Dropdown de notificaciones */}
             {showNotifications && sidebarOpen && (
-              <div className="absolute bottom-full left-0 right-0 mb-2 bg-black/90 backdrop-blur-sm border border-white/20 rounded-lg p-2 max-h-64 overflow-y-auto z-50 shadow-xl">
+              <div className="absolute bottom-full left-0 right-0 mb-3 bg-[#121212]/95 backdrop-blur-xl border border-gray-600/40 rounded-xl p-3 max-h-80 overflow-y-auto z-50 shadow-2xl">
+                <div className="text-sm font-semibold text-white mb-3 border-b border-gray-600/40 pb-2">
+                  Notificaciones recientes
+                </div>
                 {notifications.map((notification) => (
-                  <div key={notification.id} className="p-2 hover:bg-white/10 rounded transition-colors cursor-pointer">
+                  <div key={notification.id} className="p-3 hover:bg-gray-700/30 rounded-lg transition-colors cursor-pointer mb-2 last:mb-0">
                     <div className="text-sm font-medium text-white">{notification.title}</div>
-                    <div className="text-xs text-white/60">{notification.message}</div>
-                    <div className="text-xs text-white/40 mt-1">{notification.time}</div>
+                    <div className="text-xs text-gray-300 mt-1">{notification.message}</div>
+                    <div className="text-xs text-gray-500 mt-1">{notification.time}</div>
                   </div>
                 ))}
                 {notifications.length === 0 && (
-                  <div className="p-2 text-sm text-white/40 text-center">
-                    No hay notificaciones
+                  <div className="p-3 text-sm text-gray-400 text-center">
+                    No hay notificaciones nuevas
                   </div>
                 )}
               </div>
@@ -199,86 +245,72 @@ export default function AdminLayout() {
           {/* Configuración */}
           <button
             onClick={() => setShowSettings(!showSettings)}
-            className={`w-full flex items-center ${sidebarOpen ? 'gap-3 justify-start px-3 py-2' : 'justify-center py-3'} rounded-lg text-white/60 hover:bg-white/5 hover:text-white transition-colors`}
+            className={`w-full flex items-center ${sidebarOpen ? 'gap-4 justify-start px-4 py-3' : 'justify-center py-4'} 
+              rounded-xl text-gray-400 hover:bg-gray-700/30 hover:text-white transition-all duration-300 group`}
           >
             <GearIcon className={`${sidebarOpen ? 'w-5 h-5' : 'w-6 h-6'} transition-all duration-300`} />
-            {sidebarOpen && <span className="text-sm lg:text-base">Configuración</span>}
+            {sidebarOpen && <span className="text-sm font-medium">Configuración</span>}
+            
+            {/* Tooltip para sidebar collapsed */}
+            {!sidebarOpen && (
+              <div className="absolute left-full ml-4 px-3 py-2 bg-[#121212] text-white text-sm rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 whitespace-nowrap z-50 shadow-xl border border-gray-600">
+                Configuración
+                <div className="absolute right-full top-1/2 -translate-y-1/2 border-4 border-transparent border-r-[#121212]"></div>
+              </div>
+            )}
           </button>
 
-          {/* Separador */}
-          <div className="border-t border-white/10 my-2"></div>
-
-          {/* Cerrar sesión */}
+          {/* Logout */}
           <button
             onClick={handleLogout}
-            className={`w-full flex items-center ${sidebarOpen ? 'gap-3 justify-start px-3 py-2' : 'justify-center py-3'} rounded-lg text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors`}
+            className={`w-full flex items-center ${sidebarOpen ? 'gap-4 justify-start px-4 py-3' : 'justify-center py-4'} 
+              rounded-xl text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-all duration-300 group border border-transparent hover:border-red-500/30`}
           >
             <ExitIcon className={`${sidebarOpen ? 'w-5 h-5' : 'w-6 h-6'} transition-all duration-300`} />
-            {sidebarOpen && <span className="text-sm lg:text-base">Cerrar sesión</span>}
+            {sidebarOpen && <span className="text-sm font-medium">Cerrar Sesión</span>}
+            
+            {/* Tooltip para sidebar collapsed */}
+            {!sidebarOpen && (
+              <div className="absolute left-full ml-4 px-3 py-2 bg-[#121212] text-white text-sm rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 whitespace-nowrap z-50 shadow-xl border border-gray-600">
+                Cerrar Sesión
+                <div className="absolute right-full top-1/2 -translate-y-1/2 border-4 border-transparent border-r-[#121212]"></div>
+              </div>
+            )}
           </button>
         </div>
+
+        {/* Toggle button para escritorio */}
+        {!isMobile && (
+          <button
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            className="absolute -right-3 top-20 w-6 h-6 bg-gradient-to-r from-gray-700 to-gray-600 border border-gray-500/50 rounded-full flex items-center justify-center text-white hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-lg"
+          >
+            <HamburgerMenuIcon className="w-3 h-3" />
+          </button>
+        )}
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col min-w-0 h-screen">
-        {/* Header */}
-        <header className="bg-white/5 border-b border-white/10 p-4 lg:p-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              {/* Botón hamburguesa para móvil */}
-              {isMobile && (
-                <button
-                  onClick={() => setSidebarOpen(true)}
-                  className="lg:hidden p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
-                >
-                  <HamburgerMenuIcon className="w-5 h-5" />
-                </button>
-              )}
-              
-              <div>
-                <h1 className="text-xl lg:text-2xl font-semibold">
-                  {menuItems.find(item => item.path === location.pathname)?.label || 'Admin'}
-                </h1>
-                <p className="text-white/60 text-xs lg:text-sm mt-1">Panel de administración</p>
-              </div>
-            </div>
-            
-            <div className="flex items-center gap-2 lg:gap-4">
-              {/* Notificaciones en header */}
-              <button
-                onClick={() => setShowNotifications(!showNotifications)}
-                className="p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors relative"
-              >
-                <BellIcon className="w-4 h-4 lg:w-5 lg:h-5" />
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full flex items-center justify-center">
-                  <span className="text-xs text-white font-bold">{notifications.length}</span>
-                </div>
-              </button>
-
-              {/* Configuración en header */}
-              <button
-                onClick={() => setShowSettings(!showSettings)}
-                className="p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
-              >
-                <GearIcon className="w-4 h-4 lg:w-5 lg:h-5" />
-              </button>
-
-              {/* Toggle sidebar solo en desktop */}
-              {!isMobile && (
-                <button
-                  onClick={() => setSidebarOpen(!sidebarOpen)}
-                  className="hidden lg:block p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
-                >
-                  <DashboardIcon className="w-4 h-4 lg:w-5 lg:h-5" />
-                </button>
-              )}
-            </div>
+      <div className="flex-1 flex flex-col min-h-screen">
+        {/* Top Bar para móvil */}
+        {isMobile && (
+          <div className="lg:hidden bg-[#121212]/95 backdrop-blur-xl border-b border-gray-700/30 p-4 flex items-center justify-between">
+            <button
+              onClick={() => setSidebarOpen(true)}
+              className="p-2 rounded-xl hover:bg-gray-700/30 transition-colors"
+            >
+              <HamburgerMenuIcon className="w-6 h-6" />
+            </button>
+            <h1 className="text-lg font-semibold">Weblisy CRM</h1>
+            <div className="w-10"></div> {/* Spacer */}
           </div>
-        </header>
+        )}
 
-        {/* Page content */}
-        <main className="flex-1 p-4 lg:p-6 overflow-y-auto">
-          <Outlet />
+        {/* Content */}
+        <main className="flex-1 p-6 lg:p-8 overflow-y-auto">
+          <div className="max-w-7xl mx-auto">
+            <Outlet />
+          </div>
         </main>
       </div>
     </div>

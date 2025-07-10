@@ -21,6 +21,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [productsOpen, setProductsOpen] = useState(false);
   const [agencyOpen, setAgencyOpen] = useState(false);
   const location = useLocation();
   const { theme, toggleTheme } = useTheme();
@@ -39,6 +40,7 @@ const Navbar = () => {
     setIsOpen(false);
     setAgencyOpen(false);
     setServicesOpen(false);
+    setProductsOpen(false);
   }, [location.pathname]);
 
   // Prevenir scroll del body cuando el menú móvil está abierto
@@ -62,9 +64,12 @@ const Navbar = () => {
     { name: 'Desarrollo Web', href: '/servicios/desarrollo-web', description: 'Sitios web profesionales y modernos.', icon: DesktopIcon },
     { name: 'E-commerce', href: '/servicios/ecommerce', description: 'Tiendas online que venden.', icon: Component1Icon },
     { name: 'Aplicaciones Web', href: '/aplicaciones-web', description: 'Soluciones complejas y a medida.', icon: RocketIcon },
-    { name: 'CV Master', href: '/cv-master', description: 'Creador de CV profesional con IA.', icon: PersonIcon },
     { name: 'Mantenimiento', href: '/servicios/mantenimiento', description: 'Soporte y actualizaciones.', icon: Component1Icon },
     { name: 'Todos los Servicios', href: '/servicios', description: 'Una vista general completa.', icon: Component1Icon },
+  ];
+
+  const productsDropdown = [
+    { name: 'CV Master', href: '/cv-master-landing', description: 'Creador de CV profesional con IA.', icon: 'cv-logo' },
   ];
 
   const isActive = (href) => {
@@ -151,6 +156,75 @@ const Navbar = () => {
                           >
                             <div className="flex items-start gap-3">
                               <item.icon className="w-5 h-5 text-[#006239] mt-0.5 flex-shrink-0" />
+                              <div>
+                                <div className="font-bold hover:text-[#006239] text-gray-200 group-hover:text-[#006239] transition-colors font-medium">
+                                  {item.name}
+                                </div>
+                                <div className="font-bold hover:text-[#006239] text-gray-400 text-xs mt-1">
+                                  {item.description}
+                                </div>
+                              </div>
+                            </div>
+                          </Link>
+                        </motion.div>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* Menú Productos */}
+              <div
+                className="relative"
+                onMouseEnter={() => setProductsOpen(true)}
+                onMouseLeave={() => setProductsOpen(false)}
+              >
+                <button
+                  className="flex items-center gap-1 text-sm font-bold text-gray-300 hover:text-[#006239] hover:bg-white/5 focus:text-[#006239] focus:outline-none focus:ring-2 focus:ring-[#006239]/50 transition-colors duration-200 px-3 py-2 rounded-lg"
+                  onClick={() => setProductsOpen((v) => !v)}
+                  tabIndex={0}
+                >
+                  Productos
+                  <motion.span
+                    animate={{ rotate: productsOpen ? 180 : 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="inline-block"
+                  >
+                    <ChevronDownIcon className="w-4 h-4" />
+                  </motion.span>
+                </button>
+                <AnimatePresence>
+                  {productsOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute left-0 mt-2 min-w-[400px] max-w-[90vw] bg-[#181818]/95 backdrop-blur-md border border-white/10 rounded-xl shadow-2xl z-50 py-3 px-2 flex flex-row flex-wrap gap-2"
+                    >
+                      {productsDropdown.map((item, idx) => (
+                        <motion.div
+                          key={item.name}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.05 * idx, duration: 0.25, type: 'spring' }}
+                          className="flex-1 min-w-[220px] max-w-[260px]"
+                        >
+                          <Link
+                            to={item.href}
+                            className="block px-4 py-3 text-sm group hover:bg-white/5 rounded-lg transition-colors h-full"
+                            onClick={() => setProductsOpen(false)}
+                          >
+                            <div className="flex items-start gap-3">
+                              {item.icon === 'cv-logo' ? (
+                                <img 
+                                  src="/assets/cv.png" 
+                                  alt="CV Master Logo" 
+                                  className="w-5 h-5 mt-0.5 flex-shrink-0 object-contain rounded-lg"
+                                />
+                              ) : (
+                                <item.icon className="w-5 h-5 text-[#006239] mt-0.5 flex-shrink-0" />
+                              )}
                               <div>
                                 <div className="font-bold hover:text-[#006239] text-gray-200 group-hover:text-[#006239] transition-colors font-medium">
                                   {item.name}
@@ -403,6 +477,27 @@ const Navbar = () => {
                   >
                     <Component1Icon className="w-4 h-4 text-[#006239] flex-shrink-0" />
                     <span className="text-sm">Todos los Servicios</span>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Menú Productos móvil */}
+              <div className="space-y-2">
+                <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
+                  Productos
+                </h3>
+                <div className="space-y-1">
+                  <Link
+                    to="/cv-master-landing"
+                    className="flex items-center gap-3 px-3 sm:px-4 py-2.5 sm:py-2 rounded-lg text-gray-200 hover:text-[#006239] hover:bg-white/5 transition-all duration-200"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <img 
+                      src="/assets/cv.png" 
+                      alt="CV Master Logo" 
+                      className="w-4 h-4 text-[#006239] flex-shrink-0 object-contain rounded-lg"
+                    />
+                    <span className="text-sm">CV Master</span>
                   </Link>
                 </div>
               </div>

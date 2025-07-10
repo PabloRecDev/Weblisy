@@ -14,12 +14,28 @@ const navItems = [
 
 export default function Sidebar() {
   return (
-    <aside className="h-screen w-64 bg-[#121212] border-r border-gray-900 flex flex-col py-6 px-4 shadow-lg font-['Circular',custom-font,'Helvetica_Neue',Helvetica,Arial,sans-serif] font-medium text-[#fafafa] text-[14px] leading-[14px]" style={{ fontFamily: "'Circular', custom-font, 'Helvetica Neue', Helvetica, Arial, sans-serif", fontWeight: 500, color: '#fafafa', fontSize: 14, lineHeight: '14px' }}>
+    <aside className="fixed left-0 top-0 h-screen w-64 bg-[#121212] border-r border-gray-900 flex flex-col py-6 px-4 shadow-lg font-['Circular',custom-font,'Helvetica_Neue',Helvetica,Arial,sans-serif] font-medium text-[#fafafa] text-[14px] leading-[14px] z-50" style={{ fontFamily: "'Circular', custom-font, 'Helvetica Neue', Helvetica, Arial, sans-serif", fontWeight: 500, color: '#fafafa', fontSize: 14, lineHeight: '14px' }}>
       <div className="flex items-center gap-3 mb-10 px-2">
-        <div className="w-10 h-10 bg-gradient-to-r from-blue-400 to-purple-400 rounded-xl flex items-center justify-center">
-          <UserCircleIcon className="w-6 h-6 text-white" />
-        </div>
-        <span className="text-2xl font-bold text-[#fafafa]">CV Master</span>
+        <img 
+          src="/assets/cv.png" 
+          alt="CV Master"
+          className="w-10 h-10 rounded-lg object-cover"
+          style={{
+            filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.3))'
+          }}
+        />
+                 <span 
+           className="text-[#fafafa]"
+           style={{ 
+             fontFamily: 'Circular, "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+             fontWeight: 700,
+             fontSize: '18px',
+             lineHeight: '24px',
+             letterSpacing: '-0.01em'
+           }}
+         >
+           cv master
+         </span>
       </div>
       <nav className="flex-1 space-y-2">
         {navItems.map((item) => (

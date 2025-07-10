@@ -38,8 +38,21 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import PlanSitioWeb from './pages/PlanSitioWeb';
 import PlanSitioWebIA from './pages/PlanSitioWebIA';
 import CvMasterPage from './pages/CvMaster';
+import CvMasterLanding from './pages/CvMasterLanding';
 import CvMasterAppPage from './pages/CvMasterApp';
 import CvMasterTestPage from './pages/CvMasterTest';
+import CVMasterLogin from './pages/CVMasterLogin';
+import CVMasterRegister from './pages/CVMasterRegister';
+import CVMasterProtectedRoute from './components/CVMasterProtectedRoute';
+import { CVMasterAuthProvider } from './contexts/CVMasterAuthContext';
+
+// CvmasteApp Components
+import CvmasteAppHome from './app/cvmasteApp/page';
+import CvmasteAppCrear from './app/cvmasteApp/crear';
+import CvmasteAppMisCVs from './app/cvmasteApp/mis-cvs';
+import CvmasteAppAjustes from './app/cvmasteApp/ajustes';
+import CvmasteAppAyuda from './app/cvmasteApp/ayuda';
+import CVPreviewPage from './app/cvmasteApp/preview';
 
 // Páginas de Admin
 import AdminDashboardPage from './pages/admin/Dashboard';
@@ -124,9 +137,74 @@ function App() {
                   <Route path="/proyectos/:slug" element={<MainLayout><PageWrapper><ProyectoDetallePage /></PageWrapper></MainLayout>} />
                   <Route path="/faq" element={<MainLayout><PageWrapper><FAQPage /></PageWrapper></MainLayout>} />
                   <Route path="/privacidad" element={<MainLayout><PageWrapper><PrivacyPolicy /></PageWrapper></MainLayout>} />
+                  {/* CV Master Routes */}
                   <Route path="/cv-master" element={<CvMasterPage />} />
+                  <Route path="/cv-master-landing" element={<CvMasterLanding />} />
                   <Route path="/cv-master/app/*" element={<CvMasterAppPage />} />
                   <Route path="/cv-master-test" element={<CvMasterTestPage />} />
+                  
+                  {/* CV Master Auth Routes */}
+                  <Route path="/cvmaster-login" element={
+                    <CVMasterAuthProvider>
+                      <CVMasterLogin />
+                    </CVMasterAuthProvider>
+                  } />
+                  <Route path="/cvmaster-register" element={
+                    <CVMasterAuthProvider>
+                      <CVMasterRegister />
+                    </CVMasterAuthProvider>
+                  } />
+                  
+                  {/* CvmasteApp Routes */}
+                  <Route path="/cvmasterApp" element={
+                    <CVMasterAuthProvider>
+                      <CVMasterProtectedRoute>
+                        <CvmasteAppHome />
+                      </CVMasterProtectedRoute>
+                    </CVMasterAuthProvider>
+                  } />
+                  <Route path="/cvmasterApp/crear" element={
+                    <CVMasterAuthProvider>
+                      <CVMasterProtectedRoute>
+                        <CvmasteAppCrear />
+                      </CVMasterProtectedRoute>
+                    </CVMasterAuthProvider>
+                  } />
+                  <Route path="/cvmasterApp/crear/:id" element={
+                    <CVMasterAuthProvider>
+                      <CVMasterProtectedRoute>
+                        <CvmasteAppCrear />
+                      </CVMasterProtectedRoute>
+                    </CVMasterAuthProvider>
+                  } />
+                  <Route path="/cvmasterApp/mis-cvs" element={
+                    <CVMasterAuthProvider>
+                      <CVMasterProtectedRoute>
+                        <CvmasteAppMisCVs />
+                      </CVMasterProtectedRoute>
+                    </CVMasterAuthProvider>
+                  } />
+                  <Route path="/cvmasterApp/ajustes" element={
+                    <CVMasterAuthProvider>
+                      <CVMasterProtectedRoute>
+                        <CvmasteAppAjustes />
+                      </CVMasterProtectedRoute>
+                    </CVMasterAuthProvider>
+                  } />
+                  <Route path="/cvmasterApp/ayuda" element={
+                    <CVMasterAuthProvider>
+                      <CVMasterProtectedRoute>
+                        <CvmasteAppAyuda />
+                      </CVMasterProtectedRoute>
+                    </CVMasterAuthProvider>
+                  } />
+                  <Route path="/cvmasterApp/preview/:cvId" element={
+                    <CVMasterAuthProvider>
+                      <CVMasterProtectedRoute>
+                        <CVPreviewPage />
+                      </CVMasterProtectedRoute>
+                    </CVMasterAuthProvider>
+                  } />
 
                   {/* Admin Routes */}
                   <Route path="/login" element={<SimpleLogin />} />
