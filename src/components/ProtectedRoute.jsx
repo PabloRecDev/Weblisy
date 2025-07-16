@@ -9,8 +9,22 @@ const ProtectedRoute = ({ children }) => {
     useEffect(() => {
         const checkSession = async () => {
             const { data } = await supabase.auth.getSession();
-            if (data.session && data.session.user) {
-                setUser(data.session.user);
+            
+            if (data.session) {
+                // Verificar si el usuario es administrador
+                const { data: profile, error } = await supabase
+                    .from('admin_profiles')
+                    .select('*')
+                    .eq('user_id', data.session.user.id)
+                    .single();
+
+                if (error || !profile) {
+                    // No es administrador
+                    setUser(null);
+                } else {
+                    // Es administrador
+                    setUser({ ...data.session.user, profile });
+                }
             } else {
                 setUser(null);
             }

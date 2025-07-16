@@ -1,0 +1,157 @@
+{
+  "localBusiness": {
+    "name": "Weblisy",
+    "alternateName": "Weblisy Agencia de Desarrollo Web",
+    "description": "Agencia de desarrollo web especializada en diseño web, aplicaciones a medida, ecommerce y SEO en España",
+    "url": "https://weblisy.es",
+    "telephone": "+34-XXX-XXX-XXX",
+    "email": "info@weblisy.es",
+    "address": {
+      "streetAddress": "Calle Principal, 123",
+      "addressLocality": "Madrid",
+      "addressRegion": "Madrid",
+      "postalCode": "28001",
+      "addressCountry": "ES"
+    },
+    "geo": {
+      "latitude": "40.4168",
+      "longitude": "-3.7038"
+    },
+    "openingHours": [
+      "Mo-Fr 09:00-18:00"
+    ],
+    "priceRange": "€€",
+    "currenciesAccepted": "EUR",
+    "paymentAccepted": "Cash, Credit Card, Bank Transfer",
+    "areaServed": [
+      {
+        "@type": "Country",
+        "name": "España"
+      },
+      {
+        "@type": "City",
+        "name": "Madrid"
+      },
+      {
+        "@type": "City", 
+        "name": "Barcelona"
+      },
+      {
+        "@type": "City",
+        "name": "Valencia"
+      }
+    ],
+    "serviceArea": {
+      "@type": "Country",
+      "name": "España"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Servicios de Desarrollo Web",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Desarrollo Web Profesional",
+            "description": "Diseño y desarrollo de sitios web corporativos y personales"
+          }
+        },
+        {
+          "@type": "Offer", 
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Aplicaciones Web a Medida",
+            "description": "Desarrollo de aplicaciones web personalizadas"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service", 
+            "name": "Ecommerce y Tiendas Online",
+            "description": "Creación de tiendas online y plataformas de comercio electrónico"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "SEO y Optimización Web", 
+            "description": "Servicios de posicionamiento web y optimización para motores de búsqueda"
+          }
+        }
+      ]
+    }
+  },
+  "keywords": {
+    "brand": [
+      "weblisy",
+      "weblisy.es",
+      "agencia weblisy",
+      "desarrollo web weblisy",
+      "weblisy madrid",
+      "weblisy barcelona",
+      "weblisy españa"
+    ],
+    "local": [
+      "desarrollo web madrid",
+      "agencia web madrid", 
+      "desarrollo web barcelona",
+      "agencia web barcelona",
+      "desarrollo web españa",
+      "agencia web españa",
+      "programador web madrid",
+      "diseñador web madrid",
+      "desarrollo web valencia",
+      "agencia web valencia"
+    ],
+    "services": [
+      "desarrollo web profesional",
+      "diseño web madrid",
+      "aplicaciones web",
+      "tiendas online",
+      "ecommerce madrid",
+      "seo madrid",
+      "posicionamiento web",
+      "mantenimiento web",
+      "hosting web",
+      "dominio web"
+    ]
+  },
+  "reviews": {
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "47"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "María García"
+        },
+        "reviewBody": "Excelente trabajo en nuestro sitio web. Weblisy superó todas nuestras expectativas."
+      },
+      {
+        "@type": "Review", 
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Carlos López"
+        },
+        "reviewBody": "Profesionales muy competentes. Nuestra tienda online funciona perfectamente."
+      }
+    ]
+  }
+} 

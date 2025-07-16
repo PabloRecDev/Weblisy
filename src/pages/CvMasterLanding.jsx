@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   FileText, 
   Download, 
@@ -28,6 +28,16 @@ import { Helmet } from 'react-helmet-async';
 
 export default function CvMasterLanding() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const features = [
     {
@@ -221,7 +231,7 @@ export default function CvMasterLanding() {
         <div style={{ 
           maxWidth: '1200px',
           margin: '0 auto',
-          padding: '10px 24px',
+          padding: windowWidth < 768 ? '10px 16px' : '10px 24px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between'
@@ -231,18 +241,18 @@ export default function CvMasterLanding() {
               src="/assets/cv.png" 
               alt="CV Master"
               style={{
-                width: 40,
-                height: 40,
+                width: windowWidth < 768 ? 32 : 40,
+                height: windowWidth < 768 ? 32 : 40,
                 borderRadius: 10,
                 objectFit: 'cover',
                 filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.3))'
               }}
             />
             <span style={{ 
-              fontFamily: 'Circular, "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-              fontWeight: 700,
-              fontSize: '18px',
-              lineHeight: '24px',
+              fontFamily: 'Circular, custom-font, "Helvetica Neue", Helvetica, Arial, sans-serif',
+              fontWeight: 400,
+              fontSize: windowWidth < 480 ? 'clamp(20px, 4vw, 28px)' : windowWidth < 768 ? 'clamp(24px, 4vw, 32px)' : 'clamp(28px, 4vw, 36px)',
+              lineHeight: windowWidth < 480 ? 'clamp(20px, 4vw, 28px)' : windowWidth < 768 ? 'clamp(24px, 4vw, 32px)' : 'clamp(28px, 4vw, 36px)',
               color: 'rgb(250, 250, 250)',
               letterSpacing: '-0.01em'
             }}>cv master</span>
@@ -250,7 +260,7 @@ export default function CvMasterLanding() {
 
           {/* Desktop Menu */}
           <div style={{ 
-            display: window.innerWidth < 768 ? 'none' : 'flex',
+            display: windowWidth < 768 ? 'none' : 'flex',
             alignItems: 'center',
             gap: 12
           }}>
@@ -298,11 +308,12 @@ export default function CvMasterLanding() {
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             style={{ 
-              display: window.innerWidth >= 768 ? 'none' : 'flex',
+              display: windowWidth >= 768 ? 'none' : 'flex',
               background: 'transparent',
               border: 'none',
               color: 'rgb(250, 250, 250)',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              padding: '8px'
             }}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -314,9 +325,13 @@ export default function CvMasterLanding() {
           <div style={{ 
             background: '#171717',
             borderTop: '1px solid #292929',
-            padding: 20
+            padding: windowWidth < 480 ? 16 : 20
           }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            <div style={{ 
+              display: 'flex', 
+              flexDirection: 'column', 
+              gap: 12 
+            }}>
               <Link 
                 to="/cvmaster-login" 
                 style={{ 
@@ -326,15 +341,15 @@ export default function CvMasterLanding() {
                   color: 'rgb(250, 250, 250)', 
                   textDecoration: 'none', 
                   fontWeight: 400,
-                  fontSize: '12px',
-                  padding: '4px 20px',
+                  fontSize: '14px',
+                  padding: '12px 20px',
                   borderRadius: '6px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  height: '28px',
                   transition: 'all 0.3s ease'
                 }}
+                onClick={() => setIsMobileMenuOpen(false)}
               >
                 Iniciar sesión
               </Link>
@@ -343,20 +358,20 @@ export default function CvMasterLanding() {
                 style={{ 
                   background: 'linear-gradient(135deg, #5e17eb 0%, #4c14c7 100%)',
                   color: 'rgb(250, 250, 250)',
-                  padding: '4px 20px',
+                  padding: '12px 20px',
                   borderRadius: '6px',
                   textDecoration: 'none',
                   fontWeight: 400,
-                  fontSize: '12px',
+                  fontSize: '14px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  height: '28px',
                   transition: 'all 0.3s ease'
                 }}
+                onClick={() => setIsMobileMenuOpen(false)}
               >
                 Empezar CV
-                </Link>
+              </Link>
             </div>
           </div>
         )}
@@ -364,8 +379,8 @@ export default function CvMasterLanding() {
 
       {/* Hero Section */}
       <section style={{ 
-        paddingTop: 120,
-        paddingBottom: 80,
+        paddingTop: windowWidth < 768 ? 100 : 120,
+        paddingBottom: windowWidth < 768 ? 60 : 80,
         textAlign: 'center',
         position: 'relative',
         overflow: 'hidden',
@@ -376,52 +391,56 @@ export default function CvMasterLanding() {
         backgroundSize: '400% 400%',
         animation: 'gradientShift 15s ease infinite'
       }}>
-        {/* Elementos decorativos animados */}
-        <div className="floating-element" style={{ 
-          width: '80px', 
-          height: '80px', 
-          top: '20%', 
-          left: '10%',
-          animationDelay: '0s'
-        }}></div>
-        <div className="floating-element" style={{ 
-          width: '50px', 
-          height: '50px', 
-          top: '70%', 
-          right: '15%',
-          animationDelay: '2s'
-        }}></div>
-        <div className="floating-element" style={{ 
-          width: '65px', 
-          height: '65px', 
-          top: '30%', 
-          right: '20%',
-          animationDelay: '4s'
-        }}></div>
-        
-        <div className="pulse-element" style={{ 
-          width: '160px', 
-          height: '160px', 
-          top: '10%', 
-          left: '60%',
-          animationDelay: '1s'
-        }}></div>
-        <div className="pulse-element" style={{ 
-          width: '120px', 
-          height: '120px', 
-          bottom: '20%', 
-          left: '5%',
-          animationDelay: '3s'
-        }}></div>
-        
-        <div className="rotating-element" style={{ 
-          width: '250px', 
-          height: '250px', 
-          top: '50%', 
-          left: '50%', 
-          transform: 'translate(-50%, -50%)',
-          borderRadius: '50%'
-        }}></div>
+        {/* Elementos decorativos animados - ocultos en móvil */}
+        {windowWidth >= 768 && (
+          <>
+            <div className="floating-element" style={{ 
+              width: '80px', 
+              height: '80px', 
+              top: '20%', 
+              left: '10%',
+              animationDelay: '0s'
+            }}></div>
+            <div className="floating-element" style={{ 
+              width: '50px', 
+              height: '50px', 
+              top: '70%', 
+              right: '15%',
+              animationDelay: '2s'
+            }}></div>
+            <div className="floating-element" style={{ 
+              width: '65px', 
+              height: '65px', 
+              top: '30%', 
+              right: '20%',
+              animationDelay: '4s'
+            }}></div>
+            
+            <div className="pulse-element" style={{ 
+              width: '160px', 
+              height: '160px', 
+              top: '10%', 
+              left: '60%',
+              animationDelay: '1s'
+            }}></div>
+            <div className="pulse-element" style={{ 
+              width: '120px', 
+              height: '120px', 
+              bottom: '20%', 
+              left: '5%',
+              animationDelay: '3s'
+            }}></div>
+            
+            <div className="rotating-element" style={{ 
+              width: '250px', 
+              height: '250px', 
+              top: '50%', 
+              left: '50%', 
+              transform: 'translate(-50%, -50%)',
+              borderRadius: '50%'
+            }}></div>
+          </>
+        )}
         
         <div style={{ 
           position: 'absolute',
@@ -433,7 +452,13 @@ export default function CvMasterLanding() {
           pointerEvents: 'none'
         }}></div>
         
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 2 }}>
+        <div style={{ 
+          maxWidth: '1200px', 
+          margin: '0 auto', 
+          padding: windowWidth < 768 ? '0 16px' : '0 24px', 
+          position: 'relative', 
+          zIndex: 2 
+        }}>
           <motion.div
             initial={{ opacity: 0, y: 50, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -441,11 +466,11 @@ export default function CvMasterLanding() {
           >
             <h1 style={{ 
               fontFamily: 'Circular, custom-font, "Helvetica Neue", Helvetica, Arial, sans-serif',
-              fontSize: 'clamp(48px, 8vw, 72px)',
+              fontSize: windowWidth < 480 ? 'clamp(32px, 8vw, 48px)' : windowWidth < 768 ? 'clamp(40px, 8vw, 56px)' : 'clamp(48px, 8vw, 72px)',
               fontWeight: 400,
               color: 'rgb(250, 250, 250)',
-              lineHeight: 'clamp(48px, 8vw, 72px)',
-              marginBottom: 24,
+              lineHeight: windowWidth < 480 ? 'clamp(32px, 8vw, 48px)' : windowWidth < 768 ? 'clamp(40px, 8vw, 56px)' : 'clamp(48px, 8vw, 72px)',
+              marginBottom: windowWidth < 768 ? 16 : 24,
               textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
             }}>
               Crea CVs Profesionales con{' '}
@@ -462,13 +487,13 @@ export default function CvMasterLanding() {
             
             <p style={{ 
               fontFamily: 'Circular, custom-font, "Helvetica Neue", Helvetica, Arial, sans-serif',
-              fontSize: '18px',
+              fontSize: windowWidth < 768 ? '16px' : '18px',
               fontWeight: 400,
               color: 'rgb(250, 250, 250)',
-              lineHeight: '28px',
-              marginBottom: 40,
+              lineHeight: windowWidth < 768 ? '24px' : '28px',
+              marginBottom: windowWidth < 768 ? 32 : 40,
               maxWidth: '600px',
-              margin: '0 auto 40px auto',
+              margin: windowWidth < 768 ? '0 auto 32px auto' : '0 auto 40px auto',
               textShadow: '1px 1px 2px rgba(0,0,0,0.3)'
             }}>
               Genera CVs y cartas de presentación optimizadas para ATS con IA avanzada. 
@@ -477,31 +502,33 @@ export default function CvMasterLanding() {
 
             <div style={{ 
               display: 'flex',
-              flexDirection: window.innerWidth < 640 ? 'column' : 'row',
-              gap: 16,
+              flexDirection: windowWidth < 640 ? 'column' : 'row',
+              gap: windowWidth < 640 ? 12 : 16,
               justifyContent: 'center',
               alignItems: 'center',
-              marginBottom: 60
+              marginBottom: windowWidth < 768 ? 40 : 60
             }}>
               <Link
                 to="/cvmaster-register"
                 style={{ 
                   background: 'linear-gradient(135deg, #5e17eb 0%, #4c14c7 100%)',
                   color: 'rgb(250, 250, 250)',
-                  padding: '10px 20px',
+                  padding: windowWidth < 640 ? '12px 24px' : '10px 20px',
                   borderRadius: 8,
                   textDecoration: 'none',
                   fontWeight: 400,
-                  fontSize: 14,
+                  fontSize: windowWidth < 640 ? '16px' : '14px',
                   display: 'flex',
                   alignItems: 'center',
                   gap: 6,
                   transition: 'all 0.3s ease',
                   transform: 'scale(1)',
-                  ':hover': { transform: 'scale(1.05)' }
+                  ':hover': { transform: 'scale(1.05)' },
+                  width: windowWidth < 640 ? '100%' : 'auto',
+                  justifyContent: 'center'
                 }}
               >
-                <Plus size={16} />
+                <Plus size={windowWidth < 640 ? 20 : 16} />
                 Crear mi CV Gratis
               </Link>
               
@@ -509,19 +536,21 @@ export default function CvMasterLanding() {
                 background: '#242424',
                 color: 'rgb(250, 250, 250)',
                 border: '1px solid #292929',
-                padding: '10px 20px',
+                padding: windowWidth < 640 ? '12px 24px' : '10px 20px',
                 borderRadius: 8,
                 fontWeight: 400,
-                fontSize: 14,
+                fontSize: windowWidth < 640 ? '16px' : '14px',
                 display: 'flex',
                 alignItems: 'center',
                 gap: 6,
                 cursor: 'pointer',
                 transition: 'all 0.3s ease',
                 transform: 'scale(1)',
-                ':hover': { transform: 'scale(1.05)' }
+                ':hover': { transform: 'scale(1.05)' },
+                width: windowWidth < 640 ? '100%' : 'auto',
+                justifyContent: 'center'
               }}>
-                <Play size={16} />
+                <Play size={windowWidth < 640 ? 20 : 16} />
                 Ver Demo
               </button>
             </div>
@@ -529,15 +558,15 @@ export default function CvMasterLanding() {
             {/* Stats */}
             <div style={{ 
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
-              gap: 40,
+              gridTemplateColumns: windowWidth < 480 ? 'repeat(2, 1fr)' : windowWidth < 768 ? 'repeat(2, 1fr)' : 'repeat(auto-fit, minmax(120px, 1fr))',
+              gap: windowWidth < 768 ? 24 : 40,
               maxWidth: '600px',
               margin: '0 auto'
             }}>
               {stats.map((stat, index) => (
                 <div key={index} style={{ textAlign: 'center' }}>
                   <div style={{ 
-                    fontSize: 'clamp(24px, 4vw, 32px)',
+                    fontSize: windowWidth < 480 ? 'clamp(20px, 4vw, 24px)' : windowWidth < 768 ? 'clamp(24px, 4vw, 28px)' : 'clamp(24px, 4vw, 32px)',
                     fontWeight: 900,
                     color: '#5e17eb',
                     marginBottom: 8
@@ -545,7 +574,7 @@ export default function CvMasterLanding() {
                     {stat.number}
                   </div>
                   <div style={{ 
-                    fontSize: 14,
+                    fontSize: windowWidth < 768 ? '12px' : '14px',
                     color: '#a2a2a2',
                     fontWeight: 500,
                     textShadow: '1px 1px 2px rgba(0,0,0,0.3)'
@@ -561,20 +590,20 @@ export default function CvMasterLanding() {
 
       {/* Features Section */}
       <section id="features" style={{ 
-        padding: '80px 24px',
+        padding: windowWidth < 768 ? '60px 16px' : '80px 24px',
         background: '#171717'
       }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 60 }}>
+          <div style={{ textAlign: 'center', marginBottom: windowWidth < 768 ? 40 : 60 }}>
             <h2 style={{ 
-              fontSize: 'clamp(28px, 6vw, 48px)',
+              fontSize: windowWidth < 480 ? 'clamp(24px, 6vw, 32px)' : windowWidth < 768 ? 'clamp(28px, 6vw, 40px)' : 'clamp(28px, 6vw, 48px)',
               fontWeight: 900,
               marginBottom: 16
             }}>
               Características Poderosas
             </h2>
             <p style={{ 
-              fontSize: 18,
+              fontSize: windowWidth < 768 ? '16px' : '18px',
               color: '#a2a2a2',
               maxWidth: '600px',
               margin: '0 auto'
@@ -585,8 +614,8 @@ export default function CvMasterLanding() {
 
           <div style={{ 
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-            gap: 32
+            gridTemplateColumns: windowWidth < 640 ? '1fr' : windowWidth < 1024 ? 'repeat(auto-fit, minmax(300px, 1fr))' : 'repeat(auto-fit, minmax(350px, 1fr))',
+            gap: windowWidth < 768 ? 24 : 32
           }}>
             {features.map((feature, index) => (
               <motion.div
@@ -598,7 +627,7 @@ export default function CvMasterLanding() {
                   background: '#242424',
                   border: '1px solid #292929',
                   borderRadius: 16,
-                  padding: 32,
+                  padding: windowWidth < 768 ? '24px' : 32,
                   transition: 'all 0.3s ease'
                 }}
               >
@@ -609,7 +638,7 @@ export default function CvMasterLanding() {
                   {feature.icon}
                 </div>
                 <h3 style={{ 
-                  fontSize: 20,
+                  fontSize: windowWidth < 768 ? '18px' : '20px',
                   fontWeight: 700,
                   marginBottom: 12,
                   color: '#e2e8f0'
@@ -619,7 +648,7 @@ export default function CvMasterLanding() {
                 <p style={{ 
                   color: '#a2a2a2',
                   lineHeight: 1.6,
-                  fontSize: 16
+                  fontSize: windowWidth < 768 ? '14px' : '16px'
                 }}>
                   {feature.description}
                 </p>
@@ -631,20 +660,20 @@ export default function CvMasterLanding() {
 
       {/* Pricing Section */}
       <section id="pricing" style={{ 
-        padding: '80px 24px',
+        padding: windowWidth < 768 ? '60px 16px' : '80px 24px',
         background: '#121212'
       }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 60 }}>
+          <div style={{ textAlign: 'center', marginBottom: windowWidth < 768 ? 40 : 60 }}>
             <h2 style={{ 
-              fontSize: 'clamp(28px, 6vw, 48px)',
+              fontSize: windowWidth < 480 ? 'clamp(24px, 6vw, 32px)' : windowWidth < 768 ? 'clamp(28px, 6vw, 40px)' : 'clamp(28px, 6vw, 48px)',
               fontWeight: 900,
               marginBottom: 16
             }}>
               Planes que se Adaptan a Ti
             </h2>
             <p style={{ 
-              fontSize: 18,
+              fontSize: windowWidth < 768 ? '16px' : '18px',
               color: '#a2a2a2',
               maxWidth: '600px',
               margin: '0 auto'
@@ -655,8 +684,8 @@ export default function CvMasterLanding() {
 
           <div style={{ 
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: 32,
+            gridTemplateColumns: windowWidth < 768 ? '1fr' : windowWidth < 1024 ? 'repeat(auto-fit, minmax(280px, 1fr))' : 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: windowWidth < 768 ? 24 : 32,
             maxWidth: '1000px',
             margin: '0 auto'
           }}>
@@ -670,7 +699,7 @@ export default function CvMasterLanding() {
                   background: plan.popular ? 'linear-gradient(135deg, rgba(94, 23, 235, 0.1) 0%, rgba(76, 20, 199, 0.1) 100%)' : '#171717',
                   border: plan.popular ? '2px solid #5e17eb' : '1px solid #292929',
                   borderRadius: 16,
-                  padding: 32,
+                  padding: windowWidth < 768 ? '24px' : 32,
                   textAlign: 'center',
                   position: 'relative',
                   transition: 'all 0.3s ease'
@@ -686,7 +715,7 @@ export default function CvMasterLanding() {
                     color: '#e2e8f0',
                     padding: '6px 20px',
                     borderRadius: 20,
-                    fontSize: 12,
+                    fontSize: windowWidth < 768 ? '10px' : '12px',
                     fontWeight: 700
                   }}>
                     MÁS POPULAR
@@ -694,7 +723,7 @@ export default function CvMasterLanding() {
                 )}
                 
                 <h3 style={{ 
-                  fontSize: 24,
+                  fontSize: windowWidth < 768 ? '20px' : '24px',
                   fontWeight: 700,
                   marginBottom: 8,
                   color: plan.color
@@ -705,14 +734,14 @@ export default function CvMasterLanding() {
                 <p style={{ 
                   color: '#a2a2a2',
                   marginBottom: 20,
-                  fontSize: 14
+                  fontSize: windowWidth < 768 ? '12px' : '14px'
                 }}>
                   {plan.description}
                 </p>
                 
-                <div style={{ marginBottom: 32 }}>
+                <div style={{ marginBottom: windowWidth < 768 ? 24 : 32 }}>
                   <span style={{ 
-                    fontSize: 'clamp(32px, 6vw, 48px)',
+                    fontSize: windowWidth < 480 ? 'clamp(28px, 6vw, 36px)' : windowWidth < 768 ? 'clamp(32px, 6vw, 40px)' : 'clamp(32px, 6vw, 48px)',
                     fontWeight: 900,
                     color: '#e2e8f0'
                   }}>
@@ -720,14 +749,14 @@ export default function CvMasterLanding() {
                   </span>
                   <span style={{ 
                     color: '#a2a2a2',
-                    fontSize: 16
+                    fontSize: windowWidth < 768 ? '14px' : '16px'
                   }}>
                     {plan.period}
                   </span>
                 </div>
                 
                 <div style={{ 
-                  marginBottom: 32,
+                  marginBottom: windowWidth < 768 ? 24 : 32,
                   textAlign: 'left'
                 }}>
                   {plan.features.map((feature, featureIndex) => (
@@ -735,10 +764,15 @@ export default function CvMasterLanding() {
                       display: 'flex',
                       alignItems: 'center',
                       gap: 12,
-                      marginBottom: 12
+                      marginBottom: windowWidth < 768 ? 8 : 12
                     }}>
-                      <CheckCircle size={16} style={{ color: '#2e7d32' }} />
-                      <span style={{ color: '#a2a2a2', fontSize: 14 }}>{feature}</span>
+                      <CheckCircle size={windowWidth < 768 ? 14 : 16} style={{ color: '#2e7d32' }} />
+                      <span style={{ 
+                        color: '#a2a2a2', 
+                        fontSize: windowWidth < 768 ? '12px' : '14px' 
+                      }}>
+                        {feature}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -750,11 +784,11 @@ export default function CvMasterLanding() {
                     background: plan.popular ? 'linear-gradient(135deg, #5e17eb 0%, #4c14c7 100%)' : '#242424',
                     color: plan.popular ? '#e2e8f0' : '#e2e8f0',
                     border: plan.popular ? 'none' : '1px solid #5e17eb',
-                    padding: '8px 16px',
+                    padding: windowWidth < 768 ? '10px 20px' : '8px 16px',
                     borderRadius: 6,
                     textDecoration: 'none',
                     fontWeight: 600,
-                    fontSize: 14,
+                    fontSize: windowWidth < 768 ? '14px' : '14px',
                     transition: 'all 0.3s ease'
                   }}
                 >
@@ -768,20 +802,20 @@ export default function CvMasterLanding() {
 
       {/* Testimonials Section */}
       <section id="testimonials" style={{ 
-        padding: '80px 24px',
+        padding: windowWidth < 768 ? '60px 16px' : '80px 24px',
         background: '#171717'
       }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 60 }}>
+          <div style={{ textAlign: 'center', marginBottom: windowWidth < 768 ? 40 : 60 }}>
             <h2 style={{ 
-              fontSize: 'clamp(28px, 6vw, 48px)',
+              fontSize: windowWidth < 480 ? 'clamp(24px, 6vw, 32px)' : windowWidth < 768 ? 'clamp(28px, 6vw, 40px)' : 'clamp(28px, 6vw, 48px)',
               fontWeight: 900,
               marginBottom: 16
             }}>
               Lo que Dicen Nuestros Usuarios
             </h2>
             <p style={{ 
-              fontSize: 18,
+              fontSize: windowWidth < 768 ? '16px' : '18px',
               color: '#a2a2a2',
               maxWidth: '600px',
               margin: '0 auto'
@@ -792,8 +826,8 @@ export default function CvMasterLanding() {
 
           <div style={{ 
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-            gap: 32
+            gridTemplateColumns: windowWidth < 640 ? '1fr' : windowWidth < 1024 ? 'repeat(auto-fit, minmax(300px, 1fr))' : 'repeat(auto-fit, minmax(350px, 1fr))',
+            gap: windowWidth < 768 ? 24 : 32
           }}>
             {testimonials.map((testimonial, index) => (
               <motion.div
@@ -805,7 +839,7 @@ export default function CvMasterLanding() {
                   background: '#242424',
                   border: '1px solid #292929',
                   borderRadius: 16,
-                  padding: 32
+                  padding: windowWidth < 768 ? '24px' : 32
                 }}
               >
                 <div style={{ 
@@ -814,7 +848,7 @@ export default function CvMasterLanding() {
                   marginBottom: 16
                 }}>
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} size={16} style={{ color: '#ffa726', fill: '#ffa726' }} />
+                    <Star key={i} size={windowWidth < 768 ? 14 : 16} style={{ color: '#ffa726', fill: '#ffa726' }} />
                   ))}
                 </div>
                 
@@ -822,7 +856,7 @@ export default function CvMasterLanding() {
                   color: '#a2a2a2',
                   lineHeight: 1.6,
                   marginBottom: 20,
-                  fontSize: 16
+                  fontSize: windowWidth < 768 ? '14px' : '16px'
                 }}>
                   "{testimonial.content}"
                 </p>
@@ -831,12 +865,13 @@ export default function CvMasterLanding() {
                   <div style={{ 
                     fontWeight: 600,
                     color: '#e2e8f0',
-                    marginBottom: 4
+                    marginBottom: 4,
+                    fontSize: windowWidth < 768 ? '14px' : '16px'
                   }}>
                     {testimonial.name}
                   </div>
                   <div style={{ 
-                    fontSize: 14,
+                    fontSize: windowWidth < 768 ? '12px' : '14px',
                     color: '#a2a2a2'
                   }}>
                     {testimonial.role} • {testimonial.company}
@@ -850,22 +885,22 @@ export default function CvMasterLanding() {
 
       {/* CTA Section */}
       <section style={{ 
-        padding: '80px 24px',
+        padding: windowWidth < 768 ? '60px 16px' : '80px 24px',
         background: 'linear-gradient(135deg, rgba(94, 23, 235, 0.1) 0%, rgba(76, 20, 199, 0.1) 100%)',
         textAlign: 'center'
       }}>
         <div style={{ maxWidth: '800px', margin: '0 auto' }}>
           <h2 style={{ 
-            fontSize: 'clamp(28px, 6vw, 48px)',
+            fontSize: windowWidth < 480 ? 'clamp(24px, 6vw, 32px)' : windowWidth < 768 ? 'clamp(28px, 6vw, 40px)' : 'clamp(28px, 6vw, 48px)',
             fontWeight: 900,
             marginBottom: 16
           }}>
             ¿Listo para Conseguir tu Trabajo Soñado?
           </h2>
           <p style={{ 
-            fontSize: 18,
+            fontSize: windowWidth < 768 ? '16px' : '18px',
             color: '#a2a2a2',
-            marginBottom: 40,
+            marginBottom: windowWidth < 768 ? 32 : 40,
             lineHeight: 1.6
           }}>
             Únete a miles de profesionales que ya han transformado sus carreras con CV Master. 
@@ -874,8 +909,8 @@ export default function CvMasterLanding() {
           
           <div style={{ 
             display: 'flex',
-            flexDirection: window.innerWidth < 640 ? 'column' : 'row',
-            gap: 16,
+            flexDirection: windowWidth < 640 ? 'column' : 'row',
+            gap: windowWidth < 640 ? 12 : 16,
             justifyContent: 'center',
             alignItems: 'center'
           }}>
@@ -884,18 +919,20 @@ export default function CvMasterLanding() {
               style={{ 
                 background: 'linear-gradient(135deg, #5e17eb 0%, #4c14c7 100%)',
                 color: '#e2e8f0',
-                padding: '8px 16px',
+                padding: windowWidth < 640 ? '12px 24px' : '8px 16px',
                 borderRadius: 6,
                 textDecoration: 'none',
                 fontWeight: 600,
-                fontSize: 14,
+                fontSize: windowWidth < 640 ? '16px' : '14px',
                 display: 'flex',
                 alignItems: 'center',
                 gap: 6,
-                transition: 'all 0.3s ease'
+                transition: 'all 0.3s ease',
+                width: windowWidth < 640 ? '100%' : 'auto',
+                justifyContent: 'center'
               }}
             >
-              <ArrowRight size={16} />
+              <ArrowRight size={windowWidth < 640 ? 20 : 16} />
               Empezar Ahora Gratis
             </Link>
             
@@ -905,7 +942,8 @@ export default function CvMasterLanding() {
                 color: '#5e17eb',
                 textDecoration: 'none',
                 fontWeight: 600,
-                fontSize: 16
+                fontSize: windowWidth < 640 ? '14px' : '16px',
+                marginTop: windowWidth < 640 ? '8px' : '0'
               }}
             >
               ¿Ya tienes cuenta? Inicia sesión
@@ -918,7 +956,7 @@ export default function CvMasterLanding() {
       <footer style={{ 
         background: '#121212',
         borderTop: '1px solid #292929',
-        padding: '40px 24px',
+        padding: windowWidth < 768 ? '32px 16px' : '40px 24px',
         textAlign: 'center'
       }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
@@ -927,23 +965,23 @@ export default function CvMasterLanding() {
             alignItems: 'center',
             justifyContent: 'center',
             gap: 12,
-            marginBottom: 24
+            marginBottom: windowWidth < 768 ? 16 : 24
           }}>
             <img 
               src="/assets/cv.png" 
               alt="CV Master"
               style={{
-                width: 40,
-                height: 40,
+                width: windowWidth < 768 ? 32 : 40,
+                height: windowWidth < 768 ? 32 : 40,
                 borderRadius: 8,
                 objectFit: 'cover'
               }}
             />
             <span style={{ 
-              fontFamily: 'Circular, "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-              fontWeight: 700,
-              fontSize: '18px',
-              lineHeight: '24px',
+              fontFamily: 'Circular, custom-font, "Helvetica Neue", Helvetica, Arial, sans-serif',
+              fontWeight: 400,
+              fontSize: windowWidth < 480 ? 'clamp(16px, 3vw, 24px)' : windowWidth < 768 ? 'clamp(20px, 3vw, 28px)' : 'clamp(24px, 3vw, 32px)',
+              lineHeight: windowWidth < 480 ? 'clamp(16px, 3vw, 24px)' : windowWidth < 768 ? 'clamp(20px, 3vw, 28px)' : 'clamp(24px, 3vw, 32px)',
               color: '#e2e8f0',
               letterSpacing: '-0.01em'
             }}>cv master</span>
@@ -951,8 +989,8 @@ export default function CvMasterLanding() {
           
           <p style={{ 
             color: '#a2a2a2',
-            marginBottom: 24,
-            fontSize: 14
+            marginBottom: windowWidth < 768 ? 16 : 24,
+            fontSize: windowWidth < 768 ? '12px' : '14px'
           }}>
             Creado con ❤️ por Weblisy. Todos los derechos reservados © 2024
           </p>
@@ -960,8 +998,9 @@ export default function CvMasterLanding() {
           <div style={{ 
             display: 'flex',
             justifyContent: 'center',
-            gap: 24,
-            fontSize: 14
+            gap: windowWidth < 768 ? 16 : 24,
+            fontSize: windowWidth < 768 ? '12px' : '14px',
+            flexWrap: 'wrap'
           }}>
             <a href="/privacidad" style={{ color: '#a2a2a2', textDecoration: 'none' }}>Privacidad</a>
             <a href="/terminos" style={{ color: '#a2a2a2', textDecoration: 'none' }}>Términos</a>

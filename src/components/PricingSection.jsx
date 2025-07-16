@@ -190,6 +190,31 @@ export default function PricingSection() {
       category: "ia"
     },
     {
+      name: "Marca Personal Pro",
+      price: "249€",
+      period: "pago único",
+      description: "Solución completa para emprendedores que quieren construir su marca personal y captar clientes.",
+      features: [
+        "Sitio web de marca personal",
+        "CRM integrado para leads",
+        "Formularios de captación",
+        "Blog para posicionamiento",
+        "Integración redes sociales",
+        "Panel de gestión de clientes",
+        "Formulario de contacto optimizado",
+        "1 año hosting + dominio",
+        "Formación en uso del CRM"
+      ],
+      popular: false,
+      buttonText: "Construir mi Marca",
+      isQuote: false,
+      oldPrice: "499€",
+      offerBadge: true,
+      icon: PersonIcon,
+      gradient: "from-amber-500/20 to-yellow-500/20",
+      category: "marca-personal"
+    },
+    {
       name: "CV Master",
       price: "Gratis",
       period: "versión básica",
@@ -306,6 +331,7 @@ export default function PricingSection() {
     basic: plans.filter(plan => plan.category === "básico"),
     professional: plans.filter(plan => plan.category === "profesional"),
     ia: plans.filter(plan => plan.category === "ia"),
+    'marca-personal': plans.filter(plan => plan.category === "marca-personal"),
     tools: plans.filter(plan => plan.category === "herramientas"),
     ecommerce: plans.filter(plan => plan.category === "ecommerce"),
     application: plans.filter(plan => plan.category === "aplicacion"),
@@ -396,6 +422,7 @@ export default function PricingSection() {
               {category === 'basic' && 'Básicos'}
               {category === 'professional' && 'Profesionales'}
               {category === 'ia' && 'Con IA'}
+              {category === 'marca-personal' && 'Marca Personal'}
               {category === 'tools' && 'Herramientas'}
               {category === 'ecommerce' && 'E-commerce'}
               {category === 'application' && 'Aplicaciones'}

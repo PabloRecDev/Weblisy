@@ -1,0 +1,65 @@
+{
+  "homepage": {
+    "title": "Weblisy - Agencia de Desarrollo Web, Apps y SEO en España | Desarrollo Web Profesional",
+    "description": "Weblisy es tu agencia de desarrollo web en España. Especialistas en diseño web, aplicaciones a medida, ecommerce y SEO. Más de 50 proyectos exitosos. ¡Haz crecer tu negocio digital con Weblisy!",
+    "keywords": "weblisy, desarrollo web profesional, agencia diseño web, aplicaciones web a medida, tiendas online, ecommerce, SEO en España, optimización web, páginas web rápidas, soporte web, desarrollo React, desarrollo Node.js, diseño web moderno, agencia digital, web corporativa, web para empresas, web personalizada, desarrollo web Madrid, agencia web Barcelona, programación web, diseño responsive",
+    "canonical": "https://weblisy.es",
+    "og_title": "Weblisy - Agencia de Desarrollo Web, Apps y SEO en España",
+    "og_description": "Desarrollo de webs, apps y tiendas online con diseño moderno, SEO y soporte premium. ¡Transforma tu presencia digital con Weblisy!",
+    "og_image": "https://weblisy.es/assets/Weblisy-logo-fondo.png"
+  },
+  "servicios": {
+    "title": "Servicios de Desarrollo Web - Weblisy | Diseño Web, Apps y SEO",
+    "description": "Servicios completos de desarrollo web: diseño web profesional, aplicaciones a medida, ecommerce, SEO y mantenimiento web. ¡Tu proyecto en manos expertas con Weblisy!",
+    "keywords": "servicios desarrollo web, diseño web profesional, aplicaciones web, ecommerce, SEO, mantenimiento web, weblisy",
+    "canonical": "https://weblisy.es/servicios",
+    "og_title": "Servicios de Desarrollo Web - Weblisy",
+    "og_description": "Servicios completos de desarrollo web: diseño, apps, ecommerce y SEO. ¡Tu proyecto en manos expertas!",
+    "og_image": "https://weblisy.es/assets/Weblisy-logo-fondo.png"
+  },
+  "proyectos": {
+    "title": "Portafolio de Proyectos - Weblisy | Casos de Éxito en Desarrollo Web",
+    "description": "Descubre nuestros proyectos de desarrollo web más exitosos. Sitios web corporativos, ecommerce, aplicaciones web y más. ¡Conoce el trabajo de calidad de Weblisy!",
+    "keywords": "portafolio proyectos, casos éxito desarrollo web, sitios web corporativos, ecommerce, aplicaciones web, weblisy",
+    "canonical": "https://weblisy.es/proyectos",
+    "og_title": "Portafolio de Proyectos - Weblisy",
+    "og_description": "Descubre nuestros proyectos de desarrollo web más exitosos. ¡Conoce el trabajo de calidad de Weblisy!",
+    "og_image": "https://weblisy.es/assets/Weblisy-logo-fondo.png"
+  },
+  "blog": {
+    "title": "Blog de Desarrollo Web - Weblisy | Artículos sobre SEO, Diseño y Tecnología",
+    "description": "Blog especializado en desarrollo web, SEO, diseño web y tecnología. Artículos expertos sobre las últimas tendencias en desarrollo web y marketing digital.",
+    "keywords": "blog desarrollo web, artículos SEO, diseño web, tecnología web, marketing digital, weblisy",
+    "canonical": "https://weblisy.es/blog",
+    "og_title": "Blog de Desarrollo Web - Weblisy",
+    "og_description": "Blog especializado en desarrollo web, SEO y tecnología. Artículos expertos sobre las últimas tendencias.",
+    "og_image": "https://weblisy.es/assets/Weblisy-logo-fondo.png"
+  },
+  "contacto": {
+    "title": "Contacto - Weblisy | Agencia de Desarrollo Web en España",
+    "description": "Contacta con Weblisy, tu agencia de desarrollo web en España. Consulta gratuita, presupuesto personalizado y soporte experto para tu proyecto web.",
+    "keywords": "contacto weblisy, agencia desarrollo web, consulta gratuita, presupuesto web, soporte desarrollo, weblisy",
+    "canonical": "https://weblisy.es/contacto",
+    "og_title": "Contacto - Weblisy | Agencia de Desarrollo Web",
+    "og_description": "Contacta con Weblisy para tu proyecto web. Consulta gratuita y presupuesto personalizado.",
+    "og_image": "https://weblisy.es/assets/Weblisy-logo-fondo.png"
+  },
+  "presupuesto": {
+    "title": "Solicitar Presupuesto - Weblisy | Desarrollo Web a Medida",
+    "description": "Solicita tu presupuesto personalizado para desarrollo web, aplicaciones o ecommerce. Análisis gratuito de tu proyecto con Weblisy.",
+    "keywords": "presupuesto desarrollo web, solicitar presupuesto, desarrollo a medida, ecommerce, aplicaciones web, weblisy",
+    "canonical": "https://weblisy.es/presupuesto",
+    "og_title": "Solicitar Presupuesto - Weblisy",
+    "og_description": "Solicita tu presupuesto personalizado para desarrollo web. Análisis gratuito de tu proyecto.",
+    "og_image": "https://weblisy.es/assets/Weblisy-logo-fondo.png"
+  },
+  "nosotros": {
+    "title": "Sobre Weblisy - Agencia de Desarrollo Web en España",
+    "description": "Conoce más sobre Weblisy, tu agencia de desarrollo web en España. Experiencia, valores y equipo especializado en desarrollo web y aplicaciones.",
+    "keywords": "sobre weblisy, agencia desarrollo web, equipo desarrollo, experiencia web, valores empresa, weblisy",
+    "canonical": "https://weblisy.es/nosotros",
+    "og_title": "Sobre Weblisy - Agencia de Desarrollo Web",
+    "og_description": "Conoce más sobre Weblisy, tu agencia de desarrollo web en España. Experiencia y valores.",
+    "og_image": "https://weblisy.es/assets/Weblisy-logo-fondo.png"
+  }
+} 

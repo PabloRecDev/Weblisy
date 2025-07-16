@@ -19,7 +19,16 @@ export default function SimpleLogin() {
         const checkSession = async () => {
             const { data } = await supabase.auth.getSession();
             if (data.session) {
-                navigate('/admin/dashboard');
+                // Verificar si es administrador
+                const { data: profile } = await supabase
+                    .from('admin_profiles')
+                    .select('*')
+                    .eq('user_id', data.session.user.id)
+                    .single();
+                
+                if (profile) {
+                    navigate('/admin/dashboard');
+                }
             }
         };
         checkSession();
@@ -47,9 +56,24 @@ export default function SimpleLogin() {
         try {
             const { data, error } = await supabase.auth.signInWithPassword({ email, password });
             if (error) throw new Error(error.message);
+            
             if (data.user) {
-                localStorage.setItem('user', JSON.stringify(data.user));
-                localStorage.setItem('session', JSON.stringify(data.session));
+                // Verificar si el usuario es administrador
+                const { data: profile, error: profileError } = await supabase
+                    .from('admin_profiles')
+                    .select('*')
+                    .eq('user_id', data.user.id)
+                    .single();
+
+                if (profileError || !profile) {
+                    // No es administrador, cerrar sesión
+                    await supabase.auth.signOut();
+                    throw new Error('Acceso denegado. Solo administradores pueden acceder.');
+                }
+
+                // Es administrador, guardar datos
+                localStorage.setItem('adminUser', JSON.stringify(data.user));
+                localStorage.setItem('adminProfile', JSON.stringify(profile));
                 navigate('/admin/dashboard');
             }
         } catch (error) {
@@ -180,13 +204,6 @@ export default function SimpleLogin() {
                 )}
                 <div className="w-full mt-4 flex flex-col gap-2">
                     <button
-                        onClick={handleSignUp}
-                        disabled={loading}
-                        className="w-full py-2 bg-transparent text-white text-sm border border-white/20 rounded-md hover:bg-white/10 transition-all duration-200 disabled:opacity-50"
-                    >
-                        Crear cuenta nueva
-                    </button>
-                    <button
                         type="button"
                         className="text-xs text-gray-400 hover:underline"
                         onClick={() => setShowReset(true)}
@@ -196,10 +213,10 @@ export default function SimpleLogin() {
                 </div>
                 <div className="mt-6 text-center">
                     <p className="text-xs text-gray-500">
-                        Credenciales de prueba:
+                        Acceso Administrativo:
                     </p>
                     <p className="text-xs text-gray-400 mt-1">
-                        admin@weblisy.com / admin123
+                        contacto@weblisy.es
                     </p>
                 </div>
             </div>

@@ -1,120 +1,197 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
+  <!-- Página principal - Máxima prioridad -->
   <url>
     <loc>https://weblisy.es/</loc>
     <lastmod>2025-01-27</lastmod>
     <priority>1.00</priority>
     <changefreq>daily</changefreq>
   </url>
+
+  <!-- Páginas de servicios principales -->
   <url>
     <loc>https://weblisy.es/servicios</loc>
+    <lastmod>2025-01-27</lastmod>
     <priority>0.95</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://weblisy.es/aplicaciones-web</loc>
+    <loc>https://weblisy.es/servicios/desarrollo-web</loc>
+    <lastmod>2025-01-27</lastmod>
     <priority>0.90</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://weblisy.es/proyectos</loc>
+    <loc>https://weblisy.es/servicios/ecommerce</loc>
+    <lastmod>2025-01-27</lastmod>
     <priority>0.90</priority>
-    <changefreq>weekly</changefreq>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://weblisy.es/aplicaciones-web</loc>
+    <lastmod>2025-01-27</lastmod>
+    <priority>0.90</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <!-- Páginas de contacto y presupuesto -->
+  <url>
     <loc>https://weblisy.es/presupuesto</loc>
+    <lastmod>2025-01-27</lastmod>
     <priority>0.85</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
     <loc>https://weblisy.es/agendar</loc>
+    <lastmod>2025-01-27</lastmod>
     <priority>0.85</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://weblisy.es/nosotros</loc>
-    <priority>0.80</priority>
+    <loc>https://weblisy.es/contacto</loc>
+    <lastmod>2025-01-27</lastmod>
+    <priority>0.85</priority>
     <changefreq>yearly</changefreq>
   </url>
+
+  <!-- Páginas de proyectos y portafolio -->
   <url>
-    <loc>https://weblisy.es/blog</loc>
+    <loc>https://weblisy.es/proyectos</loc>
+    <lastmod>2025-01-27</lastmod>
     <priority>0.90</priority>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://weblisy.es/contacto</loc>
-    <priority>0.80</priority>
-    <changefreq>yearly</changefreq>
-  </url>
-  <url>
-    <loc>https://weblisy.es/faq</loc>
-    <priority>0.70</priority>
-    <changefreq>yearly</changefreq>
-  </url>
-  <url>
-    <loc>https://weblisy.es/privacidad</loc>
-    <priority>0.60</priority>
-    <changefreq>yearly</changefreq>
-  </url>
-  <url>
     <loc>https://weblisy.es/proyectos/sitio-web-corporativo</loc>
+    <lastmod>2025-01-27</lastmod>
     <priority>0.80</priority>
     <changefreq>yearly</changefreq>
   </url>
   <url>
     <loc>https://weblisy.es/proyectos/sistema-de-reservas-online</loc>
+    <lastmod>2025-01-27</lastmod>
     <priority>0.80</priority>
     <changefreq>yearly</changefreq>
   </url>
+
+  <!-- Blog y contenido -->
+  <url>
+    <loc>https://weblisy.es/blog</loc>
+    <lastmod>2025-01-27</lastmod>
+    <priority>0.90</priority>
+    <changefreq>weekly</changefreq>
+  </url>
   <url>
     <loc>https://weblisy.es/blog/seo-para-webs-modernas</loc>
+    <lastmod>2025-01-27</lastmod>
     <priority>0.75</priority>
     <changefreq>yearly</changefreq>
   </url>
   <url>
     <loc>https://weblisy.es/blog/diferencia-sitio-web-aplicacion-web</loc>
+    <lastmod>2025-01-27</lastmod>
     <priority>0.75</priority>
     <changefreq>yearly</changefreq>
   </url>
   <url>
     <loc>https://weblisy.es/blog/tendencias-diseno-web-2025</loc>
+    <lastmod>2025-01-27</lastmod>
     <priority>0.75</priority>
     <changefreq>yearly</changefreq>
   </url>
   <url>
     <loc>https://weblisy.es/blog/ventajas-desarrollo-medida</loc>
+    <lastmod>2025-01-27</lastmod>
     <priority>0.75</priority>
     <changefreq>yearly</changefreq>
   </url>
   <url>
     <loc>https://weblisy.es/blog/como-elegir-agencia-desarrollo</loc>
+    <lastmod>2025-01-27</lastmod>
     <priority>0.75</priority>
     <changefreq>yearly</changefreq>
   </url>
   <url>
     <loc>https://weblisy.es/blog/wordpress-vs-desarrollo-medida</loc>
+    <lastmod>2025-01-27</lastmod>
     <priority>0.75</priority>
     <changefreq>yearly</changefreq>
   </url>
   <url>
     <loc>https://weblisy.es/blog/optimizacion-velocidad-web</loc>
+    <lastmod>2025-01-27</lastmod>
     <priority>0.75</priority>
     <changefreq>yearly</changefreq>
   </url>
   <url>
     <loc>https://weblisy.es/blog/ecommerce-tendencias-2025</loc>
+    <lastmod>2025-01-27</lastmod>
+    <priority>0.75</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+
+  <!-- Páginas informativas -->
+  <url>
+    <loc>https://weblisy.es/nosotros</loc>
+    <lastmod>2025-01-27</lastmod>
+    <priority>0.80</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://weblisy.es/faq</loc>
+    <lastmod>2025-01-27</lastmod>
+    <priority>0.70</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://weblisy.es/privacidad</loc>
+    <lastmod>2025-01-27</lastmod>
+    <priority>0.60</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+
+  <!-- Páginas de servicios específicos -->
+  <url>
+    <loc>https://weblisy.es/servicios/diseño-web</loc>
+    <lastmod>2025-01-27</lastmod>
+    <priority>0.85</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://weblisy.es/servicios/seo</loc>
+    <lastmod>2025-01-27</lastmod>
+    <priority>0.85</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://weblisy.es/servicios/mantenimiento-web</loc>
+    <lastmod>2025-01-27</lastmod>
+    <priority>0.80</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <!-- Páginas de tecnologías -->
+  <url>
+    <loc>https://weblisy.es/tecnologias/react</loc>
+    <lastmod>2025-01-27</lastmod>
     <priority>0.75</priority>
     <changefreq>yearly</changefreq>
   </url>
   <url>
-    <loc>https://weblisy.es/servicios/desarrollo-web</loc>
-    <priority>0.85</priority>
+    <loc>https://weblisy.es/tecnologias/nodejs</loc>
+    <lastmod>2025-01-27</lastmod>
+    <priority>0.75</priority>
     <changefreq>yearly</changefreq>
   </url>
   <url>
-    <loc>https://weblisy.es/servicios/ecommerce</loc>
-    <priority>0.85</priority>
+    <loc>https://weblisy.es/tecnologias/wordpress</loc>
+    <lastmod>2025-01-27</lastmod>
+    <priority>0.75</priority>
     <changefreq>yearly</changefreq>
   </url>
+
 </urlset>

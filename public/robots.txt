@@ -1,8 +1,45 @@
-# robots.txt para Weblisy
+# robots.txt para Weblisy - Optimizado para SEO
 
+# Permitir acceso a todos los robots
 User-agent: *
-Disallow: /admin
-Disallow: /login
 Allow: /
 
+# Permitir acceso específico a Googlebot
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Permitir acceso específico a Bingbot
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Bloquear acceso a áreas administrativas
+Disallow: /admin/
+Disallow: /login/
+Disallow: /admin/*
+Disallow: /api/admin/
+Disallow: /private/
+Disallow: /temp/
+Disallow: /cache/
+Disallow: /backup/
+
+# Bloquear archivos específicos
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /config/
+Disallow: /database/
+Disallow: /logs/
+
+# Permitir acceso a recursos importantes
+Allow: /assets/
+Allow: /images/
+Allow: /css/
+Allow: /js/
+Allow: /fonts/
+
+# Sitemap
 Sitemap: https://weblisy.es/sitemap.xml
+
+# Host canonical
+Host: https://weblisy.es

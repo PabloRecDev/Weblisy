@@ -53,8 +53,8 @@ export default function AdminLayout() {
   const handleLogout = async () => {
     try {
       await supabase.auth.signOut();
-      localStorage.removeItem('user');
-      localStorage.removeItem('session');
+      localStorage.removeItem('adminUser');
+      localStorage.removeItem('adminProfile');
       navigate('/login');
     } catch (error) {
       console.error('Error al cerrar sesión:', error);
